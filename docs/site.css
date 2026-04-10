@@ -59,7 +59,7 @@ a:focus { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
   letter-spacing: -0.3px;
   color: var(--text-main);
   text-decoration: none;
-  margin-right: 28px;
+  margin-right: 16px;
   white-space: nowrap;
 }
 .site-logo:visited { color: var(--text-main); }
@@ -75,10 +75,10 @@ a:focus { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
 .site-nav::-webkit-scrollbar { display: none; }
 
 .site-nav a {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-muted);
   text-decoration: none;
-  padding: 6px 10px;
+  padding: 5px 7px;
   border-radius: 5px;
   white-space: nowrap;
   transition: background 0.1s, color 0.1s;
