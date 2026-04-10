@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generator Guide — VINDSNURR</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-logo" href="index.html">VIND<span>SNURR</span></a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="index.html">Overview</a>
+    <a href="viz.html">3D Visualizer</a>
+    <a href="step-by-step.html">Assembly Guide</a>
+    <a href="theory.html">Theory</a>
+    <a href="geometry-comparison.html">Geometry</a>
+    <a href="generator.html">Generator</a>
+    <a href="support-frame.html">Support Frame</a>
+  </nav>
+  <button id="theme-toggle" aria-label="Switch to dark mode">
+    <svg aria-hidden="true" class="sun-icon" viewBox="0 0 24 24" width="18" height="18">
+      <circle cx="12" cy="12" r="5" fill="currentColor"/>
+      <path fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+    </svg>
+    <svg aria-hidden="true" class="moon-icon" viewBox="0 0 24 24" width="18" height="18">
+      <path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+</header>
+
+<main class="page">
+<div class="prose">
+
+<h1>Generator Selection Guide</h1>
+<p style="color:var(--text-faint);font-size:13px;">Power extraction for a low-RPM drag turbine</p>
+
+<blockquote>
+  <strong>Honest assessment:</strong> The VINDSNURR is a low-RPM, high-drag, Savonius-style rotor.
+  This heavily constrains generator choice. The question is not "what motor works" but
+  "what generator produces usable power at low RPM without stalling the rotor."
+  All power estimates below are theoretical. No prototype has been tested.
+</blockquote>
+
+<hr>
+
+<h2>1. The non-negotiable constraint</h2>
+
+<p>Based on the rotor geometry and Savonius drag principle (λ ≈ 1, Cp ≈ 0.20), the VINDSNURR will likely produce:</p>
+
+<table>
+  <thead><tr><th>Wind speed</th><th>Estimated shaft RPM</th><th>Estimated shaft power</th></tr></thead>
+  <tbody>
+    <tr><td>5 m/s (11 mph)</td><td>~96 RPM</td><td>~16 W</td></tr>
+    <tr><td>7 m/s (16 mph)</td><td>~134 RPM</td><td>~44 W</td></tr>
+    <tr><td>10 m/s (22 mph)</td><td>~191 RPM</td><td>~128 W</td></tr>
+    <tr><td>12 m/s (27 mph)</td><td>~220 RPM</td><td>~221 W</td></tr>
+  </tbody>
+</table>
+
+<p>Shaft power ≠ electrical output. Generator efficiency, cogging losses, rectifier losses, and wiring resistance will reduce these figures by 30–60% in practice. Treat the shaft power estimates as an upper bound, not a target.</p>
+
+<p>Any generator chosen must:</p>
+<ul>
+  <li><strong>Produce usable voltage at 100–200 RPM</strong> without gearing, or at 500–1000 RPM with a step-up drive</li>
+  <li><strong>Have low cogging torque</strong> — a generator that resists rotation will stall the rotor before it can generate</li>
+  <li><strong>Not require a minimum RPM to start</strong> — self-starting is a Savonius advantage; don't design it away</li>
+</ul>
+
+<hr>
+
+<h2>2. Generator options — ranked for this rotor</h2>
+
+<h3>Option A — Low-KV brushless outrunner motor ⭐ Best starting point</h3>
+
+<p>Drone and RC aircraft outrunner motors are widely available, affordable, and designed for rotation. Used as generators, they produce three-phase AC that requires rectification.</p>
+
+<table>
+  <thead><tr><th>Property</th><th>Detail</th></tr></thead>
+  <tbody>
+    <tr><td>KV rating to target</td><td>100–300 KV (lower = more voltage at low RPM)</td></tr>
+    <tr><td>Examples</td><td>T-Motor U series, Turnigy RotoMax 150cc, large agricultural drone motors</td></tr>
+    <tr><td>Output at 150 RPM</td><td>Roughly 5–15V AC before rectification at 150 KV rating</td></tr>
+    <tr><td>Cogging</td><td>Moderate — present but usually manageable</td></tr>
+    <tr><td>Cost</td><td>$30–$150 depending on size</td></tr>
+    <tr><td>Electronics needed</td><td>3-phase bridge rectifier, capacitor, voltage regulator</td></tr>
+  </tbody>
+</table>
+
+<p><strong>KV rating explained:</strong> KV = RPM per volt when used as a motor. As a generator, a 150 KV motor produces roughly 1V per 150 RPM. At 191 RPM you get ~1.3V — too low for direct use. A 50 KV motor would give ~3.8V at the same RPM. Lower KV = more useful at low RPM.</p>
+
+<h3>Option B — E-bike hub motor ⭐ Best upgrade path</h3>
+
+<p>Direct-drive e-bike hub motors are purpose-built for low-RPM, high-torque operation. They are effectively permanent magnet alternators in a convenient package.</p>
+
+<table>
+  <thead><tr><th>Property</th><th>Detail</th></tr></thead>
+  <tbody>
+    <tr><td>KV rating</td><td>Typically 5–20 KV equivalent — excellent for low RPM</td></tr>
+    <tr><td>Examples</td><td>Bafang, MAC motor, any 36V or 48V direct-drive hub</td></tr>
+    <tr><td>Output at 150 RPM</td><td>10–30V depending on winding, before rectification</td></tr>
+    <tr><td>Cogging</td><td>Low to moderate — most are optimised for smooth starting</td></tr>
+    <tr><td>Cost</td><td>$80–$300 new; often available secondhand from e-bike conversions</td></tr>
+    <tr><td>Mounting</td><td>Requires adaptor to connect to rotor shaft</td></tr>
+  </tbody>
+</table>
+
+<h3>Option C — Permanent Magnet Alternator (PMA) ⭐ Best performance ceiling</h3>
+
+<p>Small wind turbine generators — sold as replacement parts for commercial micro-turbines — are optimised for exactly this application: low RPM, variable wind, high torque. They are the most capable option but also the most expensive off-the-shelf, or the most labour-intensive to build.</p>
+
+<table>
+  <thead><tr><th>Property</th><th>Detail</th></tr></thead>
+  <tbody>
+    <tr><td>Examples</td><td>Primus Wind Power replacement alternators, Ginlong / Naier small PMAs</td></tr>
+    <tr><td>Cut-in RPM</td><td>Typically 100–200 RPM</td></tr>
+    <tr><td>Output</td><td>12V or 24V nominal at rated RPM</td></tr>
+    <tr><td>Cogging</td><td>Low — specifically engineered for smooth starting</td></tr>
+    <tr><td>Cost</td><td>$200–$600+ off-the-shelf</td></tr>
+  </tbody>
+</table>
+
+<h3>Option D — Stepper motor ⚠️ Testing only</h3>
+
+<p>Stepper motors are often reached for first because they generate voltage with no electronics and are cheap. The problem is severe cogging torque — they resist rotation at every detent position. On a low-torque Savonius rotor this will stall rotation before any useful power is produced.</p>
+
+<p>Use a stepper only to confirm the rotor physically spins before investing in a real generator. Expect it to slow or stop the rotor in any wind below 8–10 m/s.</p>
+
+<h3>Option E — Brushed DC motor ⚠️ Early prototyping only</h3>
+
+<p>A brushed DC motor wired backwards generates DC directly — no rectifier needed. Easy to demonstrate. However: brushes wear out, efficiency is low (50–70%), and output is inconsistent. Adequate for a first proof-of-concept demonstration, not for sustained operation.</p>
+
+<h3>Option F — Custom axial flux generator (advanced)</h3>
+
+<p>A flat-disc generator with permanent magnets on a rotor plate and coils on a stator plate is the highest-performance DIY option. Cogging can be nearly eliminated by design. Output voltage and RPM can be tuned by choosing the number of poles and coil turns.</p>
+
+<p>This is a second-phase project. It requires coil winding, magnet sourcing, and either machining or fibreglass casting. Not recommended until the rotor has been validated mechanically.</p>
+
+<hr>
+
+<h2>3. Recommended build path</h2>
+
+<table>
+  <thead><tr><th>Phase</th><th>Goal</th><th>Generator</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Phase 1 — Proof of motion</strong></td><td>Confirm rotor spins reliably. Test sail geometry. Don't worry about power yet.</td><td>Stepper motor or cheap BLDC. Load = LEDs.</td></tr>
+    <tr><td><strong>Phase 2 — Real generation</strong></td><td>Measure actual RPM and torque. Get usable voltage.</td><td>Low-KV brushless outrunner (150–300 KV) with 3-phase rectifier.</td></tr>
+    <tr><td><strong>Phase 3 — Optimisation</strong></td><td>Maximise output. Reduce cogging losses.</td><td>E-bike hub motor or small PMA. Add charge controller and battery.</td></tr>
+    <tr><td><strong>Phase 4 — Custom (optional)</strong></td><td>Tune generator to exact RPM and torque profile.</td><td>DIY axial flux generator.</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>4. Direct drive vs geared</h2>
+
+<p>Direct coupling the generator to the rotor shaft is mechanically simple but requires a very low-KV generator to produce useful voltage at 100–200 RPM. Gearing up the generator RPM relaxes this constraint.</p>
+
+<table>
+  <thead><tr><th>Approach</th><th>Ratio</th><th>Pros</th><th>Cons</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Direct drive</strong></td><td>1:1</td><td>No added friction, simple mounting, no belt slip</td><td>Requires very low-KV generator; limits generator choice</td></tr>
+    <tr><td><strong>Belt drive</strong></td><td>3:1 – 8:1</td><td>Opens up cheaper, higher-KV generators; easy ratio change</td><td>Belt friction ~5%, alignment critical, belt wear</td></tr>
+    <tr><td><strong>Gear train</strong></td><td>5:1 – 20:1</td><td>Compact, no slip</td><td>More complex, noise, requires lubrication</td></tr>
+    <tr><td><strong>Friction wheel</strong></td><td>Variable</td><td>Simple to build</td><td>Slip under load, wear</td></tr>
+  </tbody>
+</table>
+
+<p><strong>For a first build:</strong> direct drive with a low-KV motor is the simplest. If voltage is insufficient, add a 3:1 belt drive before switching generators.</p>
+
+<hr>
+
+<h2>5. Electronics required</h2>
+
+<p>Regardless of generator type, you will need these components between the generator and your load or battery:</p>
+
+<table>
+  <thead><tr><th>Component</th><th>Purpose</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td><strong>3-phase bridge rectifier</strong></td><td>Converts 3-phase AC (BLDC/PMA) to DC</td><td>Use 35A bridge rectifier module; size for peak current</td></tr>
+    <tr><td><strong>Smoothing capacitor</strong></td><td>Reduces voltage ripple after rectification</td><td>1000–4700 µF electrolytic at appropriate voltage rating</td></tr>
+    <tr><td><strong>Voltage regulator / MPPT controller</strong></td><td>Regulates variable generator output to stable charging voltage</td><td>A wind charge controller (not solar MPPT) is preferred; handles variable-frequency AC input</td></tr>
+    <tr><td><strong>Dump load</strong></td><td>Dissipates power when battery is full</td><td>Critical for battery safety; typically a resistive heater element</td></tr>
+    <tr><td><strong>Battery</strong></td><td>Stores energy for use when wind drops</td><td>12V or 24V lead-acid or LiFePO4; size to daily generation estimate</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Minimum test circuit (Phase 1–2):</strong> Generator → 3-phase rectifier → LED string or USB power meter. This confirms generation without risk to electronics.</p>
+
+<hr>
+
+<h2>6. Realistic power expectations</h2>
+
+<p>This is the most important section. The numbers below are honest estimates, not marketing figures.</p>
+
+<table>
+  <thead><tr><th>Scenario</th><th>Realistic electrical output</th></tr></thead>
+  <tbody>
+    <tr><td>5 m/s average wind, direct drive, low-KV BLDC</td><td>5–10 W electrical</td></tr>
+    <tr><td>7 m/s average wind, belt drive 3:1, BLDC</td><td>15–25 W electrical</td></tr>
+    <tr><td>10 m/s average wind, e-bike hub motor</td><td>40–80 W electrical</td></tr>
+    <tr><td>10 m/s average wind, custom PMA</td><td>60–100 W electrical</td></tr>
+  </tbody>
+</table>
+
+<p>What these outputs can power:</p>
+<ul>
+  <li><strong>5–10 W:</strong> LED lighting, sensors, low-power microcontrollers (Arduino, Raspberry Pi Zero)</li>
+  <li><strong>15–25 W:</strong> USB device charging, small battery maintenance</li>
+  <li><strong>40–80 W:</strong> Laptop charging, 12V appliances, meaningful battery storage</li>
+</ul>
+
+<p>What this turbine will <strong>not</strong> power at typical residential wind speeds: household appliances, heating, air conditioning, or a meaningful fraction of household electricity consumption. A 5–15 kW system would be needed for that — roughly 5–15× this rotor's diameter.</p>
+
+<p>The VINDSNURR is optimised for <strong>turbulence handling, low cut-in speed, and aesthetic form</strong> — not peak power extraction. The generator must adapt to that reality.</p>
+
+<hr>
+
+<h2>7. Concrete starter specification</h2>
+
+<p>If building the rotor as designed (1000 mm diameter, 20 mm shaft), this starter setup is recommended for Phase 2:</p>
+
+<table>
+  <thead><tr><th>Component</th><th>Specification</th><th>Approx. cost</th></tr></thead>
+  <tbody>
+    <tr><td>Generator</td><td>Brushless outrunner, 150–200 KV, 500W+ rated</td><td>$50–$120</td></tr>
+    <tr><td>Drive</td><td>Direct shaft coupling or 3:1 belt + pulley</td><td>$10–$40</td></tr>
+    <tr><td>Rectifier</td><td>3-phase bridge, 35A, 100V</td><td>$5–$15</td></tr>
+    <tr><td>Capacitor</td><td>2200 µF, 50V electrolytic</td><td>$3–$8</td></tr>
+    <tr><td>Test load</td><td>12V LED string + USB power meter</td><td>$10–$20</td></tr>
+    <tr><td><strong>Total Phase 2</strong></td><td></td><td><strong>~$80–$200</strong></td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>8. One key insight</h2>
+
+<p>The VINDSNURR is not optimised for peak efficiency. It is optimised for omnidirectional wind capture, smooth torque in turbulent conditions, and structural elegance. The generator choice must reflect that — a high-efficiency generator that demands high RPM or high starting torque will fight the rotor rather than work with it.</p>
+
+<p>The right mental model: treat the rotor as a <strong>low-speed, high-torque prime mover</strong>, and select the generator accordingly. Torque is available; RPM is limited. Low-KV motors and PMAs are designed exactly for this trade-off.</p>
+
+<p class="note">All power figures are theoretical estimates. Generator efficiency, bearing friction, rectifier losses, and real wind variability will reduce actual output. Validate with a power meter before sizing batteries or loads.</p>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <span>VINDSNURR HBR-6-14V · Open source · MIT licence</span>
+  <span><a href="https://github.com/mgifford/Hex-Bicup-Rotor">GitHub repository</a></span>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>

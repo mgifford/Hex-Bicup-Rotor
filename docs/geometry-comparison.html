@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geometry Comparison — VINDSNURR</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-logo" href="index.html">VIND<span>SNURR</span></a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="index.html">Overview</a>
+    <a href="viz.html">3D Visualizer</a>
+    <a href="step-by-step.html">Assembly Guide</a>
+    <a href="theory.html">Theory</a>
+    <a href="geometry-comparison.html">Geometry</a>
+  </nav>
+  <button id="theme-toggle" aria-label="Switch to dark mode">
+    <svg aria-hidden="true" class="sun-icon" viewBox="0 0 24 24" width="18" height="18">
+      <circle cx="12" cy="12" r="5" fill="currentColor"/>
+      <path fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+    </svg>
+    <svg aria-hidden="true" class="moon-icon" viewBox="0 0 24 24" width="18" height="18">
+      <path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+</header>
+
+<main class="page">
+<div class="prose">
+
+<h1>Geometry Comparison</h1>
+<p style="color:var(--text-faint);font-size:13px;">Icosahedron (GeoWind GW1200) vs Hexagonal Bicupola (VINDSNURR) — design rationale</p>
+
+<blockquote>
+  <strong>Disclaimer:</strong> Neither the VINDSNURR hexagonal bicupola rotor nor the GeoWind GW1200 icosahedron rotor has been physically tested by this project. All comparisons below are theoretical, based on geometric analysis and published Savonius turbine principles. No performance claims should be taken as validated until prototype testing is complete.
+</blockquote>
+
+<hr>
+
+<h2>The two geometries at a glance</h2>
+
+<table>
+  <thead><tr><th>Property</th><th>GeoWind GW1200 — Icosahedron</th><th>VINDSNURR — Hexagonal Bicupola</th></tr></thead>
+  <tbody>
+    <tr><td>Vertices</td><td>12</td><td>14</td></tr>
+    <tr><td>Edges</td><td>30</td><td>36</td></tr>
+    <tr><td>Faces</td><td>20 (all triangular)</td><td>24 (all triangular)</td></tr>
+    <tr><td>Rotational symmetry</td><td>5-fold (and 3-fold, 2-fold)</td><td>6-fold</td></tr>
+    <tr><td>Edge lengths</td><td>1 (all equal)</td><td>3 (fan, ring, belt)</td></tr>
+    <tr><td>Hub types</td><td>1 (all vertices identical)</td><td>2 (apex degree-6, ring degree-5)</td></tr>
+    <tr><td>Geometric family</td><td>Platonic solid</td><td>Johnson-solid-like bicupola</td></tr>
+    <tr><td>Named solid?</td><td>Yes — regular icosahedron</td><td>No — bicupola-derived, not standard</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>Where the icosahedron has the advantage</h2>
+
+<h3>One edge length, one hub angle</h3>
+
+<p>The regular icosahedron has a single edge length throughout. Every vertex connects to exactly five others at identical angles. This means:</p>
+<ul>
+  <li><strong>One rod length to cut</strong> (vs three distinct lengths in VINDSNURR)</li>
+  <li><strong>One hub design</strong> to print or fabricate (12 identical hubs vs two designs in VINDSNURR)</li>
+  <li>Simpler parametric CAD — change one dimension and the whole structure scales correctly</li>
+</ul>
+<p>This is a genuine fabrication advantage, especially for small batches or iterative prototyping.</p>
+
+<h3>Established structural precedent</h3>
+<p>The icosahedron is the basis for geodesic domes, carbon-60 buckyballs, and many structural engineering applications. Its load distribution properties are well-understood and extensively documented.</p>
+
+<h3>Aesthetic regularity</h3>
+<p>The icosahedron looks identical from many viewing angles. For an urban or architectural installation, this visual regularity may be desirable.</p>
+
+<hr>
+
+<h2>Where the hexagonal bicupola has the advantage</h2>
+
+<h3>6-fold symmetry fits drag turbine aerodynamics directly</h3>
+
+<p>Savonius turbines are conventionally designed with 2, 3, or 6 sail sectors. The 6-fold symmetry of the hexagonal bicupola maps directly onto a 6-sector drag arrangement with no geometric compromise.</p>
+
+<p>The icosahedron's 5-fold symmetry creates an awkward aerodynamic situation: you cannot divide 5 sectors into an equal number of power-stroke and return-stroke faces. At any rotor angle, either 3 or 2 faces are in the power stroke — not a stable equal split. The GeoWind GW1200 likely addresses this by using lift-based or hybrid blades rather than pure drag, but for a Savonius-style rotor, 5-fold symmetry is genuinely problematic.</p>
+
+<p>The VINDSNURR's 6-fold symmetry means:</p>
+<ul>
+  <li>3 upper sails + 3 lower sails in alternating sectors — exactly equal on each side</li>
+  <li>At any rotor angle, torque contributions are symmetric about the shaft axis</li>
+  <li>Same balance achieved by a 3-bucket or 6-bucket Savonius in conventional designs</li>
+</ul>
+
+<h3>The 30° ring offset is a structural consequence, not an add-on</h3>
+
+<p>In the hexagonal bicupola, the 30° rotational offset between the upper ring (U1–U6) and lower ring (L1–L6) is what produces the triangulated middle belt. Without this offset the middle zone would be rectangular panels — not triangulated — and the frame would need additional diagonal bracing.</p>
+
+<p>This is a significant theoretical advantage: the aerodynamic feature (staggered upper/lower sails producing helical-Savonius-like torque smoothing) and the structural feature (full triangulation without extra bracing) arise from the <em>same geometric decision</em>. The two requirements reinforce rather than compete with each other.</p>
+
+<h3>Upper/lower sail stagger — theoretical torque smoothing</h3>
+
+<p>The alternating upper/lower sail placement in VINDSNURR is geometrically equivalent to a <strong>two-stage stacked Savonius rotor</strong>, where two S-rotors are mounted on the same shaft rotated 90° apart to smooth out torque pulsation. In VINDSNURR this is an intrinsic property of the bicupola topology — no additional mechanical staging is required.</p>
+
+<p><em>This is a theoretical claim. Whether the actual torque curve is measurably smoother requires prototype testing with a torque sensor.</em></p>
+
+<h3>More vertices at the sail attachment zone</h3>
+
+<p>VINDSNURR has 14 nodes vs 12 for the icosahedron. The additional 2 nodes come from the explicit separation of upper ring (U) and lower ring (L) nodes, giving dedicated attachment points for diagonal sail panels. Each sail corner attaches directly to a structural node.</p>
+
+<p>In an icosahedron-based rotor, the sail attachment geometry must be worked out separately — the 12 vertices of a regular icosahedron do not naturally form two distinct horizontal rings at different heights with a 30° offset.</p>
+
+<hr>
+
+<h2>Where neither has a clear advantage (theoretical)</h2>
+
+<table>
+  <thead><tr><th>Criterion</th><th>Assessment</th></tr></thead>
+  <tbody>
+    <tr><td>Structural rigidity</td><td>Both fully triangulated. Both carry axial loads only in the idealized case.</td></tr>
+    <tr><td>Aerodynamic efficiency</td><td>Both expected in the Savonius range (Cp ≈ 0.10–0.20). Neither tested.</td></tr>
+    <tr><td>Cut-in wind speed</td><td>GW1200 claims 4 m/s. VINDSNURR targets similar. Neither validated by prototype measurement.</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>Summary judgement (theoretical)</h2>
+
+<table>
+  <thead><tr><th>Criterion</th><th>Icosahedron</th><th>Hexagonal Bicupola</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td>Fabrication simplicity</td><td>✓ Advantage</td><td>—</td><td>1 edge length, 1 hub type</td></tr>
+    <tr><td>Structural precedent</td><td>✓ Advantage</td><td>—</td><td>Geodesic dome literature</td></tr>
+    <tr><td>Aerodynamic symmetry for drag rotor</td><td>—</td><td>✓ Advantage</td><td>6-fold vs 5-fold</td></tr>
+    <tr><td>Torque smoothing (theoretical)</td><td>—</td><td>✓ Advantage</td><td>Staggered upper/lower sails</td></tr>
+    <tr><td>Sail attachment geometry</td><td>—</td><td>✓ Advantage</td><td>Dedicated nodes at sail corners</td></tr>
+    <tr><td>Helical-Savonius analogy</td><td>Partial</td><td>✓ Advantage</td><td>30° offset is structural + aerodynamic</td></tr>
+    <tr><td>Testing status</td><td colspan="2" style="text-align:center"><strong>Neither — both unvalidated</strong></td><td></td></tr>
+  </tbody>
+</table>
+
+<p>The icosahedron is the better choice if fabrication simplicity is the primary constraint. The hexagonal bicupola is the better theoretical choice for a Savonius-class drag rotor. Whether that theoretical advantage materialises in practice depends on prototype testing.</p>
+
+<p class="note">All claims in this document are theoretical. Neither design has been built and tested by this project. Treat all performance comparisons as hypotheses to be tested, not established facts.</p>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <span>VINDSNURR HBR-6-14V · Open source · MIT licence</span>
+  <span><a href="https://github.com/mgifford/Hex-Bicup-Rotor">GitHub repository</a></span>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>

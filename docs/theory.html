@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aerodynamic Theory — VINDSNURR</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-logo" href="index.html">VIND<span>SNURR</span></a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="index.html">Overview</a>
+    <a href="viz.html">3D Visualizer</a>
+    <a href="step-by-step.html">Assembly Guide</a>
+    <a href="theory.html">Theory</a>
+    <a href="geometry-comparison.html">Geometry</a>
+    <a href="generator.html">Generator</a>
+    <a href="support-frame.html">Support Frame</a>
+  </nav>
+  <button id="theme-toggle" aria-label="Switch to dark mode">
+    <svg aria-hidden="true" class="sun-icon" viewBox="0 0 24 24" width="18" height="18">
+      <circle cx="12" cy="12" r="5" fill="currentColor"/>
+      <path fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+    </svg>
+    <svg aria-hidden="true" class="moon-icon" viewBox="0 0 24 24" width="18" height="18">
+      <path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+</header>
+
+<main class="page">
+<div class="prose">
+
+<h1>Design Theory and Aerodynamic Background</h1>
+<p style="color:var(--text-faint);font-size:13px;">HBR-6-14V · Vertical-axis drag turbine (Savonius class)</p>
+
+<hr>
+
+<h2>1. The Savonius Turbine — Operating Principle</h2>
+
+<p>The VINDSNURR rotor belongs to the <strong>Savonius class</strong> of vertical-axis wind turbines (VAWTs). Savonius turbines are drag-type devices, not lift-type. This distinction determines nearly every aspect of their performance and geometry.</p>
+
+<h3>How drag-based rotation works</h3>
+
+<p>A drag turbine works by presenting an asymmetric cross-section to the wind:</p>
+<ul>
+  <li>The <strong>concave (cup) face</strong> of each blade catches wind and experiences high drag — it is pushed away from the wind source.</li>
+  <li>The <strong>convex (back) face</strong> sheds wind and experiences much lower drag.</li>
+  <li>The net difference in drag force across the two sides produces a torque about the vertical shaft.</li>
+</ul>
+
+<p>Because no aerodynamic lift is involved, the blade tip can never travel faster than the wind itself. This imposes a fundamental ceiling on performance, but it also means the rotor is <strong>self-starting at any wind direction</strong>, requires no yaw mechanism, and produces useful torque at very low wind speeds.</p>
+
+<p>The Savonius principle was invented by Finnish engineer <strong>Sigurd Johannes Savonius</strong> around 1922 (patented in Finland 1926, USA 1925 and 1928). The classic form uses two hemicylindrical buckets arranged in an S-shape when viewed from above.</p>
+
+<hr>
+
+<h2>2. Performance Characteristics</h2>
+
+<h3>Power coefficient</h3>
+
+<p>All wind turbines are bounded by the <strong>Betz limit</strong>: no rotor can extract more than 16/27 ≈ 59.3% of the kinetic energy in the wind passing through its swept area.</p>
+
+<p>Savonius rotors achieve a practical <strong>power coefficient (Cp) of approximately 0.20</strong> — about 20% of available wind energy. For comparison:</p>
+
+<table>
+  <thead><tr><th>Turbine type</th><th>Typical Cp</th></tr></thead>
+  <tbody>
+    <tr><td>Modern horizontal-axis wind turbine (HAWT)</td><td>~0.45</td></tr>
+    <tr><td>Darrieus vertical-axis (lift-based)</td><td>~0.35</td></tr>
+    <tr><td><strong>Savonius drag-based</strong></td><td><strong>~0.20</strong></td></tr>
+    <tr><td>Cup anemometer</td><td>~0.08</td></tr>
+  </tbody>
+</table>
+
+<h3>Tip-speed ratio</h3>
+
+<p>The <strong>tip-speed ratio</strong> (λ) is the ratio of blade tip velocity to wind velocity:</p>
+
+<pre><code>λ = (ω × r) / v</code></pre>
+
+<p>For Savonius turbines, <strong>λ ≈ 1</strong>. For the VINDSNURR with r = 0.5 m at v = 10 m/s:</p>
+
+<pre><code>ω ≈ 10 / 0.5 = 20 rad/s ≈ 191 RPM</code></pre>
+
+<h3>Power output estimate</h3>
+
+<pre><code>P_max ≈ 0.12 × h × d × v³</code></pre>
+
+<p>Where h = rotor height (m), d = diameter (m), v = wind speed (m/s). The 0.12 coefficient absorbs air density (1.2 kg/m³) and Cp ≈ 0.20.</p>
+
+<p><strong>For the VINDSNURR</strong> (h = 1.064 m, d = 1.0 m):</p>
+
+<table>
+  <thead><tr><th>Wind speed</th><th>Estimated power output</th></tr></thead>
+  <tbody>
+    <tr><td>5 m/s (18 km/h, light breeze)</td><td>~16 W</td></tr>
+    <tr><td>7 m/s (25 km/h, moderate breeze)</td><td>~44 W</td></tr>
+    <tr><td>10 m/s (36 km/h, fresh breeze)</td><td>~128 W</td></tr>
+    <tr><td>12 m/s (43 km/h, strong breeze)</td><td>~221 W</td></tr>
+  </tbody>
+</table>
+
+<p>These are first-order estimates using the 0.20 Cp baseline. Actual output depends on sail coverage fraction, hub interference losses, generator efficiency, and bearing friction.</p>
+
+<hr>
+
+<h2>3. Why a Hexagonal Bicupola Geometry?</h2>
+
+<h3>Multi-stage torque smoothing</h3>
+
+<p>A standard 2-bucket Savonius produces strongly pulsed torque. The VINDSNURR achieves a structurally equivalent effect to multi-stage stacking through its single integrated frame. The alternating upper/lower sail attachment (three sails from T, three from B, in alternating sectors) means the effective aerodynamic phase distribution resembles a two-stage, 6-bucket design within one structure.</p>
+
+<h3>Helical analogy</h3>
+
+<p>The 30° rotational offset between the upper ring (U1–U6) and lower ring (L1–L6) produces a diagonal belt of structural rods that wrap helically around the equatorial zone of the frame. This is geometrically analogous to the <strong>helical Savonius variant</strong> (developed by Risto Joutsiniemi in the early 1980s), which smooths the torque profile and improves self-starting reliability.</p>
+
+<h3>Triangulated frame rigidity</h3>
+
+<p>A closed triangulated frame is <strong>statically determinate</strong>: every member is either in pure tension or pure compression, with no bending loads in the idealized case. The structural load path is:</p>
+<ol>
+  <li>Wind pressure → sail fabric → three corner nodes of each triangular sail</li>
+  <li>Node forces → rods in tension/compression</li>
+  <li>Rod forces → apex hubs → shaft → bearings → support structure</li>
+</ol>
+
+<hr>
+
+<h2>4. Related Commercial Designs</h2>
+
+<h3>GeoWind GW1200 — the closest existing parallel</h3>
+
+<p>The <strong>GeoWind GW1200</strong> (CES 2026 Innovation Award, iF Design Award) applies geodesic geometry — an <strong>icosahedron frame</strong> (20 triangular faces, 12 vertices) — to a VAWT, achieving self-balancing rotation, omnidirectional capture, and a cut-in wind speed of 4 m/s.</p>
+
+<p>VINDSNURR and GW1200 share the core design thesis — that a fully triangulated polyhedral frame provides structural rigidity, load distribution, and aerodynamic geometry simultaneously — but differ in their specific polyhedron. See the <a href="geometry-comparison.html">geometry comparison</a> for a full analysis.</p>
+
+<p><strong>Coverage:</strong> <a href="https://www.donga.com/en/article/all/20251224/6025912/1">Donga.com</a> · <a href="https://ifdesign.com/en/winner-ranking/project/geowind-gw1200-geodesic-vertical-axis-wind-turbine/765799">iF Design</a> · <a href="https://us.aving.net/news/articleView.html?idxno=53081">AVING News</a></p>
+
+<hr>
+
+<h2>5. Savonius Design Variants</h2>
+
+<table>
+  <thead><tr><th>Variant</th><th>Description</th><th>Relation to VINDSNURR</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Standard S-rotor (2-bucket)</strong></td><td>Original form, halved cylinders. High torque pulsation.</td><td>Same drag-turbine class</td></tr>
+    <tr><td><strong>3-bucket rotor</strong></td><td>120° spacing, smoother torque.</td><td>VINDSNURR's 6-fold symmetry gives similar effect</td></tr>
+    <tr><td><strong>Multi-stage stacked</strong></td><td>Two S-rotors on one shaft, offset 45–90°.</td><td>Integrated structurally via alternating upper/lower sails</td></tr>
+    <tr><td><strong>Helical Savonius</strong></td><td>Twisted buckets, smoothest torque, no end plates.</td><td>30° ring offset is geometrically related</td></tr>
+    <tr><td><strong>Darrieus-Savonius hybrid</strong></td><td>Lift rotor + drag starter.</td><td>VINDSNURR is pure drag — no lift elements</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>6. VINDSNURR Sail Logic</h2>
+
+<h3>Sail geometry</h3>
+
+<p>Each sail is a <strong>single triangular fabric panel</strong>. The three corners attach to three structural nodes:</p>
+<ul>
+  <li><strong>Upper sails (3 off):</strong> T–U1–L1, T–U3–L3, T–U5–L5 — hanging diagonally from the top apex</li>
+  <li><strong>Lower sails (3 off):</strong> B–L1–U2, B–L3–U4, B–L5–U6 — rising diagonally from the bottom apex</li>
+</ul>
+
+<p>The diagonal edge of each sail (T to an L node, or B to a U node) is a <strong>fabric edge only</strong> — not a structural stay.</p>
+
+<h3>Alternating pattern</h3>
+<ul>
+  <li>Sectors 1, 3, 5: upper sails (blue in visualizer)</li>
+  <li>Sectors 2, 4, 6: lower sails (green in visualizer)</li>
+</ul>
+<p>All six unsailed sectors are open frame — intentionally, to reduce return-stroke drag.</p>
+
+<p><strong>Rotation direction:</strong> Counter-clockwise when viewed from above with wind arriving from the front.</p>
+
+<hr>
+
+<h2>7. Generator and Shaft Considerations</h2>
+
+<table>
+  <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>Rotor radius</td><td>0.5 m</td></tr>
+    <tr><td>Expected RPM at 10 m/s wind</td><td>~191 RPM</td></tr>
+    <tr><td>Expected RPM at 7 m/s wind</td><td>~134 RPM</td></tr>
+    <tr><td>Expected RPM at 5 m/s wind</td><td>~96 RPM</td></tr>
+  </tbody>
+</table>
+
+<p>Options for power extraction:</p>
+<ol>
+  <li><strong>Direct-drive low-RPM alternator</strong> — purpose-built axial flux generators wound for 50–200 RPM. No gearbox losses.</li>
+  <li><strong>Step-up gearbox</strong> — increases RPM to match a standard generator. Adds mechanical losses.</li>
+  <li><strong>Salvaged DC motor as generator</strong> — treadmill motors (90–180V DC) work for proof-of-concept.</li>
+</ol>
+
+<hr>
+
+<h2>8. Design Status and Open Questions</h2>
+
+<table>
+  <thead><tr><th>Question</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>Frame geometry</td><td>Settled — 14-vertex graph, coordinates computed</td></tr>
+    <tr><td>Hub geometry</td><td>Settled — 2 hub families, SCAD files complete</td></tr>
+    <tr><td>Rod lengths</td><td>Settled — 3 families, lengths computed</td></tr>
+    <tr><td>Print tolerances</td><td>Requires test jig validation before production</td></tr>
+    <tr><td>Sail area sufficiency</td><td><strong>Open</strong> — single-triangle vs paired-pocket to be tested</td></tr>
+    <tr><td>Generator selection</td><td><strong>Open</strong> — RPM range established, unit not chosen</td></tr>
+    <tr><td>Cut-in wind speed</td><td><strong>Open</strong> — requires physical prototype measurement</td></tr>
+    <tr><td>Cp measurement</td><td><strong>Open</strong> — requires field testing</td></tr>
+    <tr><td>Long-term material durability</td><td><strong>Open</strong> — PETG outdoor performance under UV/moisture</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>9. VAWT Performance in Residential Context</h2>
+
+<ul>
+  <li>Residential VAWTs typically range from 400 W to 600 W rated capacity. A 5–15 kW system is needed for meaningful household contribution.</li>
+  <li>Real-world output is typically <strong>15–30% below manufacturer rated figures</strong>.</li>
+  <li><strong>Savonius efficiency: 10–17%</strong> in practice. Darrieus lift-type VAWTs reach 30–40%. HAWTs reach 40–50%.</li>
+  <li>Wind speed has a cubic effect on output: a site averaging 12 mph produces roughly 70% more power than one averaging 10 mph.</li>
+  <li>VAWTs are particularly well suited to sites with <strong>turbulent or rapidly shifting wind</strong> — urban rooftops, coastal margins.</li>
+</ul>
+
+<p>Sources: <a href="https://www.ecoflow.com/us/blog/vertical-wind-turbines-for-homes-pros-cons-output">EcoFlow — Vertical Wind Turbines for Homes</a> · <a href="https://elege-energy.com/vertical-axis-wind-turbine-design-a-complete-guide-to-efficiency-and-performance/">Elege Energy — VAWT Design Guide</a></p>
+
+<hr>
+
+<h2>10. References and Further Reading</h2>
+
+<h3>Primary sources</h3>
+<ul>
+  <li>Savonius, S.J. (1931). "The S-Rotor and Its Applications." <em>Mechanical Engineering</em> 53(5): 333–338.</li>
+  <li>Betz, A. (1926). <em>Wind-Energie und ihre Ausnutzung durch Windmühlen.</em> Göttingen: Vandenhoeck &amp; Ruprecht.</li>
+  <li>Johnson, G.L. (2006). <em>Wind Energy Systems.</em> Electronic edition. (Chapter 4 covers VAWT theory.)</li>
+</ul>
+
+<h3>Web references</h3>
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Savonius_wind_turbine">Wikipedia: Savonius wind turbine</a></li>
+  <li><a href="https://ifdesign.com/en/winner-ranking/project/geowind-gw1200-geodesic-vertical-axis-wind-turbine/765799">GeoWind GW1200 — iF Design Award</a></li>
+  <li><a href="https://us.aving.net/news/articleView.html?idxno=53081">GeoWind GW1200 — CES 2026 (AVING News)</a></li>
+  <li><a href="https://www.donga.com/en/article/all/20251224/6025912/1">GeoWind GW1200 — Donga.com</a></li>
+  <li><a href="https://www.ecoflow.com/us/blog/vertical-wind-turbines-for-homes-pros-cons-output">EcoFlow — Vertical Wind Turbines for Homes</a></li>
+  <li><a href="https://elege-energy.com/vertical-axis-wind-turbine-design-a-complete-guide-to-efficiency-and-performance/">Elege Energy — VAWT Design Guide</a></li>
+</ul>
+
+<p class="note">Theory document for VINDSNURR HBR-6-14V. Performance figures are first-order estimates. All claims require prototype validation.</p>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <span>VINDSNURR HBR-6-14V · Open source · MIT licence</span>
+  <span><a href="https://github.com/mgifford/Hex-Bicup-Rotor">GitHub repository</a></span>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>

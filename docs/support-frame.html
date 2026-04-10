@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support Frame — VINDSNURR</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-logo" href="index.html">VIND<span>SNURR</span></a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="index.html">Overview</a>
+    <a href="viz.html">3D Visualizer</a>
+    <a href="step-by-step.html">Assembly Guide</a>
+    <a href="theory.html">Theory</a>
+    <a href="geometry-comparison.html">Geometry</a>
+    <a href="generator.html">Generator</a>
+    <a href="support-frame.html">Support Frame</a>
+  </nav>
+  <button id="theme-toggle" aria-label="Switch to dark mode">
+    <svg aria-hidden="true" class="sun-icon" viewBox="0 0 24 24" width="18" height="18">
+      <circle cx="12" cy="12" r="5" fill="currentColor"/>
+      <path fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+    </svg>
+    <svg aria-hidden="true" class="moon-icon" viewBox="0 0 24 24" width="18" height="18">
+      <path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+</header>
+
+<main class="page">
+<div class="prose">
+
+<h1>Support Frame</h1>
+<p style="color:var(--text-faint);font-size:13px;">Structural mounting for the VINDSNURR 1000 mm rotor</p>
+
+<blockquote>
+  <strong>Design status:</strong> No support frame has been built or tested for this rotor.
+  All structural recommendations below are theoretical, based on standard timber and steel
+  construction principles applied to the known rotor dimensions and estimated loads.
+  Have structural choices reviewed by a qualified engineer before outdoor installation.
+</blockquote>
+
+<hr>
+
+<h2>1. What the frame must do</h2>
+
+<p>The support frame has four jobs:</p>
+<ol>
+  <li><strong>Hold the shaft vertically</strong> — two bearing housings, one at the top of the rotor zone and one at the bottom, must be coaxial to within ~1 mm over the full shaft length or the rotor will wobble under load.</li>
+  <li><strong>Carry the rotor weight</strong> — the completed rotor (hubs, rods, sails, shaft) is estimated at 3–8 kg depending on materials. The lower bearing takes axial (thrust) load.</li>
+  <li><strong>Resist overturning moment</strong> — wind on the rotor produces a lateral force. At 10 m/s wind on a 1 m² projected area, drag force is roughly 60 N (13 lbf). This acts at the rotor's centre of gravity, which is ~1 m or more above the ground bearing.</li>
+  <li><strong>Provide clearance for rotation</strong> — the rotor sweeps a 1000 mm diameter circle. The frame must not enter this zone.</li>
+</ol>
+
+<hr>
+
+<h2>2. Shaft dimensions to design around</h2>
+
+<table>
+  <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>Rotor diameter</td><td>1000 mm</td></tr>
+    <tr><td>Rotor height (T to B)</td><td>1064 mm</td></tr>
+    <tr><td>Shaft OD</td><td>20 mm aluminium tube</td></tr>
+    <tr><td>Recommended shaft length</td><td>~1665 mm minimum (rotor + 300 mm overhang each end)</td></tr>
+    <tr><td>Bearing spec</td><td>6204-2RS — 20 mm ID, 47 mm OD</td></tr>
+    <tr><td>Bearing positions</td><td>One at the top of the rotor zone, one at the bottom</td></tr>
+    <tr><td>Generator position</td><td>Below the lower bearing or above the upper bearing</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>3. Timber frame — 2×4 vs 4×4</h2>
+
+<p>A simple timber A-frame or post-and-crossbar structure is the most accessible option for a first prototype. The question is whether 2×4 (38×89 mm) or 4×4 (89×89 mm) lumber is sufficient.</p>
+
+<h3>For the 1000 mm rotor: 2×4 is marginal, 4×4 is appropriate</h3>
+
+<table>
+  <thead><tr><th>Section</th><th>2×4 (38×89 mm)</th><th>4×4 (89×89 mm)</th></tr></thead>
+  <tbody>
+    <tr><td>Vertical post (3 m tall)</td><td>Adequate if well-braced; prone to racking in wind</td><td>Comfortable margin; self-bracing against racking</td></tr>
+    <tr><td>Horizontal crossbars</td><td>Adequate for rotor weight loads</td><td>More than adequate</td></tr>
+    <tr><td>Bearing mount plate</td><td>Adequate with metal plate bridging</td><td>Directly accepts bolt-down bearing housings</td></tr>
+    <tr><td>Wind load resistance</td><td>Requires diagonal bracing on all faces</td><td>Requires bracing on two faces (depth helps)</td></tr>
+    <tr><td>Outdoor durability</td><td>Adequate with treated lumber (ACQ or similar)</td><td>Better; more wood to lose before structural failure</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Recommendation for 1000 mm rotor:</strong> Use 4×4 posts for vertical members. 2×4 is acceptable for horizontal crossbars and diagonal bracing. If the rotor is installed above ~1.5 m off the ground, add at least two diagonal braces (one per axis) to resist overturning.</p>
+
+<h3>For larger rotors</h3>
+
+<p>If the rotor diameter increases, so do the loads — roughly with the square of diameter for wind force, and with the cube of diameter for the swept area power capture. As a rough guide:</p>
+
+<table>
+  <thead><tr><th>Rotor diameter</th><th>Minimum post section</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td>500 mm</td><td>2×4 (38×89 mm)</td><td>Light loads; simple frame</td></tr>
+    <tr><td>1000 mm (this design)</td><td>4×4 (89×89 mm)</td><td>Diagonal bracing required</td></tr>
+    <tr><td>1500 mm</td><td>6×6 (140×140 mm) or steel</td><td>Timber gets heavy; consider steel tube</td></tr>
+    <tr><td>2000 mm+</td><td>Steel angle or tube, engineered design</td><td>Have a structural engineer review</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>4. Simple A-frame design (timber)</h2>
+
+<p>The simplest adequate frame for the 1000 mm rotor is a freestanding A-frame:</p>
+
+<pre><code>     [bearing housing — top]
+           |
+     [rotor zone — 1064 mm]
+           |
+     [bearing housing — bottom]
+           |
+    [generator mount — 200 mm]
+           |
+    ───────┼───────   crossbar (1200 mm, 2×4)
+          / \
+         /   \
+        /     \
+   [post]   [post]
+   4×4        4×4
+   ~2000 mm tall each
+        \     /
+         \   /   diagonal braces (2×4)
+          \_/
+   [base plate or ground anchor]</code></pre>
+
+<p>Key dimensions for this rotor:</p>
+<ul>
+  <li>Crossbar height above ground: at least 400 mm (rotor B node must clear the ground when rotor is spinning)</li>
+  <li>Crossbar span: at least 800 mm between posts to provide stability against overturning</li>
+  <li>Post height: crossbar height + rotor height (1064 mm) + upper overhang (300 mm) + bearing plate depth (~50 mm) = ~1800 mm minimum above crossbar</li>
+  <li>Total post length including footing: ~2500–3000 mm</li>
+</ul>
+
+<h3>Footing options</h3>
+
+<table>
+  <thead><tr><th>Option</th><th>Suitable for</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td>Weighted base plate (steel, 20+ kg)</td><td>Indoor testing, sheltered locations</td><td>No ground modification needed; tip risk in high wind</td></tr>
+    <tr><td>Concrete footings (300 mm × 300 mm × 600 mm deep)</td><td>Outdoor permanent installation</td><td>Requires digging; excellent stability</td></tr>
+    <tr><td>Post spikes (ground anchors)</td><td>Soft ground, semi-permanent</td><td>Fast to install; not for rocky or hard ground</td></tr>
+    <tr><td>Bolted to existing concrete slab</td><td>Rooftops, patios</td><td>Requires anchor bolts into slab; check slab thickness</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>5. Steel tube alternative</h2>
+
+<p>For a cleaner installation or where timber is impractical, steel rectangular hollow section (RHS) or round hollow section (RHS) is a better choice:</p>
+
+<table>
+  <thead><tr><th>Component</th><th>Steel specification</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td>Vertical mast</td><td>50×50×3 mm RHS or 50 mm OD round tube</td><td>Single central mast; requires guy wires or outriggers</td></tr>
+    <tr><td>Bearing mount plate</td><td>6 mm flat plate, laser cut or welded</td><td>Drill to accept flanged bearing housing</td></tr>
+    <tr><td>Outriggers (if mast)</td><td>40×40×3 mm RHS, 600 mm long, 120° spacing</td><td>3 outriggers gives stable tripod base</td></tr>
+    <tr><td>Guy wires (if tall mast)</td><td>3 mm stainless wire, turnbuckle tensioners</td><td>2 levels of guys if mast exceeds 3 m</td></tr>
+  </tbody>
+</table>
+
+<p>A single steel mast with three outriggers welded at 120° spacing at the base is compact, strong, and leaves the rotor unobstructed on all sides. This is the preferred form for a production installation.</p>
+
+<hr>
+
+<h2>6. Bearing hardware — specification, sourcing, and installation</h2>
+
+<h3>The bearing</h3>
+
+<p>The rotor shaft (20 mm OD aluminium tube) runs in two <strong>6204-2RS</strong> deep-groove ball bearings:</p>
+
+<table>
+  <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>Designation</td><td>6204-2RS (also written 6204-RS, 6204-2RSH)</td></tr>
+    <tr><td>Bore (ID)</td><td>20 mm — matches shaft OD exactly</td></tr>
+    <tr><td>Outer diameter (OD)</td><td>47 mm</td></tr>
+    <tr><td>Width</td><td>14 mm</td></tr>
+    <tr><td>Seal type</td><td>2RS = rubber sealed both sides — important for outdoor use; keeps grease in and water out</td></tr>
+    <tr><td>Load rating (dynamic)</td><td>~13 kN (well above rotor loads)</td></tr>
+    <tr><td>Quantity needed</td><td>2 (one at top of rotor zone, one at bottom)</td></tr>
+  </tbody>
+</table>
+
+<p><strong>Where to source:</strong> 6204-2RS is one of the most common bearing sizes in the world. Available from:</p>
+<ul>
+  <li><strong>Amazon / eBay</strong> — search "6204-2RS bearing" — $3–$8 each for off-brand, $8–$15 for branded (SKF, NSK, FAG). At this price the risk of buying Chinese no-name bearings for a prototype is acceptable.</li>
+  <li><strong>Local bearing suppliers</strong> (e.g. Motion Industries, Grainger in North America; BSC Bearing, CBC in Australia; Simply Bearings, HPC Bearings in the UK) — often $5–$12 each, same-day pickup, guaranteed specification.</li>
+  <li><strong>Robot/RC/maker suppliers</strong> (ServoCity, VXB, Amazon) — usually stocked, reasonable quality.</li>
+</ul>
+
+<p>Search terms: "6204-2RS", "6204 RS bearing", "20mm bore bearing". The "2RS" suffix is important — open bearings (6204 with no suffix) are not suitable outdoors.</p>
+
+<h3>Bearing housings</h3>
+
+<p>The bearing must be held in a housing that bolts to the frame. Two formats:</p>
+
+<table>
+  <thead><tr><th>Housing type</th><th>Search term</th><th>Approx. cost</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Pillow block (UCP204)</strong></td><td>"UCP204 pillow block" or "P204 bearing block"</td><td>$5–$15 each</td><td>Bolts flat to a horizontal surface. Upper bearing: to underside of top crossbar. Lower bearing: to top of bottom crossbar. Self-aligning insert tolerates slight misalignment.</td></tr>
+    <tr><td><strong>4-bolt flanged (UCF204)</strong></td><td>"UCF204 flange bearing"</td><td>$6–$18 each</td><td>Bolts to a vertical face. Better for a single-mast steel design. Round 4-bolt pattern.</td></tr>
+    <tr><td><strong>2-bolt flanged (UCFL204)</strong></td><td>"UCFL204 flange bearing"</td><td>$6–$15 each</td><td>Oblong 2-bolt pattern — easier to adjust during alignment before final tightening.</td></tr>
+  </tbody>
+</table>
+
+<p>All of the UCP204 / UCF204 family use the same 6204 insert bearing. The housing letter changes the mount geometry, not the bearing spec. All include a set screw that locks the housing to the shaft — tighten this only after alignment is confirmed.</p>
+
+<p><strong>Where to source housings:</strong> Same suppliers as the bearings. Search "UCP204" or "UCF204". Budget $10–$30 for both housings.</p>
+
+<h3>Installation and alignment</h3>
+
+<ol>
+  <li>Bolt the <strong>lower bearing housing</strong> to the frame first.</li>
+  <li>Slide the shaft through the lower bearing.</li>
+  <li>With the shaft plumb (confirmed with a spirit level), position the <strong>upper bearing housing</strong> loosely — do not tighten.</li>
+  <li>Slide the upper bearing down the shaft to its housing and verify the shaft is still plumb.</li>
+  <li>Tighten the upper housing bolts, then tighten both set screws.</li>
+  <li>Spin the shaft by hand — it should rotate with no binding and only light resistance from the seals. Any roughness suggests misalignment; loosen and re-set.</li>
+</ol>
+
+<p><strong>Critical:</strong> The two bearing housings must be coaxial — both shaft centrelines must align to within 1 mm over the full shaft length. Even 2–3 mm of misalignment will cause the rotor to wobble under load and will shorten bearing life dramatically.</p>
+
+<hr>
+
+<h2>6b. Shaft-to-generator connection</h2>
+
+<p>The shaft transfers rotor torque to the generator. There are three common approaches, depending on whether the generator is mounted above or below the rotor.</p>
+
+<h3>Generator position options</h3>
+
+<table>
+  <thead><tr><th>Position</th><th>Pros</th><th>Cons</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Below lower bearing</strong></td><td>Weight low (stability), easy access for wiring</td><td>Wiring must pass down through frame base</td></tr>
+    <tr><td><strong>Above upper bearing</strong></td><td>Clean wiring run down the mast</td><td>Weight high; harder to service</td></tr>
+    <tr><td><strong>Inline (direct drive)</strong></td><td>No coupling needed — shaft is the generator shaft</td><td>Generator must be designed for this; rare in off-the-shelf units</td></tr>
+  </tbody>
+</table>
+
+<p>For a first build: <strong>below the lower bearing</strong> is simplest. The rotor shaft extends 200–300 mm below the lower bearing housing, and the generator mounts to the frame directly beneath it.</p>
+
+<h3>Coupling the shaft to the generator</h3>
+
+<p>The VINDSNURR shaft is 20 mm OD aluminium tube. Most generators and motors have a solid keyed shaft — typically 8 mm, 10 mm, or 12 mm diameter. A coupling is needed to connect them.</p>
+
+<table>
+  <thead><tr><th>Coupling type</th><th>Search term</th><th>Approx. cost</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Rigid shaft coupler</strong></td><td>"rigid shaft coupling 20mm to 10mm"</td><td>$5–$15</td><td>Simplest. Zero slip. Requires near-perfect shaft alignment — any misalignment causes vibration and bearing wear. Acceptable for direct drive on a well-aligned frame.</td></tr>
+    <tr><td><strong>Jaw/spider coupler (flexible)</strong></td><td>"flexible jaw coupling 20mm 10mm"</td><td>$8–$25</td><td>Polyurethane spider insert absorbs minor misalignment and vibration. Preferred over rigid. Search "Oldham coupling" or "jaw coupling".</td></tr>
+    <tr><td><strong>Belt drive pulley</strong></td><td>"timing pulley 20mm bore" + "GT2 belt"</td><td>$10–$30</td><td>For step-up ratio (e.g. 3:1 to spin generator faster). Allows spatial offset between shaft and generator. GT2 timing belts are low-slip and widely available from 3D printer suppliers.</td></tr>
+    <tr><td><strong>Friction disc</strong></td><td>—</td><td>DIY</td><td>Simple but slips under load. Not recommended for sustained power generation.</td></tr>
+  </tbody>
+</table>
+
+<p>Note: The VINDSNURR shaft is <em>tube</em>, not solid rod. A standard shaft coupler bored to 20 mm will clamp the tube's OD, but if the tube wall is thin (typically 2 mm), the set screw may crush it. Options:</p>
+<ul>
+  <li>Use a <strong>collar clamp</strong> (split clamp style) rather than a set-screw coupler — distributes clamping force around the full circumference.</li>
+  <li>Fill the tube end with a short <strong>aluminium plug</strong> (20 mm OD solid rod, 30–40 mm long) epoxied inside before fitting the coupler — gives the set screw a solid surface to bite.</li>
+  <li>Use a <strong>3D-printed adaptor</strong> that fits over the tube OD and presents a standard solid shaft diameter to the coupler.</li>
+</ul>
+
+<h3>Generator mounting</h3>
+
+<p>The generator must be rigidly fixed to the frame — it must not rotate with the shaft. Common approaches:</p>
+<ul>
+  <li><strong>Clamp bracket:</strong> a U-bolt or band clamp around the generator body, bolted to a crossbar on the frame. Works for cylindrical generators (outrunner motors, hub motors).</li>
+  <li><strong>Flange mount:</strong> generators with a front face plate bolt directly to a plate welded or bolted to the frame. Cleanest option.</li>
+  <li><strong>3D-printed motor mount:</strong> design a mount that accepts the generator's bolt circle and bolts to the frame crossbar. Suitable for prototype phase; upgrade to metal for permanent installation.</li>
+</ul>
+
+<p>Ensure the generator body is electrically isolated from the metal frame if the frame is earthed — especially for permanent outdoor installation. A rubber gasket under the mount bracket is sufficient for low-voltage systems (&lt;48V).</p>
+
+<hr>
+
+<h2>7. Wind and safety loads</h2>
+
+<p>Estimated structural loads for the 1000 mm rotor at 15 m/s (storm conditions):</p>
+
+<table>
+  <thead><tr><th>Load</th><th>Estimate</th><th>Basis</th></tr></thead>
+  <tbody>
+    <tr><td>Rotor weight (static)</td><td>5–8 kg</td><td>Hubs, rods, shaft, sails</td></tr>
+    <tr><td>Wind drag on rotor at 15 m/s</td><td>~130 N (29 lbf)</td><td>Cd ≈ 1.0, A = 1 m², ρ = 1.2 kg/m³</td></tr>
+    <tr><td>Overturning moment at base (1.5 m height)</td><td>~200 N·m</td><td>130 N × 1.5 m moment arm</td></tr>
+    <tr><td>Shaft torsional load at rated power</td><td>~3–6 N·m at 150 RPM</td><td>P = τ × ω; P ≈ 50 W typical</td></tr>
+  </tbody>
+</table>
+
+<p>These loads are modest for timber or steel construction at this scale. The overturning moment governs the footing design — a 200 N·m overturning moment at the base requires either a heavy ballast (>100 kg) or ground anchors.</p>
+
+<hr>
+
+<h2>8. Scaling up</h2>
+
+<p>If the rotor design is validated and scaled to a larger diameter, every structural dimension changes. Key scaling relationships:</p>
+
+<ul>
+  <li><strong>Wind force on rotor:</strong> scales with diameter² (doubling diameter = 4× the force)</li>
+  <li><strong>Overturning moment:</strong> scales with diameter³ (doubling diameter = 8× the moment, because both force and height increase)</li>
+  <li><strong>Rotor weight:</strong> scales roughly with diameter² to diameter³ depending on material choices</li>
+  <li><strong>Shaft diameter:</strong> must increase with rotor weight and torque — 20 mm is appropriate for the 1000 mm rotor; a 1500 mm rotor would likely want 25–30 mm</li>
+</ul>
+
+<p>For rotors above 1500 mm diameter, consult a structural engineer before committing to a frame design. The loads begin to exceed what can be confidently handled by rule-of-thumb timber sizing.</p>
+
+<hr>
+
+<h2>9. Rooftop installation considerations</h2>
+
+<p>The VINDSNURR's omnidirectional operation and compact footprint make rooftop installation appealing. Additional considerations:</p>
+
+<ul>
+  <li><strong>Vibration transmission:</strong> any rotor imbalance will transmit vibration into the roof structure. Always balance the rotor before permanent installation (see Assembly Guide §8). Rubber isolation mounts between frame and roof help.</li>
+  <li><strong>Roof load capacity:</strong> check that the roof can carry the frame weight plus wind uplift loads before installation. Most pitched roofs can handle localised point loads of 500–1000 N without modification; flat roofs vary.</li>
+  <li><strong>Planning permission:</strong> in most jurisdictions, rooftop wind turbines require planning permission or at least notification. Check local rules before installing.</li>
+  <li><strong>Height advantage:</strong> wind speed increases with height. Mounting the rotor at 3–5 m above the roofline rather than at roof level can significantly increase output at the same wind site.</li>
+</ul>
+
+<p class="note">All structural recommendations in this document are theoretical estimates based on standard engineering principles. They have not been validated by physical testing or engineering review. Treat them as starting points for design, not as certified specifications. For any permanent outdoor installation, have the frame design reviewed by a qualified structural engineer.</p>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <span>VINDSNURR HBR-6-14V · Open source · MIT licence</span>
+  <span><a href="https://github.com/mgifford/Hex-Bicup-Rotor">GitHub repository</a></span>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>

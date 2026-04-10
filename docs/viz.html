@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Visualizer — VINDSNURR</title>
+  <link rel="stylesheet" href="site.css">
+  <style>
+    body { display: flex; flex-direction: column; align-items: center; }
+    .page-inner { width: 100%; max-width: 640px; padding: 24px 16px 48px; }
+    h1 { font-size: 18px; font-weight: 500; margin-bottom: 4px; }
+    .subtitle { font-size: 12px; color: var(--text-faint); margin-bottom: 20px; }
+    canvas {
+      display: block; width: 100%; max-width: 640px;
+      border-radius: 12px; background: var(--bg-card); box-shadow: var(--shadow);
+    }
+    .controls {
+      display: flex; flex-wrap: wrap; align-items: center;
+      gap: 16px; padding: 14px 0 10px;
+    }
+    .controls label {
+      display: flex; align-items: center; gap: 7px;
+      color: var(--text-muted); font-size: 12px; white-space: nowrap;
+    }
+    .controls label.flex { flex: 1; min-width: 130px; }
+    input[type="range"]    { flex: 1; accent-color: var(--accent); cursor: pointer; }
+    input[type="checkbox"] { accent-color: var(--accent); cursor: pointer; width: 15px; height: 15px; }
+    .legend {
+      display: flex; flex-wrap: wrap; gap: 16px; padding: 6px 0 0;
+      font-size: 11px; color: var(--text-muted);
+    }
+    .legend-item { display: flex; align-items: center; gap: 6px; }
+    .legend-item svg { flex-shrink: 0; }
+    .info {
+      margin-top: 24px; background: var(--bg-card); border-radius: 10px;
+      border: 1px solid var(--border); padding: 16px 20px;
+      font-size: 12px; color: var(--text-muted); line-height: 1.7;
+    }
+    .info h2 { font-size: 13px; font-weight: 500; color: var(--text-main); margin-bottom: 8px; }
+    .info p  { margin-bottom: 6px; }
+    .info p:last-child { margin-bottom: 0; }
+    code {
+      font-family: ui-monospace, monospace; font-size: 11px;
+      background: var(--bg-code); padding: 1px 5px; border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-logo" href="index.html">VIND<span>SNURR</span></a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="index.html">Overview</a>
+    <a href="viz.html">3D Visualizer</a>
+    <a href="step-by-step.html">Assembly Guide</a>
+    <a href="theory.html">Theory</a>
+    <a href="geometry-comparison.html">Geometry</a>
+    <a href="generator.html">Generator</a>
+    <a href="support-frame.html">Support Frame</a>
+  </nav>
+  <button id="theme-toggle" aria-label="Switch to dark mode">
+    <svg aria-hidden="true" class="sun-icon" viewBox="0 0 24 24" width="18" height="18">
+      <circle cx="12" cy="12" r="5" fill="currentColor"/>
+      <path fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+    </svg>
+    <svg aria-hidden="true" class="moon-icon" viewBox="0 0 24 24" width="18" height="18">
+      <path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+</header>
+
+<div class="page-inner">
+
+  <h1>3D Visualizer</h1>
+  <p class="subtitle">14-vertex · 36-edge · fully triangulated · 6-sector wind rotor graph</p>
+
+  <canvas id="c" aria-label="Rotating 3D diagram of the VINDSNURR rotor frame"></canvas>
+
+  <div class="controls">
+    <label><input type="checkbox" id="chk" checked> Rotate</label>
+    <label class="flex">Speed <input type="range" id="spd" min="1" max="8" value="3"></label>
+    <label class="flex">Tilt  <input type="range" id="tlt" min="10" max="50" value="28"></label>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item">
+      <svg width="32" height="8">
+        <line x1="0" y1="4" x2="32" y2="4" stroke="#2c2c2a" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+      Fiberglass stay
+    </div>
+    <div class="legend-item">
+      <svg width="32" height="8">
+        <line x1="0" y1="4" x2="32" y2="4" stroke="#378add" stroke-width="2.2"
+              stroke-dasharray="5 3" stroke-linecap="round" opacity="0.8"/>
+      </svg>
+      Sail edge — upper (fabric)
+    </div>
+    <div class="legend-item">
+      <svg width="32" height="8">
+        <line x1="0" y1="4" x2="32" y2="4" stroke="#1d9e75" stroke-width="2.2"
+              stroke-dasharray="5 3" stroke-linecap="round" opacity="0.8"/>
+      </svg>
+      Sail edge — lower (fabric)
+    </div>
+    <div class="legend-item">
+      <svg width="14" height="14">
+        <rect x="0" y="0" width="14" height="14" rx="3"
+              fill="rgba(133,183,235,0.80)" stroke="#185fa5" stroke-width="1"/>
+      </svg>
+      Upper sail (T fan)
+    </div>
+    <div class="legend-item">
+      <svg width="14" height="14">
+        <rect x="0" y="0" width="14" height="14" rx="3"
+              fill="rgba(93,202,165,0.80)" stroke="#0f6e56" stroke-width="1"/>
+      </svg>
+      Lower sail (B fan)
+    </div>
+  </div>
+
+  <div class="info">
+    <h2>Physics note — rotation direction</h2>
+    <p>
+      This is a <strong>drag-based Savonius-style</strong> vertical-axis wind turbine.
+      Each sail is a triangular panel spanning from an apex (T or B) diagonally across
+      to the opposite ring. Wind pressure on the open concave face of each sail pocket
+      drives that face away from the wind source. The closed triangular frame faces on
+      the alternating sectors present far less drag area and return with low resistance.
+    </p>
+    <p>
+      With wind arriving from the front (toward the viewer), the rotor spins
+      counter-clockwise when viewed from above. If your physical shaft rotation
+      appears reversed when tested outdoors, reverse the generator winding connections
+      rather than the rotor geometry.
+    </p>
+    <h2 style="margin-top:12px">Graph structure</h2>
+    <p>
+      <strong>Vertex order top to bottom:</strong>
+      T (top apex) → U1–U6 (upper ring) → L1–L6 (lower ring) → B (bottom apex).
+    </p>
+    <p>
+      <strong>Edges (36):</strong>
+      6 top fan (T–U), 6 upper ring, 12 staggered belt, 6 lower ring, 6 bottom fan (B–L).
+      All 24 faces triangular.
+    </p>
+    <p>
+      <strong>Sails (6, alternating):</strong>
+      Upper from T: <code>T–U1–L1</code>, <code>T–U3–L3</code>, <code>T–U5–L5</code>.
+      Lower from B: <code>B–L1–U2</code>, <code>B–L3–U4</code>, <code>B–L5–U6</code>.
+      Dashed coloured lines are fabric sail edges, not fiberglass stays.
+    </p>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <span>VINDSNURR HBR-6-14V · Open source · MIT licence</span>
+  <span><a href="https://github.com/mgifford/Hex-Bicup-Rotor">GitHub repository</a></span>
+</footer>
+
+<script src="site.js"></script>
+<script>
+  const cv  = document.getElementById('c');
+  const ctx = cv.getContext('2d');
+  const W = 640, H = 640;
+  cv.width = W; cv.height = H;
+
+  const CX = W / 2, CY = H / 2 - 10, R = 210;
+
+  const SAIL_FILL = { T: 'rgba(133,183,235,0.80)', B: 'rgba(93,202,165,0.80)' };
+
+  function buildVerts() {
+    const phi = 20 * Math.PI / 180;
+    const rh  = R * Math.cos(phi);
+    const yU  = +R * Math.sin(phi);
+    const yL  = -R * Math.sin(phi);
+    const n   = {};
+    n['T'] = [0, +R, 0];
+    n['B'] = [0, -R, 0];
+    for (let i = 0; i < 6; i++) {
+      const a = i * 60 * Math.PI / 180;
+      n['U' + (i + 1)] = [rh * Math.sin(a), yU, rh * Math.cos(a)];
+    }
+    for (let i = 0; i < 6; i++) {
+      const a = (i * 60 + 30) * Math.PI / 180;
+      n['L' + (i + 1)] = [rh * Math.sin(a), yL, rh * Math.cos(a)];
+    }
+    return n;
+  }
+  const BASE = buildVerts();
+
+  function rotY(v, a) {
+    const [x, y, z] = v;
+    return [x * Math.cos(a) + z * Math.sin(a), y, -x * Math.sin(a) + z * Math.cos(a)];
+  }
+  function rotX(v, a) {
+    const [x, y, z] = v;
+    return [x, y * Math.cos(a) - z * Math.sin(a), y * Math.sin(a) + z * Math.cos(a)];
+  }
+  function project(rv, tilt) {
+    const p = rotX(rv, tilt);
+    return { x: CX + p[0], y: CY - p[1], d: p[2] };
+  }
+  function dAlpha(d, lo, hi) {
+    return lo + ((d + R) / (2 * R)) * (hi - lo);
+  }
+
+  const STAYS = new Set([
+    'T|U1','T|U2','T|U3','T|U4','T|U5','T|U6',
+    'B|L1','B|L2','B|L3','B|L4','B|L5','B|L6',
+    'U1|U2','U2|U3','U3|U4','U4|U5','U5|U6','U6|U1',
+    'L1|L2','L2|L3','L3|L4','L4|L5','L5|L6','L6|L1',
+    'U1|L1','U1|L6','U2|L1','U2|L2','U3|L2','U3|L3',
+    'U4|L3','U4|L4','U5|L4','U5|L5','U6|L5','U6|L6',
+  ]);
+  const STAY_LIST = [...STAYS].map(k => k.split('|'));
+  function stayKey(a, b) { return [a, b].sort().join('|'); }
+  function isStay(a, b)  { return STAYS.has(stayKey(a, b)); }
+
+  const SAILS = [
+    { keys: ['T', 'U1', 'L1'], type: 'T' },
+    { keys: ['T', 'U3', 'L3'], type: 'T' },
+    { keys: ['T', 'U5', 'L5'], type: 'T' },
+    { keys: ['B', 'L1', 'U2'], type: 'B' },
+    { keys: ['B', 'L3', 'U4'], type: 'B' },
+    { keys: ['B', 'L5', 'U6'], type: 'B' },
+  ];
+
+  let angle   = 0.52;
+  let running = true;
+  document.getElementById('chk').onchange = e => { running = e.target.checked; };
+
+  function faceNormalZ(pts) {
+    const ax = pts[1].x - pts[0].x, ay = pts[1].y - pts[0].y;
+    const bx = pts[2].x - pts[0].x, by = pts[2].y - pts[0].y;
+    return ax * by - ay * bx;
+  }
+
+  function draw() {
+    const tilt = +document.getElementById('tlt').value * Math.PI / 180;
+    const rv = {};
+    for (const k in BASE) rv[k] = rotY(BASE[k], angle);
+    const p = {};
+    for (const k in rv) p[k] = project(rv[k], tilt);
+
+    ctx.clearRect(0, 0, W, H);
+
+    const faces = SAILS.map(s => {
+      const pts   = s.keys.map(k => p[k]);
+      const depth = pts.reduce((sum, pt) => sum + pt.d, 0) / 3;
+      return { ...s, pts, depth, nz: faceNormalZ(pts) };
+    }).sort((a, b) => a.depth - b.depth);
+
+    for (const f of faces) {
+      ctx.beginPath();
+      ctx.moveTo(f.pts[0].x, f.pts[0].y);
+      ctx.lineTo(f.pts[1].x, f.pts[1].y);
+      ctx.lineTo(f.pts[2].x, f.pts[2].y);
+      ctx.closePath();
+      ctx.fillStyle = SAIL_FILL[f.type];
+      ctx.fill();
+    }
+
+    for (const s of SAILS) {
+      const k   = s.keys;
+      const pts = k.map(n => p[n]);
+      const nz  = faceNormalZ(pts);
+      const front = nz < 0;
+      for (let i = 0; i < 3; i++) {
+        const a = k[i], b = k[(i + 1) % 3];
+        if (!isStay(a, b)) {
+          const pa    = p[a], pb = p[b];
+          const ed    = (pa.d + pb.d) / 2;
+          const alpha = front ? dAlpha(ed, 0.35, 0.80) : dAlpha(ed, 0.08, 0.25);
+          ctx.beginPath();
+          ctx.moveTo(pa.x, pa.y);
+          ctx.lineTo(pb.x, pb.y);
+          ctx.strokeStyle = s.type === 'T'
+            ? `rgba(55,138,221,${alpha})`
+            : `rgba(29,158,117,${alpha})`;
+          ctx.lineWidth = 2.4;
+          ctx.setLineDash([6, 4]);
+          ctx.lineCap = 'round';
+          ctx.stroke();
+          ctx.setLineDash([]);
+        }
+      }
+    }
+
+    const staysSorted = STAY_LIST
+      .map(([a, b]) => ({ a, b, d: (p[a].d + p[b].d) / 2 }))
+      .sort((x, y) => x.d - y.d);
+
+    for (const { a, b, d } of staysSorted) {
+      const pa    = p[a], pb = p[b];
+      const alpha = dAlpha(d, 0.07, 0.96);
+      const lw    = dAlpha(d, 0.5, 2.3);
+      ctx.beginPath();
+      ctx.moveTo(pa.x, pa.y);
+      ctx.lineTo(pb.x, pb.y);
+      ctx.strokeStyle = `rgba(44,44,42,${alpha})`;
+      ctx.lineWidth   = lw;
+      ctx.lineCap     = 'round';
+      ctx.setLineDash([]);
+      ctx.stroke();
+    }
+
+    ctx.beginPath();
+    ctx.moveTo(p['T'].x, p['T'].y);
+    ctx.lineTo(p['B'].x, p['B'].y);
+    ctx.strokeStyle = 'rgba(136,135,128,0.35)';
+    ctx.lineWidth   = 1.3;
+    ctx.setLineDash([6, 5]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    const nodeOrder = Object.keys(p).sort((a, b) => p[a].d - p[b].d);
+    for (const k of nodeOrder) {
+      const pt    = p[k];
+      const alpha = dAlpha(pt.d, 0.15, 1.0);
+      let r, fill, stroke;
+      if (k === 'T' || k === 'B') { r = 9; fill = '#2c2c2a'; stroke = '#888780'; }
+      else if (k[0] === 'U')      { r = 6; fill = '#534ab7'; stroke = '#cecbf6'; }
+      else                         { r = 6; fill = '#0f6e56'; stroke = '#9fe1cb'; }
+      ctx.globalAlpha = alpha;
+      ctx.beginPath();
+      ctx.arc(pt.x, pt.y, r, 0, Math.PI * 2);
+      ctx.fillStyle   = fill;
+      ctx.strokeStyle = stroke;
+      ctx.lineWidth   = 1.3;
+      ctx.fill();
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
+
+    for (const k of nodeOrder) {
+      const pt    = p[k];
+      const alpha = Math.max(0.18, dAlpha(pt.d, 0.15, 1.0));
+      const dx    = pt.x - CX, dy = pt.y - CY;
+      const dist  = Math.sqrt(dx * dx + dy * dy) || 1;
+      const off   = (k === 'T' || k === 'B') ? 16 : 13;
+      const lx    = pt.x + dx / dist * off;
+      const ly    = pt.y + dy / dist * off;
+      ctx.globalAlpha  = alpha;
+      ctx.font         = '500 11px system-ui, sans-serif';
+      ctx.textAlign    = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.lineWidth    = 3.5;
+      ctx.strokeStyle  = 'rgba(255,255,255,0.82)';
+      ctx.strokeText(k, lx, ly);
+      ctx.fillStyle = (k === 'T' || k === 'B') ? '#2c2c2a'
+                    : (k[0] === 'U')            ? '#3c3489'
+                                                : '#085041';
+      ctx.fillText(k, lx, ly);
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  let last = 0;
+  function loop(ts) {
+    const spd = +document.getElementById('spd').value;
+    const dt  = Math.min(ts - last, 50);
+    last = ts;
+    if (running) angle -= spd * 0.0004 * dt;
+    draw();
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(ts => { last = ts; loop(ts); });
+</script>
+
+</body>
+</html>

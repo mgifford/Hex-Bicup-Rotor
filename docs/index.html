@@ -3,417 +3,157 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hexagonal Bicupola Rotor</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: system-ui, -apple-system, sans-serif;
-      font-size: 14px;
-      background: #f8f7f4;
-      color: #2c2c2a;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      padding: 24px 16px 40px;
-    }
-    h1 { font-size: 18px; font-weight: 500; margin-bottom: 4px; }
-    .subtitle { font-size: 12px; color: #888780; margin-bottom: 20px; }
-    canvas {
-      display: block;
-      width: 100%;
-      max-width: 640px;
-      border-radius: 12px;
-      background: #ffffff;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.06);
-    }
-    .controls {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 16px;
-      padding: 14px 0 10px;
-      width: 100%;
-      max-width: 640px;
-    }
-    .controls label {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      color: #5f5e5a;
-      font-size: 12px;
-      white-space: nowrap;
-    }
-    .controls label.flex { flex: 1; min-width: 130px; }
-    input[type="range"]    { flex: 1; accent-color: #534ab7; cursor: pointer; }
-    input[type="checkbox"] { accent-color: #534ab7; cursor: pointer; width: 15px; height: 15px; }
-    .legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      padding: 6px 0 0;
-      width: 100%;
-      max-width: 640px;
-      font-size: 11px;
-      color: #5f5e5a;
-    }
-    .legend-item { display: flex; align-items: center; gap: 6px; }
-    .legend-item svg { flex-shrink: 0; }
-    .info {
-      margin-top: 24px;
-      width: 100%;
-      max-width: 640px;
-      background: #ffffff;
-      border-radius: 10px;
-      border: 1px solid rgba(0,0,0,0.07);
-      padding: 16px 20px;
-      font-size: 12px;
-      color: #5f5e5a;
-      line-height: 1.7;
-    }
-    .info h2 { font-size: 13px; font-weight: 500; color: #2c2c2a; margin-bottom: 8px; }
-    .info p { margin-bottom: 6px; }
-    .info p:last-child { margin-bottom: 0; }
-    code {
-      font-family: ui-monospace, monospace;
-      font-size: 11px;
-      background: #f1efe8;
-      padding: 1px 5px;
-      border-radius: 3px;
-    }
-    footer { margin-top: 32px; font-size: 11px; color: #b4b2a9; }
-  </style>
+  <title>VINDSNURR — Hexagonal Bicupola Wind Rotor</title>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
 
-  <h1>Hexagonal Bicupola Rotor</h1>
-  <p class="subtitle">14-vertex · 36-edge · fully triangulated · 6-sector wind rotor graph</p>
+<header class="site-header">
+  <a class="site-logo" href="index.html">VIND<span>SNURR</span></a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="index.html" aria-current="page">Overview</a>
+    <a href="viz.html">3D Visualizer</a>
+    <a href="step-by-step.html">Assembly Guide</a>
+    <a href="theory.html">Theory</a>
+    <a href="geometry-comparison.html">Geometry</a>
+    <a href="generator.html">Generator</a>
+    <a href="support-frame.html">Support Frame</a>
+  </nav>
+  <button id="theme-toggle" aria-label="Switch to dark mode">
+    <svg aria-hidden="true" class="sun-icon" viewBox="0 0 24 24" width="18" height="18">
+      <circle cx="12" cy="12" r="5" fill="currentColor"/>
+      <path fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+    </svg>
+    <svg aria-hidden="true" class="moon-icon" viewBox="0 0 24 24" width="18" height="18">
+      <path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+</header>
 
-  <canvas id="c"></canvas>
+<main class="page">
 
-  <div class="controls">
-    <label><input type="checkbox" id="chk" checked> Rotate</label>
-    <label class="flex">Speed <input type="range" id="spd" min="1" max="8" value="3"></label>
-    <label class="flex">Tilt  <input type="range" id="tlt" min="10" max="50" value="28"></label>
+  <div class="prose">
+
+    <h1>VINDSNURR</h1>
+    <p style="font-size:13px;color:var(--text-faint);margin-bottom:28px;">
+      HBR-6-14V · Rev 1.1 · Open source · MIT licence
+    </p>
+
+    <p>
+      VINDSNURR is an open-source <strong>vertical-axis drag wind turbine</strong> based on a
+      14-vertex hexagonal bicupola frame. Six triangular sail panels mounted on a fully
+      triangulated rod-and-hub structure drive a central shaft in a Savonius-style drag cycle.
+      The frame is designed for 3D-printed hubs, fiberglass or carbon rod struts, and ripstop
+      nylon sails.
+    </p>
+
+    <p style="font-size:13px;background:var(--bg-code);border:1px solid var(--border);border-radius:6px;padding:10px 14px;color:var(--text-muted);">
+      <strong>Status:</strong> Design phase. OpenSCAD files are complete and ready to print.
+      No physical prototype has been built or tested. All performance figures are theoretical estimates.
+    </p>
+
+    <hr>
+
+    <h2>Explore the project</h2>
+
+    <table>
+      <thead><tr><th>Page</th><th>What you'll find</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><a href="viz.html"><strong>3D Visualizer</strong></a></td>
+          <td>Interactive rotating canvas showing the 14-node graph, all 36 edges, and 6 sail panels. Adjust speed and tilt.</td>
+        </tr>
+        <tr>
+          <td><a href="step-by-step.html"><strong>Assembly Guide</strong></a></td>
+          <td>IKEA-style illustrated step-by-step build sequence from test jig through final balancing.</td>
+        </tr>
+        <tr>
+          <td><a href="theory.html"><strong>Aerodynamic Theory</strong></a></td>
+          <td>Savonius operating principle, Betz limit, power coefficient, RPM estimates, generator selection, and design variants.</td>
+        </tr>
+        <tr>
+          <td><a href="geometry-comparison.html"><strong>Geometry Comparison</strong></a></td>
+          <td>Icosahedron (GeoWind GW1200, 12 vertices) vs hexagonal bicupola (VINDSNURR, 14 vertices) — advantages, tradeoffs, and why 6-fold symmetry suits drag turbines.</td>
+        </tr>
+        <tr>
+          <td><a href="generator.html"><strong>Generator Guide</strong></a></td>
+          <td>Generator options for a low-RPM drag turbine: BLDC outrunners, e-bike hub motors, PMAs. Power expectations, drive options, and a Phase 2 starter BOM.</td>
+        </tr>
+        <tr>
+          <td><a href="support-frame.html"><strong>Support Frame</strong></a></td>
+          <td>Structural mounting guide: timber A-frame vs steel mast, bearing alignment, footing options, wind load estimates, and scaling rules for larger rotors.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <h2>Key numbers</h2>
+
+    <table>
+      <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Rotor diameter</td><td>1000 mm</td></tr>
+        <tr><td>Rotor height (T to B)</td><td>1064 mm</td></tr>
+        <tr><td>Shaft</td><td>20 mm OD aluminium tube</td></tr>
+        <tr><td>Vertices</td><td>14 (T + U1–U6 + L1–L6 + B)</td></tr>
+        <tr><td>Edges (rods)</td><td>36 in 3 length families</td></tr>
+        <tr><td>Fan rods F1/F2</td><td>610.4 mm × 12</td></tr>
+        <tr><td>Ring rods F3/F4</td><td>500.0 mm × 12</td></tr>
+        <tr><td>Belt rods F5</td><td>446.6 mm × 12</td></tr>
+        <tr><td>Hub designs</td><td>2 (apex × 2, ring × 12)</td></tr>
+        <tr><td>Bearing</td><td>6204-2RS · 20 mm ID · 47 mm OD</td></tr>
+        <tr><td>Sail panels</td><td>6 triangular, ripstop nylon</td></tr>
+        <tr><td>Est. power at 10 m/s</td><td>~128 W (theoretical, Cp ≈ 0.20)</td></tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <h2>Design files</h2>
+
+    <p>OpenSCAD source files for 3D printing are in the
+      <a href="https://github.com/mgifford/Hex-Bicup-Rotor">GitHub repository</a>
+      under <code>3d/</code>:</p>
+
+    <ul>
+      <li><code>vindsnurr_params.scad</code> — shared parameters and geometry constants (the single source of truth)</li>
+      <li><code>hub_apex.scad</code> — Hub T and Hub B, degree-6 with 6204-2RS bearing seat. Print 2.</li>
+      <li><code>hub_ring.scad</code> — Hub U1–U6 and L1–L6, degree-5. Print 12. Same part, L hubs flip 180°.</li>
+      <li><code>hub_test_jig.scad</code> — socket fit and angle calibration. <strong>Print this first.</strong></li>
+    </ul>
+
+    <p>Open any <code>.scad</code> file in <a href="https://openscad.org">OpenSCAD</a> (free),
+    press <strong>F6</strong> to render, then export as STL.</p>
+
+    <hr>
+
+    <h2>Design inspiration</h2>
+
+    <p>
+      VINDSNURR was inspired by the <strong>GeoWind GW1200</strong>, a geodesic VAWT using an
+      icosahedron frame that won the CES 2026 Innovation Award and iF Design Award. Both designs
+      apply the same thesis — a fully triangulated polyhedral frame serves simultaneously as
+      structure and aerodynamic geometry — but use different polyhedra. See the
+      <a href="geometry-comparison.html">geometry comparison</a> for the full analysis.
+    </p>
+
+    <ul>
+      <li><a href="https://www.donga.com/en/article/all/20251224/6025912/1">Donga.com coverage (Dec 2025)</a></li>
+      <li><a href="https://ifdesign.com/en/winner-ranking/project/geowind-gw1200-geodesic-vertical-axis-wind-turbine/765799">iF Design Award project page</a></li>
+      <li><a href="https://us.aving.net/news/articleView.html?idxno=53081">AVING News — CES 2026 unveil</a></li>
+    </ul>
+
   </div>
 
-  <div class="legend">
-    <div class="legend-item">
-      <svg width="32" height="8">
-        <line x1="0" y1="4" x2="32" y2="4" stroke="#2c2c2a" stroke-width="2.2" stroke-linecap="round"/>
-      </svg>
-      Fiberglass stay
-    </div>
-    <div class="legend-item">
-      <svg width="32" height="8">
-        <line x1="0" y1="4" x2="32" y2="4" stroke="#378add" stroke-width="2.2"
-              stroke-dasharray="5 3" stroke-linecap="round" opacity="0.8"/>
-      </svg>
-      Sail edge — upper (plastic)
-    </div>
-    <div class="legend-item">
-      <svg width="32" height="8">
-        <line x1="0" y1="4" x2="32" y2="4" stroke="#1d9e75" stroke-width="2.2"
-              stroke-dasharray="5 3" stroke-linecap="round" opacity="0.8"/>
-      </svg>
-      Sail edge — lower (plastic)
-    </div>
-    <div class="legend-item">
-      <svg width="14" height="14">
-        <rect x="0" y="0" width="14" height="14" rx="3"
-              fill="rgba(133,183,235,0.80)" stroke="#185fa5" stroke-width="1"/>
-      </svg>
-      Upper sail (T fan)
-    </div>
-    <div class="legend-item">
-      <svg width="14" height="14">
-        <rect x="0" y="0" width="14" height="14" rx="3"
-              fill="rgba(93,202,165,0.80)" stroke="#0f6e56" stroke-width="1"/>
-      </svg>
-      Lower sail (B fan)
-    </div>
-  </div>
+</main>
 
-  <div class="info">
-    <h2>Physics note — rotation direction</h2>
-    <p>
-      This is a <strong>drag-based Savonius-style</strong> vertical-axis wind turbine.
-      Each sail is a triangular panel spanning from an apex (T or B) diagonally across
-      to the opposite ring. Wind pressure on the open concave face of each sail pocket
-      drives that face away from the wind source. The closed triangular frame faces on
-      the alternating sectors present far less drag area and return with low resistance.
-    </p>
-    <p>
-      With wind arriving from the front (toward the viewer), the rotor spins
-      counter-clockwise when viewed from above — that is, the open sail pockets on the
-      front hemisphere retreat to the right, and the closed frame sectors advance from
-      the left. The animation reflects this direction. If your physical shaft rotation
-      appears reversed when tested outdoors, reverse the generator winding connections
-      rather than the rotor geometry.
-    </p>
-    <h2 style="margin-top:12px">Graph structure</h2>
-    <p>
-      <strong>Vertex order top to bottom:</strong>
-      T (top apex) → U1–U6 (upper ring) → L1–L6 (lower ring) → B (bottom apex).
-    </p>
-    <p>
-      <strong>Edges (36):</strong>
-      6 top fan (T–U), 6 upper ring, 12 staggered belt, 6 lower ring, 6 bottom fan (B–L).
-      All 24 faces triangular.
-    </p>
-    <p>
-      <strong>Sails (6, alternating):</strong>
-      Upper from T: <code>T–U1–L1</code>, <code>T–U3–L3</code>, <code>T–U5–L5</code>.
-      Lower from B: <code>B–L1–U2</code>, <code>B–L3–U4</code>, <code>B–L5–U6</code>.
-      Dashed colored lines are plastic sail edges, not fiberglass stays.
-    </p>
-  </div>
+<footer class="site-footer">
+  <span>VINDSNURR HBR-6-14V · Open source · MIT licence</span>
+  <span><a href="https://github.com/mgifford/Hex-Bicup-Rotor">GitHub repository</a></span>
+</footer>
 
-  <footer>Open source · MIT licence</footer>
-
-  <script>
-    const cv  = document.getElementById('c');
-    const ctx = cv.getContext('2d');
-    const W = 640, H = 640;
-    cv.width = W; cv.height = H;
-
-    const CX = W / 2, CY = H / 2 - 10, R = 210;
-
-    // Sail fill colors at fixed 80% opacity — no depth modulation
-    const SAIL_FILL = {
-      T: 'rgba(133,183,235,0.80)',
-      B: 'rgba(93,202,165,0.80)',
-    };
-
-    /*
-      Vertex order top to bottom:
-        T  = top pole        y = +R
-        U  = upper ring      y = +R·sin(φ)    φ = 20°  (near T)
-        L  = lower ring      y = -R·sin(φ)             (near B)
-        B  = bottom pole     y = -R
-    */
-    function buildVerts() {
-      const phi = 20 * Math.PI / 180;
-      const rh  = R * Math.cos(phi);
-      const yU  = +R * Math.sin(phi);
-      const yL  = -R * Math.sin(phi);
-      const n   = {};
-      n['T'] = [0, +R, 0];
-      n['B'] = [0, -R, 0];
-      for (let i = 0; i < 6; i++) {
-        const a = i * 60 * Math.PI / 180;
-        n['U' + (i + 1)] = [rh * Math.sin(a), yU, rh * Math.cos(a)];
-      }
-      for (let i = 0; i < 6; i++) {
-        const a = (i * 60 + 30) * Math.PI / 180;
-        n['L' + (i + 1)] = [rh * Math.sin(a), yL, rh * Math.cos(a)];
-      }
-      return n;
-    }
-    const BASE = buildVerts();
-
-    function rotY(v, a) {
-      const [x, y, z] = v;
-      return [x * Math.cos(a) + z * Math.sin(a), y, -x * Math.sin(a) + z * Math.cos(a)];
-    }
-    function rotX(v, a) {
-      const [x, y, z] = v;
-      return [x, y * Math.cos(a) - z * Math.sin(a), y * Math.sin(a) + z * Math.cos(a)];
-    }
-    function project(rv, tilt) {
-      const p = rotX(rv, tilt);
-      return { x: CX + p[0], y: CY - p[1], d: p[2] };
-    }
-
-    // Depth alpha — used for stays, nodes, and labels only (not sails)
-    function dAlpha(d, lo, hi) {
-      return lo + ((d + R) / (2 * R)) * (hi - lo);
-    }
-
-    /* Fiberglass stays — T→U, B→L, ring edges, belt edges only */
-    const STAYS = new Set([
-      'T|U1','T|U2','T|U3','T|U4','T|U5','T|U6',
-      'B|L1','B|L2','B|L3','B|L4','B|L5','B|L6',
-      'U1|U2','U2|U3','U3|U4','U4|U5','U5|U6','U6|U1',
-      'L1|L2','L2|L3','L3|L4','L4|L5','L5|L6','L6|L1',
-      'U1|L1','U1|L6',
-      'U2|L1','U2|L2',
-      'U3|L2','U3|L3',
-      'U4|L3','U4|L4',
-      'U5|L4','U5|L5',
-      'U6|L5','U6|L6',
-    ]);
-    const STAY_LIST = [...STAYS].map(k => k.split('|'));
-
-    function stayKey(a, b) { return [a, b].sort().join('|'); }
-    function isStay(a, b)  { return STAYS.has(stayKey(a, b)); }
-
-    /* Sails */
-    const SAILS = [
-      { keys: ['T', 'U1', 'L1'], type: 'T' },
-      { keys: ['T', 'U3', 'L3'], type: 'T' },
-      { keys: ['T', 'U5', 'L5'], type: 'T' },
-      { keys: ['B', 'L1', 'U2'], type: 'B' },
-      { keys: ['B', 'L3', 'U4'], type: 'B' },
-      { keys: ['B', 'L5', 'U6'], type: 'B' },
-    ];
-
-    let angle   = 0.52;
-    let running = true;
-    document.getElementById('chk').onchange = e => { running = e.target.checked; };
-
-    function faceNormalZ(pts) {
-      const ax = pts[1].x - pts[0].x, ay = pts[1].y - pts[0].y;
-      const bx = pts[2].x - pts[0].x, by = pts[2].y - pts[0].y;
-      return ax * by - ay * bx;
-    }
-
-    function draw() {
-      const tilt = +document.getElementById('tlt').value * Math.PI / 180;
-
-      const rv = {};
-      for (const k in BASE) rv[k] = rotY(BASE[k], angle);
-      const p = {};
-      for (const k in rv) p[k] = project(rv[k], tilt);
-
-      ctx.clearRect(0, 0, W, H);
-
-      /* 1 — Sail fills at fixed 80% opacity, painter's order (back to front).
-         Depth sorting means front sails naturally occlude back sails — the
-         80% transparency lets you see the back sail where the front sail
-         doesn't cover it, without flickering luminance changes mid-rotation. */
-      const faces = SAILS.map(s => {
-        const pts   = s.keys.map(k => p[k]);
-        const depth = pts.reduce((sum, pt) => sum + pt.d, 0) / 3;
-        return { ...s, pts, depth, nz: faceNormalZ(pts) };
-      }).sort((a, b) => a.depth - b.depth);
-
-      for (const f of faces) {
-        ctx.beginPath();
-        ctx.moveTo(f.pts[0].x, f.pts[0].y);
-        ctx.lineTo(f.pts[1].x, f.pts[1].y);
-        ctx.lineTo(f.pts[2].x, f.pts[2].y);
-        ctx.closePath();
-        ctx.fillStyle = SAIL_FILL[f.type];
-        ctx.fill();
-      }
-
-      /* 2 — Plastic sail edges (triangle sides that are not stays).
-         These fade slightly by depth so the back ones read as behind,
-         but remain clearly dashed to distinguish from solid rods. */
-      for (const s of SAILS) {
-        const k     = s.keys;
-        const pts   = k.map(n => p[n]);
-        const nz    = faceNormalZ(pts);
-        const front = nz < 0;
-        for (let i = 0; i < 3; i++) {
-          const a = k[i], b = k[(i + 1) % 3];
-          if (!isStay(a, b)) {
-            const pa    = p[a], pb = p[b];
-            const ed    = (pa.d + pb.d) / 2;
-            const alpha = front
-              ? dAlpha(ed, 0.35, 0.80)
-              : dAlpha(ed, 0.08, 0.25);
-            ctx.beginPath();
-            ctx.moveTo(pa.x, pa.y);
-            ctx.lineTo(pb.x, pb.y);
-            ctx.strokeStyle = s.type === 'T'
-              ? `rgba(55,138,221,${alpha})`
-              : `rgba(29,158,117,${alpha})`;
-            ctx.lineWidth = 2.4;
-            ctx.setLineDash([6, 4]);
-            ctx.lineCap = 'round';
-            ctx.stroke();
-            ctx.setLineDash([]);
-          }
-        }
-      }
-
-      /* 3 — Fiberglass stays: solid dark, continuous depth fade, back to front */
-      const staysSorted = STAY_LIST
-        .map(([a, b]) => ({ a, b, d: (p[a].d + p[b].d) / 2 }))
-        .sort((x, y) => x.d - y.d);
-
-      for (const { a, b, d } of staysSorted) {
-        const pa    = p[a], pb = p[b];
-        const alpha = dAlpha(d, 0.07, 0.96);
-        const lw    = dAlpha(d, 0.5, 2.3);
-        ctx.beginPath();
-        ctx.moveTo(pa.x, pa.y);
-        ctx.lineTo(pb.x, pb.y);
-        ctx.strokeStyle = `rgba(44,44,42,${alpha})`;
-        ctx.lineWidth   = lw;
-        ctx.lineCap     = 'round';
-        ctx.setLineDash([]);
-        ctx.stroke();
-      }
-
-      /* 4 — Shaft axis */
-      ctx.beginPath();
-      ctx.moveTo(p['T'].x, p['T'].y);
-      ctx.lineTo(p['B'].x, p['B'].y);
-      ctx.strokeStyle = 'rgba(136,135,128,0.35)';
-      ctx.lineWidth   = 1.3;
-      ctx.setLineDash([6, 5]);
-      ctx.stroke();
-      ctx.setLineDash([]);
-
-      /* 5 — Vertex nodes, back to front */
-      const nodeOrder = Object.keys(p).sort((a, b) => p[a].d - p[b].d);
-      for (const k of nodeOrder) {
-        const pt    = p[k];
-        const alpha = dAlpha(pt.d, 0.15, 1.0);
-        let r, fill, stroke;
-        if (k === 'T' || k === 'B') { r = 9; fill = '#2c2c2a'; stroke = '#888780'; }
-        else if (k[0] === 'U')      { r = 6; fill = '#534ab7'; stroke = '#cecbf6'; }
-        else                         { r = 6; fill = '#0f6e56'; stroke = '#9fe1cb'; }
-        ctx.globalAlpha = alpha;
-        ctx.beginPath();
-        ctx.arc(pt.x, pt.y, r, 0, Math.PI * 2);
-        ctx.fillStyle   = fill;
-        ctx.strokeStyle = stroke;
-        ctx.lineWidth   = 1.3;
-        ctx.fill();
-        ctx.stroke();
-        ctx.globalAlpha = 1;
-      }
-
-      /* 6 — Labels, radially offset, depth-faded */
-      for (const k of nodeOrder) {
-        const pt    = p[k];
-        const alpha = Math.max(0.18, dAlpha(pt.d, 0.15, 1.0));
-        const dx    = pt.x - CX, dy = pt.y - CY;
-        const dist  = Math.sqrt(dx * dx + dy * dy) || 1;
-        const off   = (k === 'T' || k === 'B') ? 16 : 13;
-        const lx    = pt.x + dx / dist * off;
-        const ly    = pt.y + dy / dist * off;
-        ctx.globalAlpha  = alpha;
-        ctx.font         = '500 11px system-ui, sans-serif';
-        ctx.textAlign    = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.lineWidth    = 3.5;
-        ctx.strokeStyle  = 'rgba(255,255,255,0.82)';
-        ctx.strokeText(k, lx, ly);
-        ctx.fillStyle = (k === 'T' || k === 'B') ? '#2c2c2a'
-                      : (k[0] === 'U')            ? '#3c3489'
-                                                  : '#085041';
-        ctx.fillText(k, lx, ly);
-        ctx.globalAlpha = 1;
-      }
-    }
-
-    /* Animation loop — angle decrements = counter-clockwise from above */
-    let last = 0;
-    function loop(ts) {
-      const spd = +document.getElementById('spd').value;
-      const dt  = Math.min(ts - last, 50);
-      last = ts;
-      if (running) angle -= spd * 0.0004 * dt;
-      draw();
-      requestAnimationFrame(loop);
-    }
-    requestAnimationFrame(ts => { last = ts; loop(ts); });
-  </script>
-
+<script src="site.js"></script>
 </body>
 </html>

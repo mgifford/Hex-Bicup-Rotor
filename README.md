@@ -5,6 +5,22 @@ Hexagonal Bicupola Wind Rotor · HBR-6-14V · Rev 1.1
 
 ---
 
+## Design inspiration
+
+The VINDSNURR geometry is inspired by the **GeoWind GW1200**, a geodesic vertical-axis wind turbine (VAWT) that applies polyhedral geometry — specifically an icosahedron frame (20 triangular faces, 12 vertices) — to achieve structural load distribution and self-balancing rotation. The GW1200 won the CES 2026 Innovation Award in the Sustainability & Energy Transition category and the iF Design Award.
+
+VINDSNURR applies the same core idea — using a fully triangulated polyhedral frame as the turbine structure — but uses a **hexagonal bicupola-derived graph** (14 vertices, 36 edges, 24 triangular faces) rather than an icosahedron. This geometry is better suited to a Savonius-style drag turbine because the 6-fold symmetry and 30° ring offset naturally produce the alternating sail arrangement needed for continuous torque output.
+
+**Reference coverage of the GeoWind GW1200:**
+- Donga.com (Dec 2025): <https://www.donga.com/en/article/all/20251224/6025912/1>
+- iF Design Award project page: <https://ifdesign.com/en/winner-ranking/project/geowind-gw1200-geodesic-vertical-axis-wind-turbine/765799>
+- AVING News, CES 2026 unveil: <https://us.aving.net/news/articleView.html?idxno=53081>
+
+For the aerodynamic theory behind this rotor class, see [`docs/theory.md`](docs/theory.md).  
+For a theoretical comparison of the icosahedron (GW1200) vs hexagonal bicupola (VINDSNURR) geometries, see [`docs/geometry-comparison.md`](docs/geometry-comparison.md). Neither design has been physically tested — all comparisons are theoretical.
+
+---
+
 ## Files in this package
 
 | File | Purpose | Print? |
