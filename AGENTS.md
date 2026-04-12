@@ -16,11 +16,11 @@ whether it is defined in `vindsnurr_params.scad` first.
 
 | What | Canonical location | Derived / display copies |
 |---|---|---|
-| Node coordinates (T, U1–U6, L1–L6, B) | `vindsnurr_params.scad` comments | `INSTRUCTIONS.md` §2, `README.md` geometry ref, `docs/index.html` JS |
-| Rod lengths (F1/F2, F3/F4, F5) | `vindsnurr_params.scad` `F1_LENGTH` etc. | `README.md` cut list, `INSTRUCTIONS.md` §5, `docs/theory.md` power table |
-| Shaft/bearing hardware | `vindsnurr_params.scad` `SHAFT_OD`, `BEARING_*` | `README.md` BOM, `hub_apex.scad` local copy |
+| Node coordinates (T, U1–U6, L1–L6, B) | `vindsnurr_params.scad` comments | `INSTRUCTIONS.md` §2, `README.md` geometry ref, `docs/viz.html` JS |
+| Rod lengths (F1/F2, F3/F4, F5) | `vindsnurr_params.scad` `F1_LENGTH` etc. | `README.md` cut list, `INSTRUCTIONS.md` §5, `docs/theory.html` power table |
+| Shaft/bearing hardware | `vindsnurr_params.scad` `SHAFT_OD`, `BEARING_*` | `README.md` BOM, `hub_apex.scad` local copy, `docs/support-frame.html` §6 |
 | Hub socket angles | `vindsnurr_params.scad` `RING_*` and `APEX_*` constants | `hub_apex.scad`, `hub_ring.scad` comments, `INSTRUCTIONS.md` §4 |
-| Rotor diameter / height | `vindsnurr_params.scad` `ROTOR_DIAMETER`, `ROTOR_HEIGHT` | `README.md`, `docs/theory.md` power estimates |
+| Rotor diameter / height | `vindsnurr_params.scad` `ROTOR_DIAMETER`, `ROTOR_HEIGHT` | `README.md`, `docs/theory.html` power estimates, `docs/support-frame.html` load table |
 
 ---
 
@@ -57,22 +57,23 @@ size, node coordinates), touch all of the following:
 **Markdown documentation**
 - [ ] `README.md` — rod cut list table, hardware BOM table
 - [ ] `INSTRUCTIONS.md` — §2 node coordinates, §5 rod families, §4 hub angles
-- [ ] `docs/theory.md` — power estimate table (uses `ROTOR_HEIGHT`, `ROTOR_DIAMETER`)
+- [ ] `docs/theory.html` — power estimate table (uses `ROTOR_HEIGHT`, `ROTOR_DIAMETER`)
+- [ ] `docs/support-frame.html` — shaft dimensions table, load estimates
 
 **HTML pages** — these are the hardest to keep current; see §4
 - [ ] `docs/viz.html` — JS vertex coordinates (search for `phi`, `R = 210`, `buildVerts`)
 - [ ] `docs/step-by-step.html` — SVG diagrams with hardcoded hub and rod geometry
-- [ ] `docs/site.css` / `docs/site.js` — shared nav: if a page is added or renamed, update the `<nav>` block in **all five HTML files** (index, viz, step-by-step, theory, geometry-comparison)
+- [ ] `docs/site.css` / `docs/site.js` — shared nav: if a page is added or renamed, update the `<nav>` block in **all seven HTML files** (index, viz, step-by-step, theory, geometry-comparison, generator, support-frame)
 
 **Comparison and theory docs** — update if the change affects the comparison claims
-- [ ] `docs/geometry-comparison.md` — vertex/edge/face counts, rod length count
-- [ ] `docs/theory.md` — RPM estimates, power output table
+- [ ] `docs/geometry-comparison.html` — vertex/edge/face counts, rod length count
+- [ ] `docs/theory.html` — RPM estimates, power output table
 
 ---
 
 ## 4. Rules for the HTML visualizations
 
-The canvas in `docs/index.html` and the SVG diagrams in `docs/step-by-step.html`
+The canvas in `docs/viz.html` and the SVG diagrams in `docs/step-by-step.html`
 are **display representations**. They use scaled or simplified geometry, not
 millimetre dimensions. Rules:
 
@@ -98,7 +99,7 @@ Changing a colour in one place means changing it everywhere. Current palette:
 | Structural stays | solid dark, depth-faded |
 | Plastic sail edges | dashed, upper blue `#378add`, lower green `#1d9e75` |
 
-### `docs/index.html` vertex coordinates
+### `docs/viz.html` vertex coordinates
 The JS builds vertices from two parameters:
 - `phi = 20 * Math.PI / 180` — ring latitude (matches `RING_LAT_DEG = 20.0` in params)
 - `R = 210` — display radius in canvas pixels (not a physical dimension)
@@ -137,12 +138,12 @@ topology and assembly sequence, not precise geometry. When updating:
 ### What must be accurate (match SCAD)
 - All numbers in `README.md` — rod lengths, hardware specs, quantities
 - All numbers in `INSTRUCTIONS.md` — node coordinates, hub angles, rod lengths
-- The vertex/edge/face counts in `docs/geometry-comparison.md`
+- The vertex/edge/face counts in `docs/geometry-comparison.html`
 
 ### What is intentionally approximate
-- Power output estimates in `docs/theory.md` — these are first-order, Cp=0.20 baseline
+- Power output estimates in `docs/theory.html` — these are first-order, Cp=0.20 baseline
 - RPM estimates — derived from λ≈1 assumption, not measured
-- The geometry comparison in `docs/geometry-comparison.md` — explicitly theoretical
+- The geometry comparison in `docs/geometry-comparison.html` — explicitly theoretical
 
 ### Validation disclaimer
 All documents describing performance (Cp, cut-in speed, torque smoothing,
@@ -176,13 +177,13 @@ without a corresponding prototype test result to cite.
 | `INSTRUCTIONS.md` | Design specification | Geometry rationale and build sequence |
 | `README.md` | Builder reference | Hardware BOM, print settings, cut list |
 | `ACCESSIBILITY.md` | Accessibility policy | HTML file a11y requirements |
-| `docs/theory.md` | Aerodynamic background | Savonius theory, performance estimates |
-| `docs/geometry-comparison.md` | Design rationale | Icosahedron vs bicupola comparison |
 | `docs/index.html` | Site homepage | Navigation hub, project overview |
 | `docs/viz.html` | Interactive viz | Topology display (canvas, JS) |
 | `docs/step-by-step.html` | Assembly guide | Build sequence (SVG diagrams) |
 | `docs/theory.html` | Aerodynamic theory | Savonius physics, performance estimates |
 | `docs/geometry-comparison.html` | Design rationale | Icosahedron vs bicupola comparison |
+| `docs/generator.html` | Generator guide | Generator selection, drive options, power expectations |
+| `docs/support-frame.html` | Structural guide | Frame design, bearing hardware, shaft coupling, load estimates |
 | `docs/site.css` | Shared stylesheet | Colour tokens, nav, prose, dark/light |
 | `docs/site.js` | Shared script | Theme toggle, current-page nav marking |
 | `CLAUDE.md` | AI context | Project overview for AI sessions |

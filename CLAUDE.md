@@ -23,7 +23,15 @@ A 14-vertex, 36-edge, fully triangulated hexagonal wind rotor frame for a Savoni
 | `README.md` | Print procedure and hardware BOM |
 | `AGENTS.md` | Consistency rules for AI agents and contributors |
 | `ACCESSIBILITY.md` | Accessibility policy for HTML files |
-| `docs/` | Interactive HTML visualizations, theory, and geometry comparison |
+| `docs/index.html` | Site homepage — project overview and navigation hub |
+| `docs/viz.html` | Interactive 3D canvas visualizer (14 nodes, 36 edges, 6 sails) |
+| `docs/step-by-step.html` | Assembly guide with SVG step diagrams |
+| `docs/theory.html` | Savonius aerodynamic theory, Cp table, RPM and power estimates |
+| `docs/geometry-comparison.html` | Icosahedron vs hexagonal bicupola comparison (theoretical) |
+| `docs/generator.html` | Generator selection guide — BLDC, hub motor, PMA, drive options |
+| `docs/support-frame.html` | Frame design, bearing hardware (6204-2RS), shaft coupling |
+| `docs/site.css` | Shared stylesheet — colour tokens, nav, dark/light mode |
+| `docs/site.js` | Shared script — theme toggle, aria-current nav marking |
 
 ## Key geometry facts
 

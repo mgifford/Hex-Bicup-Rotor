@@ -19,7 +19,7 @@ We believe accessibility is a subset of quality. This project commits to **WCAG 
 
 ## 3. Dark/light mode implementation
 
-Both HTML files (`docs/index.html` and `docs/step-by-step.html`) implement a sun/moon theme toggle in the top-right corner following these principles:
+All seven HTML files in `docs/` share a single `site.css` stylesheet and `site.js` script. The sun/moon theme toggle in the top-right corner is implemented once in `site.js` and applies consistently across every page. The implementation follows these principles:
 
 - **Respects system preference** via `prefers-color-scheme` media query
 - **User override persisted** in `localStorage` — choice survives page reload
@@ -44,7 +44,7 @@ The canvas visualization uses colour to distinguish node types and sail families
 
 ## 5. Known limitations
 
-- The canvas-based 3D visualization (`docs/index.html`) is not accessible to screen readers — it renders to a `<canvas>` element with no text alternative. The information it conveys (rotor geometry, node labels, edge types) is fully described in `INSTRUCTIONS.md` and `README.md`.
+- The canvas-based 3D visualization (`docs/viz.html`) is not accessible to screen readers — it renders to a `<canvas>` element with no text alternative. The information it conveys (rotor geometry, node labels, edge types) is fully described in `INSTRUCTIONS.md` and `README.md`.
 - The step-by-step guide (`docs/step-by-step.html`) contains SVG diagrams that lack text descriptions for some assembly illustrations. This is a known gap for future improvement.
 - No automated accessibility testing is currently configured for this project.
 
@@ -74,4 +74,4 @@ When adding or modifying HTML files in `docs/`:
 
 ---
 
-*Last updated: 2026-04-09*
+*Last updated: 2026-04-12*
