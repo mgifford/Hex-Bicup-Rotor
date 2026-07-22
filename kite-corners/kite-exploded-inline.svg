@@ -1,0 +1,168 @@
+<svg width="640" height="960" viewBox="0 0 640 960" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" role="img"
+     aria-label="Exploded view of a 4-layer, 20-cell tetrahedral kite, showing each layer as a separate flat panel from Layer 0 (base, bottom) to Layer 3 (top), with dashed lines connecting each vertex to the matching joint in the layer above or below, and joints colour-coded by how many cells meet there: exterior (red), interior 2-cell (blue), triple 3-cell (green), and one unhandled 4-cell joint (orange)." style="max-width:100%;height:auto;">
+  <style>
+    .kite-exploded .panel-bg { fill: var(--bg-code); stroke: var(--border); stroke-width: 1; }
+    .kite-exploded .strut { stroke: var(--text-muted); stroke-width: 1.2; fill: none; }
+    .kite-exploded .connector { stroke: var(--text-faint); stroke-width: 1.2; fill: none; stroke-dasharray: 4 3; }
+    .kite-exploded .cell-face { fill: #4f8fd6; fill-opacity: 0.5; stroke: none; }
+    .kite-exploded .cell-face-alt { fill: #2fa87d; fill-opacity: 0.5; stroke: none; }
+    .kite-exploded .ext-joint { fill: #d6473c; stroke: #7a221c; stroke-width: 1; }
+    .kite-exploded .int-joint { fill: #2c62c9; stroke: #17356f; stroke-width: 1; }
+    .kite-exploded .triple-joint { fill: #2f9e44; stroke: #1a5c27; stroke-width: 1; }
+    .kite-exploded .unhandled-joint { fill: #e8830a; stroke: #8a4d06; stroke-width: 1; }
+    .kite-exploded .label { font-size: 12px; fill: var(--text-main); }
+    .kite-exploded .layer-label { font-size: 14px; fill: var(--text-main); font-weight: 700; }
+    .kite-exploded .layer-sublabel { font-size: 11px; fill: var(--text-muted); }
+  </style>
+  <g class="kite-exploded">
+  <title>Tetrahedral kite — exploded layer view, bottom to top</title>
+<path class="connector" d="M317.37,810.83 L301.49,600.0"/>
+<path class="connector" d="M333.25,783.33 L322.66,563.33"/>
+<path class="connector" d="M412.63,810.83 L428.51,600.0"/>
+<path class="connector" d="M365.0,783.33 L365.0,563.33"/>
+<path class="connector" d="M349.12,810.83 L343.83,600.0"/>
+<path class="connector" d="M349.12,755.83 L343.83,526.67"/>
+<path class="connector" d="M380.88,810.83 L386.17,600.0"/>
+<path class="connector" d="M380.88,755.83 L386.17,526.67"/>
+<path class="connector" d="M396.75,783.33 L407.34,563.33"/>
+<path class="connector" d="M365.0,728.33 L365.0,490.0"/><path class="connector" d="M343.83,551.11 L333.25,325.0"/>
+<path class="connector" d="M365.0,514.44 L365.0,270.0"/>
+<path class="connector" d="M322.66,587.78 L301.49,380.0"/>
+<path class="connector" d="M365.0,587.78 L365.0,380.0"/>
+<path class="connector" d="M407.34,587.78 L428.51,380.0"/>
+<path class="connector" d="M386.17,551.11 L396.75,325.0"/><path class="connector" d="M396.75,361.67 L428.51,160.0"/>
+<path class="connector" d="M333.25,361.67 L301.49,160.0"/>
+<path class="connector" d="M365.0,306.67 L365.0,50.0"/>
+<g class="layer-panel">
+<rect class="panel-bg" x="90" y="690" width="550" height="150" rx="6"/>
+<text class="layer-label" x="10" y="759.0">Layer 0</text>
+<text class="layer-sublabel" x="10" y="777.0">10 cells</text>
+<polygon class="cell-face" points="301.49,820.0 333.25,820.0 317.37,792.5"/>
+<path class="strut" d="M301.49,820.0 L333.25,820.0 L317.37,792.5 Z M301.49,820.0 L317.37,810.83 M333.25,820.0 L317.37,810.83 M317.37,792.5 L317.37,810.83"/>
+<polygon class="cell-face-alt" points="333.25,820.0 365.0,820.0 349.12,792.5"/>
+<path class="strut" d="M333.25,820.0 L365.0,820.0 L349.12,792.5 Z M333.25,820.0 L349.12,810.83 M365.0,820.0 L349.12,810.83 M349.12,792.5 L349.12,810.83"/>
+<polygon class="cell-face" points="365.0,820.0 396.75,820.0 380.88,792.5"/>
+<path class="strut" d="M365.0,820.0 L396.75,820.0 L380.88,792.5 Z M365.0,820.0 L380.88,810.83 M396.75,820.0 L380.88,810.83 M380.88,792.5 L380.88,810.83"/>
+<polygon class="cell-face-alt" points="396.75,820.0 428.51,820.0 412.63,792.5"/>
+<path class="strut" d="M396.75,820.0 L428.51,820.0 L412.63,792.5 Z M396.75,820.0 L412.63,810.83 M428.51,820.0 L412.63,810.83 M412.63,792.5 L412.63,810.83"/>
+<polygon class="cell-face" points="317.37,792.5 349.12,792.5 333.25,765.0"/>
+<path class="strut" d="M317.37,792.5 L349.12,792.5 L333.25,765.0 Z M317.37,792.5 L333.25,783.33 M349.12,792.5 L333.25,783.33 M333.25,765.0 L333.25,783.33"/>
+<polygon class="cell-face-alt" points="349.12,792.5 380.88,792.5 365.0,765.0"/>
+<path class="strut" d="M349.12,792.5 L380.88,792.5 L365.0,765.0 Z M349.12,792.5 L365.0,783.33 M380.88,792.5 L365.0,783.33 M365.0,765.0 L365.0,783.33"/>
+<polygon class="cell-face" points="380.88,792.5 412.63,792.5 396.75,765.0"/>
+<path class="strut" d="M380.88,792.5 L412.63,792.5 L396.75,765.0 Z M380.88,792.5 L396.75,783.33 M412.63,792.5 L396.75,783.33 M396.75,765.0 L396.75,783.33"/>
+<polygon class="cell-face-alt" points="333.25,765.0 365.0,765.0 349.12,737.5"/>
+<path class="strut" d="M333.25,765.0 L365.0,765.0 L349.12,737.5 Z M333.25,765.0 L349.12,755.83 M365.0,765.0 L349.12,755.83 M349.12,737.5 L349.12,755.83"/>
+<polygon class="cell-face" points="365.0,765.0 396.75,765.0 380.88,737.5"/>
+<path class="strut" d="M365.0,765.0 L396.75,765.0 L380.88,737.5 Z M365.0,765.0 L380.88,755.83 M396.75,765.0 L380.88,755.83 M380.88,737.5 L380.88,755.83"/>
+<polygon class="cell-face-alt" points="349.12,737.5 380.88,737.5 365.0,710.0"/>
+<path class="strut" d="M349.12,737.5 L380.88,737.5 L365.0,710.0 Z M349.12,737.5 L365.0,728.33 M380.88,737.5 L365.0,728.33 M365.0,710.0 L365.0,728.33"/>
+<circle class="ext-joint" cx="301.49" cy="820.0" r="6"/>
+<circle class="int-joint" cx="333.25" cy="820.0" r="6"/>
+<circle class="int-joint" cx="317.37" cy="792.5" r="6"/>
+<circle class="int-joint" cx="317.37" cy="810.83" r="6"/>
+<circle class="int-joint" cx="365.0" cy="820.0" r="6"/>
+<circle class="triple-joint" cx="349.12" cy="792.5" r="6"/>
+<circle class="triple-joint" cx="349.12" cy="810.83" r="6"/>
+<circle class="int-joint" cx="396.75" cy="820.0" r="6"/>
+<circle class="triple-joint" cx="380.88" cy="792.5" r="6"/>
+<circle class="triple-joint" cx="380.88" cy="810.83" r="6"/>
+<circle class="ext-joint" cx="428.51" cy="820.0" r="6"/>
+<circle class="int-joint" cx="412.63" cy="792.5" r="6"/>
+<circle class="int-joint" cx="412.63" cy="810.83" r="6"/>
+<circle class="int-joint" cx="333.25" cy="765.0" r="6"/>
+<circle class="triple-joint" cx="333.25" cy="783.33" r="6"/>
+<circle class="triple-joint" cx="365.0" cy="765.0" r="6"/>
+<circle class="unhandled-joint" cx="365.0" cy="783.33" r="6"/>
+<circle class="int-joint" cx="396.75" cy="765.0" r="6"/>
+<circle class="triple-joint" cx="396.75" cy="783.33" r="6"/>
+<circle class="int-joint" cx="349.12" cy="737.5" r="6"/>
+<circle class="triple-joint" cx="349.12" cy="755.83" r="6"/>
+<circle class="int-joint" cx="380.88" cy="737.5" r="6"/>
+<circle class="triple-joint" cx="380.88" cy="755.83" r="6"/>
+<circle class="ext-joint" cx="365.0" cy="710.0" r="6"/>
+<circle class="int-joint" cx="365.0" cy="728.33" r="6"/>
+</g><g class="layer-panel">
+<rect class="panel-bg" x="90" y="470" width="550" height="150" rx="6"/>
+<text class="layer-label" x="10" y="539.0">Layer 1</text>
+<text class="layer-sublabel" x="10" y="557.0">6 cells</text>
+<polygon class="cell-face" points="301.49,600.0 343.83,600.0 322.66,563.33"/>
+<path class="strut" d="M301.49,600.0 L343.83,600.0 L322.66,563.33 Z M301.49,600.0 L322.66,587.78 M343.83,600.0 L322.66,587.78 M322.66,563.33 L322.66,587.78"/>
+<polygon class="cell-face-alt" points="343.83,600.0 386.17,600.0 365.0,563.33"/>
+<path class="strut" d="M343.83,600.0 L386.17,600.0 L365.0,563.33 Z M343.83,600.0 L365.0,587.78 M386.17,600.0 L365.0,587.78 M365.0,563.33 L365.0,587.78"/>
+<polygon class="cell-face" points="386.17,600.0 428.51,600.0 407.34,563.33"/>
+<path class="strut" d="M386.17,600.0 L428.51,600.0 L407.34,563.33 Z M386.17,600.0 L407.34,587.78 M428.51,600.0 L407.34,587.78 M407.34,563.33 L407.34,587.78"/>
+<polygon class="cell-face-alt" points="322.66,563.33 365.0,563.33 343.83,526.67"/>
+<path class="strut" d="M322.66,563.33 L365.0,563.33 L343.83,526.67 Z M322.66,563.33 L343.83,551.11 M365.0,563.33 L343.83,551.11 M343.83,526.67 L343.83,551.11"/>
+<polygon class="cell-face" points="365.0,563.33 407.34,563.33 386.17,526.67"/>
+<path class="strut" d="M365.0,563.33 L407.34,563.33 L386.17,526.67 Z M365.0,563.33 L386.17,551.11 M407.34,563.33 L386.17,551.11 M386.17,526.67 L386.17,551.11"/>
+<polygon class="cell-face-alt" points="343.83,526.67 386.17,526.67 365.0,490.0"/>
+<path class="strut" d="M343.83,526.67 L386.17,526.67 L365.0,490.0 Z M343.83,526.67 L365.0,514.44 M386.17,526.67 L365.0,514.44 M365.0,490.0 L365.0,514.44"/>
+<circle class="int-joint" cx="301.49" cy="600.0" r="6"/>
+<circle class="triple-joint" cx="343.83" cy="600.0" r="6"/>
+<circle class="triple-joint" cx="322.66" cy="563.33" r="6"/>
+<circle class="int-joint" cx="322.66" cy="587.78" r="6"/>
+<circle class="triple-joint" cx="386.17" cy="600.0" r="6"/>
+<circle class="unhandled-joint" cx="365.0" cy="563.33" r="6"/>
+<circle class="triple-joint" cx="365.0" cy="587.78" r="6"/>
+<circle class="int-joint" cx="428.51" cy="600.0" r="6"/>
+<circle class="triple-joint" cx="407.34" cy="563.33" r="6"/>
+<circle class="int-joint" cx="407.34" cy="587.78" r="6"/>
+<circle class="triple-joint" cx="343.83" cy="526.67" r="6"/>
+<circle class="triple-joint" cx="343.83" cy="551.11" r="6"/>
+<circle class="triple-joint" cx="386.17" cy="526.67" r="6"/>
+<circle class="triple-joint" cx="386.17" cy="551.11" r="6"/>
+<circle class="int-joint" cx="365.0" cy="490.0" r="6"/>
+<circle class="int-joint" cx="365.0" cy="514.44" r="6"/>
+</g><g class="layer-panel">
+<rect class="panel-bg" x="90" y="250" width="550" height="150" rx="6"/>
+<text class="layer-label" x="10" y="319.0">Layer 2</text>
+<text class="layer-sublabel" x="10" y="337.0">3 cells</text>
+<polygon class="cell-face" points="301.49,380.0 365.0,380.0 333.25,325.0"/>
+<path class="strut" d="M301.49,380.0 L365.0,380.0 L333.25,325.0 Z M301.49,380.0 L333.25,361.67 M365.0,380.0 L333.25,361.67 M333.25,325.0 L333.25,361.67"/>
+<polygon class="cell-face-alt" points="365.0,380.0 428.51,380.0 396.75,325.0"/>
+<path class="strut" d="M365.0,380.0 L428.51,380.0 L396.75,325.0 Z M365.0,380.0 L396.75,361.67 M428.51,380.0 L396.75,361.67 M396.75,325.0 L396.75,361.67"/>
+<polygon class="cell-face" points="333.25,325.0 396.75,325.0 365.0,270.0"/>
+<path class="strut" d="M333.25,325.0 L396.75,325.0 L365.0,270.0 Z M333.25,325.0 L365.0,306.67 M396.75,325.0 L365.0,306.67 M365.0,270.0 L365.0,306.67"/>
+<circle class="int-joint" cx="301.49" cy="380.0" r="6"/>
+<circle class="triple-joint" cx="365.0" cy="380.0" r="6"/>
+<circle class="triple-joint" cx="333.25" cy="325.0" r="6"/>
+<circle class="int-joint" cx="333.25" cy="361.67" r="6"/>
+<circle class="int-joint" cx="428.51" cy="380.0" r="6"/>
+<circle class="triple-joint" cx="396.75" cy="325.0" r="6"/>
+<circle class="int-joint" cx="396.75" cy="361.67" r="6"/>
+<circle class="int-joint" cx="365.0" cy="270.0" r="6"/>
+<circle class="int-joint" cx="365.0" cy="306.67" r="6"/>
+</g><g class="layer-panel">
+<rect class="panel-bg" x="90" y="30" width="550" height="150" rx="6"/>
+<text class="layer-label" x="10" y="99.0">Layer 3</text>
+<text class="layer-sublabel" x="10" y="117.0">1 cell</text>
+<polygon class="cell-face" points="301.49,160.0 428.51,160.0 365.0,50.0"/>
+<path class="strut" d="M301.49,160.0 L428.51,160.0 L365.0,50.0 Z M301.49,160.0 L365.0,123.33 M428.51,160.0 L365.0,123.33 M365.0,50.0 L365.0,123.33"/>
+<circle class="int-joint" cx="301.49" cy="160.0" r="6"/>
+<circle class="int-joint" cx="428.51" cy="160.0" r="6"/>
+<circle class="int-joint" cx="365.0" cy="50.0" r="6"/>
+<circle class="ext-joint" cx="365.0" cy="123.33" r="6"/>
+</g>
+  <g transform="translate(90,864)">
+    <circle class="ext-joint" cx="8" cy="0" r="6"/>
+    <text class="label" x="20" y="4">Exterior — 3 sockets (kite_corner.scad)</text>
+  </g>
+  <g transform="translate(90,882)">
+    <circle class="int-joint" cx="8" cy="0" r="6"/>
+    <text class="label" x="20" y="4">Interior, 2 cells — 6 sockets (kite_corner_interior.scad)</text>
+  </g>
+  <g transform="translate(90,900)">
+    <circle class="triple-joint" cx="8" cy="0" r="6"/>
+    <text class="label" x="20" y="4">Triple, 3 cells — 9 sockets (kite_corner_triple.scad)</text>
+  </g>
+  <g transform="translate(90,918)">
+    <circle class="unhandled-joint" cx="8" cy="0" r="6"/>
+    <text class="label" x="20" y="4">4+ cells meeting — no hub file yet (see README)</text>
+  </g>
+  <g transform="translate(90,936)">
+    <path class="connector" d="M8,0 L40,0"/>
+    <text class="label" x="48" y="4">Dashed line = same physical joint shared between adjacent layers</text>
+  </g>
+  </g>
+</svg>

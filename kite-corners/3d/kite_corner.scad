@@ -27,6 +27,13 @@
 // ═══════════════════════════════════════════════════════════════
 
 // ── Parameters ─────────────────────────────────────────────────
+// Default preset: 6mm rod. Fine for a small (<1m) kite, but at 1-2m+
+// scale the hub+strut weight this implies pushes wing loading too high
+// for reliable flight — see FLIGHT.md "Weight budget" for the numbers.
+// For anything over ~1m, use the lightweight 4mm-rod preset below
+// instead (override at export time with -D, don't hand-edit these
+// defaults — see 3d/validate_and_export.sh):
+//   openscad -D 'strut_d=4.0' -D 'hub_r=9.0' -D 'wall=2.0' -D 'strut_depth=12.0' ...
 strut_d     = 6.0;   // mm — strut outer diameter (dowel, fiberglass, or carbon rod)
 strut_tol   = 0.3;   // mm — socket clearance (slip fit; adjust per printer)
 strut_depth = 16.0;  // mm — socket depth into hub body

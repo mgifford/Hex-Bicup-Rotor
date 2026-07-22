@@ -1,25 +1,17 @@
 <svg width="720" height="400" viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" role="img"
-     aria-label="Schematic diagram of a 4-layer, 20-cell tetrahedral kite from two angles, showing exterior joints (red, 3-socket hub) at the outer tips, interior joints (blue, 6-socket hub) where 2 cells meet, triple joints (green, 9-socket hub) where 3 cells meet, and one 4-cell joint (orange, not yet covered by any hub design) near the middle of the assembly.">
+     aria-label="Schematic diagram of a 4-layer, 20-cell tetrahedral kite from two angles, showing exterior joints (red, 3-socket hub) at the outer tips, interior joints (blue, 6-socket hub) where 2 cells meet, triple joints (green, 9-socket hub) where 3 cells meet, and one 4-cell joint (orange, not yet covered by any hub design) near the middle of the assembly." style="max-width:100%;height:auto;">
   <style>
-    svg { background: #fafaf5; }
-    .strut { stroke: #3a3a3a; stroke-width: 1.4; fill: none; }
-    .cell-face { fill: #4f8fd6; fill-opacity: 0.55; stroke: none; }
-    .cell-face-alt { fill: #2fa87d; fill-opacity: 0.55; stroke: none; }
-    .ext-joint { fill: #d6473c; stroke: #7a221c; stroke-width: 1; }
-    .int-joint { fill: #2c62c9; stroke: #17356f; stroke-width: 1; }
-    .triple-joint { fill: #2f9e44; stroke: #1a5c27; stroke-width: 1; }
-    .unhandled-joint { fill: #e8830a; stroke: #8a4d06; stroke-width: 1; }
-    .label { font-size: 12px; fill: #2c2c2a; }
-    .caption { font-size: 13px; fill: #2c2c2a; font-weight: 600; }
-    @media (prefers-color-scheme: dark) {
-      svg { background: #1a1a18; }
-      .strut { stroke: #c7c7c2; }
-      .cell-face { fill: #85b7eb; fill-opacity: 0.5; }
-      .cell-face-alt { fill: #5dcaa5; fill-opacity: 0.5; }
-      .label { fill: #e8e7e1; }
-      .caption { fill: #e8e7e1; }
-    }
+    .kite-diagram .strut { stroke: var(--text-muted); stroke-width: 1.4; fill: none; }
+    .kite-diagram .cell-face { fill: #4f8fd6; fill-opacity: 0.5; stroke: none; }
+    .kite-diagram .cell-face-alt { fill: #2fa87d; fill-opacity: 0.5; stroke: none; }
+    .kite-diagram .ext-joint { fill: #d6473c; stroke: #7a221c; stroke-width: 1; }
+    .kite-diagram .int-joint { fill: #2c62c9; stroke: #17356f; stroke-width: 1; }
+    .kite-diagram .triple-joint { fill: #2f9e44; stroke: #1a5c27; stroke-width: 1; }
+    .kite-diagram .unhandled-joint { fill: #e8830a; stroke: #8a4d06; stroke-width: 1; }
+    .kite-diagram .label { font-size: 12px; fill: var(--text-main); }
+    .kite-diagram .caption { font-size: 13px; fill: var(--text-main); font-weight: 600; }
   </style>
+  <g class="kite-diagram">
   <title>Tetrahedral kite — front view and 3/4 view</title>
 
 <g transform="translate(30,40)">
@@ -195,5 +187,6 @@
   <g transform="translate(30,368)">
     <circle class="unhandled-joint" cx="8" cy="0" r="6"/>
     <text class="label" x="20" y="4">4+ cells meeting — no hub file yet (see README)</text>
+  </g>
   </g>
 </svg>

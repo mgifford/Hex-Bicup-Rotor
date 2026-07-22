@@ -80,6 +80,417 @@
   shared corner vertices, never along a shared edge or face.
 </p>
 
+<h3>Exploded layer view</h3>
+
+<p>
+  The two-view diagram above shows the whole assembled shape at once. The
+  exploded view below instead separates each of the 4 layers vertically —
+  useful for planning which hub goes where, layer by layer, rather than
+  puzzling over the 3D structure all at once. Dashed lines connect each
+  vertex to the matching joint in the layer directly above or below it (the
+  same physical point, shown once per layer it touches).
+</p>
+
+<svg width="640" height="960" viewBox="0 0 640 960" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" role="img"
+     aria-label="Exploded view of a 4-layer, 20-cell tetrahedral kite, showing each layer as a separate flat panel from Layer 0 (base, bottom) to Layer 3 (top), with dashed lines connecting each vertex to the matching joint in the layer above or below, and joints colour-coded by how many cells meet there: exterior (red), interior 2-cell (blue), triple 3-cell (green), and one unhandled 4-cell joint (orange)." style="max-width:100%;height:auto;">
+  <style>
+    .kite-exploded .panel-bg { fill: var(--bg-code); stroke: var(--border); stroke-width: 1; }
+    .kite-exploded .strut { stroke: var(--text-muted); stroke-width: 1.2; fill: none; }
+    .kite-exploded .connector { stroke: var(--text-faint); stroke-width: 1.2; fill: none; stroke-dasharray: 4 3; }
+    .kite-exploded .cell-face { fill: #4f8fd6; fill-opacity: 0.5; stroke: none; }
+    .kite-exploded .cell-face-alt { fill: #2fa87d; fill-opacity: 0.5; stroke: none; }
+    .kite-exploded .ext-joint { fill: #d6473c; stroke: #7a221c; stroke-width: 1; }
+    .kite-exploded .int-joint { fill: #2c62c9; stroke: #17356f; stroke-width: 1; }
+    .kite-exploded .triple-joint { fill: #2f9e44; stroke: #1a5c27; stroke-width: 1; }
+    .kite-exploded .unhandled-joint { fill: #e8830a; stroke: #8a4d06; stroke-width: 1; }
+    .kite-exploded .label { font-size: 12px; fill: var(--text-main); }
+    .kite-exploded .layer-label { font-size: 14px; fill: var(--text-main); font-weight: 700; }
+    .kite-exploded .layer-sublabel { font-size: 11px; fill: var(--text-muted); }
+  </style>
+  <g class="kite-exploded">
+  <title>Tetrahedral kite — exploded layer view, bottom to top</title>
+<path class="connector" d="M317.37,810.83 L301.49,600.0"/>
+<path class="connector" d="M333.25,783.33 L322.66,563.33"/>
+<path class="connector" d="M412.63,810.83 L428.51,600.0"/>
+<path class="connector" d="M365.0,783.33 L365.0,563.33"/>
+<path class="connector" d="M349.12,810.83 L343.83,600.0"/>
+<path class="connector" d="M349.12,755.83 L343.83,526.67"/>
+<path class="connector" d="M380.88,810.83 L386.17,600.0"/>
+<path class="connector" d="M380.88,755.83 L386.17,526.67"/>
+<path class="connector" d="M396.75,783.33 L407.34,563.33"/>
+<path class="connector" d="M365.0,728.33 L365.0,490.0"/><path class="connector" d="M343.83,551.11 L333.25,325.0"/>
+<path class="connector" d="M365.0,514.44 L365.0,270.0"/>
+<path class="connector" d="M322.66,587.78 L301.49,380.0"/>
+<path class="connector" d="M365.0,587.78 L365.0,380.0"/>
+<path class="connector" d="M407.34,587.78 L428.51,380.0"/>
+<path class="connector" d="M386.17,551.11 L396.75,325.0"/><path class="connector" d="M396.75,361.67 L428.51,160.0"/>
+<path class="connector" d="M333.25,361.67 L301.49,160.0"/>
+<path class="connector" d="M365.0,306.67 L365.0,50.0"/>
+<g class="layer-panel">
+<rect class="panel-bg" x="90" y="690" width="550" height="150" rx="6"/>
+<text class="layer-label" x="10" y="759.0">Layer 0</text>
+<text class="layer-sublabel" x="10" y="777.0">10 cells</text>
+<polygon class="cell-face" points="301.49,820.0 333.25,820.0 317.37,792.5"/>
+<path class="strut" d="M301.49,820.0 L333.25,820.0 L317.37,792.5 Z M301.49,820.0 L317.37,810.83 M333.25,820.0 L317.37,810.83 M317.37,792.5 L317.37,810.83"/>
+<polygon class="cell-face-alt" points="333.25,820.0 365.0,820.0 349.12,792.5"/>
+<path class="strut" d="M333.25,820.0 L365.0,820.0 L349.12,792.5 Z M333.25,820.0 L349.12,810.83 M365.0,820.0 L349.12,810.83 M349.12,792.5 L349.12,810.83"/>
+<polygon class="cell-face" points="365.0,820.0 396.75,820.0 380.88,792.5"/>
+<path class="strut" d="M365.0,820.0 L396.75,820.0 L380.88,792.5 Z M365.0,820.0 L380.88,810.83 M396.75,820.0 L380.88,810.83 M380.88,792.5 L380.88,810.83"/>
+<polygon class="cell-face-alt" points="396.75,820.0 428.51,820.0 412.63,792.5"/>
+<path class="strut" d="M396.75,820.0 L428.51,820.0 L412.63,792.5 Z M396.75,820.0 L412.63,810.83 M428.51,820.0 L412.63,810.83 M412.63,792.5 L412.63,810.83"/>
+<polygon class="cell-face" points="317.37,792.5 349.12,792.5 333.25,765.0"/>
+<path class="strut" d="M317.37,792.5 L349.12,792.5 L333.25,765.0 Z M317.37,792.5 L333.25,783.33 M349.12,792.5 L333.25,783.33 M333.25,765.0 L333.25,783.33"/>
+<polygon class="cell-face-alt" points="349.12,792.5 380.88,792.5 365.0,765.0"/>
+<path class="strut" d="M349.12,792.5 L380.88,792.5 L365.0,765.0 Z M349.12,792.5 L365.0,783.33 M380.88,792.5 L365.0,783.33 M365.0,765.0 L365.0,783.33"/>
+<polygon class="cell-face" points="380.88,792.5 412.63,792.5 396.75,765.0"/>
+<path class="strut" d="M380.88,792.5 L412.63,792.5 L396.75,765.0 Z M380.88,792.5 L396.75,783.33 M412.63,792.5 L396.75,783.33 M396.75,765.0 L396.75,783.33"/>
+<polygon class="cell-face-alt" points="333.25,765.0 365.0,765.0 349.12,737.5"/>
+<path class="strut" d="M333.25,765.0 L365.0,765.0 L349.12,737.5 Z M333.25,765.0 L349.12,755.83 M365.0,765.0 L349.12,755.83 M349.12,737.5 L349.12,755.83"/>
+<polygon class="cell-face" points="365.0,765.0 396.75,765.0 380.88,737.5"/>
+<path class="strut" d="M365.0,765.0 L396.75,765.0 L380.88,737.5 Z M365.0,765.0 L380.88,755.83 M396.75,765.0 L380.88,755.83 M380.88,737.5 L380.88,755.83"/>
+<polygon class="cell-face-alt" points="349.12,737.5 380.88,737.5 365.0,710.0"/>
+<path class="strut" d="M349.12,737.5 L380.88,737.5 L365.0,710.0 Z M349.12,737.5 L365.0,728.33 M380.88,737.5 L365.0,728.33 M365.0,710.0 L365.0,728.33"/>
+<circle class="ext-joint" cx="301.49" cy="820.0" r="6"/>
+<circle class="int-joint" cx="333.25" cy="820.0" r="6"/>
+<circle class="int-joint" cx="317.37" cy="792.5" r="6"/>
+<circle class="int-joint" cx="317.37" cy="810.83" r="6"/>
+<circle class="int-joint" cx="365.0" cy="820.0" r="6"/>
+<circle class="triple-joint" cx="349.12" cy="792.5" r="6"/>
+<circle class="triple-joint" cx="349.12" cy="810.83" r="6"/>
+<circle class="int-joint" cx="396.75" cy="820.0" r="6"/>
+<circle class="triple-joint" cx="380.88" cy="792.5" r="6"/>
+<circle class="triple-joint" cx="380.88" cy="810.83" r="6"/>
+<circle class="ext-joint" cx="428.51" cy="820.0" r="6"/>
+<circle class="int-joint" cx="412.63" cy="792.5" r="6"/>
+<circle class="int-joint" cx="412.63" cy="810.83" r="6"/>
+<circle class="int-joint" cx="333.25" cy="765.0" r="6"/>
+<circle class="triple-joint" cx="333.25" cy="783.33" r="6"/>
+<circle class="triple-joint" cx="365.0" cy="765.0" r="6"/>
+<circle class="unhandled-joint" cx="365.0" cy="783.33" r="6"/>
+<circle class="int-joint" cx="396.75" cy="765.0" r="6"/>
+<circle class="triple-joint" cx="396.75" cy="783.33" r="6"/>
+<circle class="int-joint" cx="349.12" cy="737.5" r="6"/>
+<circle class="triple-joint" cx="349.12" cy="755.83" r="6"/>
+<circle class="int-joint" cx="380.88" cy="737.5" r="6"/>
+<circle class="triple-joint" cx="380.88" cy="755.83" r="6"/>
+<circle class="ext-joint" cx="365.0" cy="710.0" r="6"/>
+<circle class="int-joint" cx="365.0" cy="728.33" r="6"/>
+</g><g class="layer-panel">
+<rect class="panel-bg" x="90" y="470" width="550" height="150" rx="6"/>
+<text class="layer-label" x="10" y="539.0">Layer 1</text>
+<text class="layer-sublabel" x="10" y="557.0">6 cells</text>
+<polygon class="cell-face" points="301.49,600.0 343.83,600.0 322.66,563.33"/>
+<path class="strut" d="M301.49,600.0 L343.83,600.0 L322.66,563.33 Z M301.49,600.0 L322.66,587.78 M343.83,600.0 L322.66,587.78 M322.66,563.33 L322.66,587.78"/>
+<polygon class="cell-face-alt" points="343.83,600.0 386.17,600.0 365.0,563.33"/>
+<path class="strut" d="M343.83,600.0 L386.17,600.0 L365.0,563.33 Z M343.83,600.0 L365.0,587.78 M386.17,600.0 L365.0,587.78 M365.0,563.33 L365.0,587.78"/>
+<polygon class="cell-face" points="386.17,600.0 428.51,600.0 407.34,563.33"/>
+<path class="strut" d="M386.17,600.0 L428.51,600.0 L407.34,563.33 Z M386.17,600.0 L407.34,587.78 M428.51,600.0 L407.34,587.78 M407.34,563.33 L407.34,587.78"/>
+<polygon class="cell-face-alt" points="322.66,563.33 365.0,563.33 343.83,526.67"/>
+<path class="strut" d="M322.66,563.33 L365.0,563.33 L343.83,526.67 Z M322.66,563.33 L343.83,551.11 M365.0,563.33 L343.83,551.11 M343.83,526.67 L343.83,551.11"/>
+<polygon class="cell-face" points="365.0,563.33 407.34,563.33 386.17,526.67"/>
+<path class="strut" d="M365.0,563.33 L407.34,563.33 L386.17,526.67 Z M365.0,563.33 L386.17,551.11 M407.34,563.33 L386.17,551.11 M386.17,526.67 L386.17,551.11"/>
+<polygon class="cell-face-alt" points="343.83,526.67 386.17,526.67 365.0,490.0"/>
+<path class="strut" d="M343.83,526.67 L386.17,526.67 L365.0,490.0 Z M343.83,526.67 L365.0,514.44 M386.17,526.67 L365.0,514.44 M365.0,490.0 L365.0,514.44"/>
+<circle class="int-joint" cx="301.49" cy="600.0" r="6"/>
+<circle class="triple-joint" cx="343.83" cy="600.0" r="6"/>
+<circle class="triple-joint" cx="322.66" cy="563.33" r="6"/>
+<circle class="int-joint" cx="322.66" cy="587.78" r="6"/>
+<circle class="triple-joint" cx="386.17" cy="600.0" r="6"/>
+<circle class="unhandled-joint" cx="365.0" cy="563.33" r="6"/>
+<circle class="triple-joint" cx="365.0" cy="587.78" r="6"/>
+<circle class="int-joint" cx="428.51" cy="600.0" r="6"/>
+<circle class="triple-joint" cx="407.34" cy="563.33" r="6"/>
+<circle class="int-joint" cx="407.34" cy="587.78" r="6"/>
+<circle class="triple-joint" cx="343.83" cy="526.67" r="6"/>
+<circle class="triple-joint" cx="343.83" cy="551.11" r="6"/>
+<circle class="triple-joint" cx="386.17" cy="526.67" r="6"/>
+<circle class="triple-joint" cx="386.17" cy="551.11" r="6"/>
+<circle class="int-joint" cx="365.0" cy="490.0" r="6"/>
+<circle class="int-joint" cx="365.0" cy="514.44" r="6"/>
+</g><g class="layer-panel">
+<rect class="panel-bg" x="90" y="250" width="550" height="150" rx="6"/>
+<text class="layer-label" x="10" y="319.0">Layer 2</text>
+<text class="layer-sublabel" x="10" y="337.0">3 cells</text>
+<polygon class="cell-face" points="301.49,380.0 365.0,380.0 333.25,325.0"/>
+<path class="strut" d="M301.49,380.0 L365.0,380.0 L333.25,325.0 Z M301.49,380.0 L333.25,361.67 M365.0,380.0 L333.25,361.67 M333.25,325.0 L333.25,361.67"/>
+<polygon class="cell-face-alt" points="365.0,380.0 428.51,380.0 396.75,325.0"/>
+<path class="strut" d="M365.0,380.0 L428.51,380.0 L396.75,325.0 Z M365.0,380.0 L396.75,361.67 M428.51,380.0 L396.75,361.67 M396.75,325.0 L396.75,361.67"/>
+<polygon class="cell-face" points="333.25,325.0 396.75,325.0 365.0,270.0"/>
+<path class="strut" d="M333.25,325.0 L396.75,325.0 L365.0,270.0 Z M333.25,325.0 L365.0,306.67 M396.75,325.0 L365.0,306.67 M365.0,270.0 L365.0,306.67"/>
+<circle class="int-joint" cx="301.49" cy="380.0" r="6"/>
+<circle class="triple-joint" cx="365.0" cy="380.0" r="6"/>
+<circle class="triple-joint" cx="333.25" cy="325.0" r="6"/>
+<circle class="int-joint" cx="333.25" cy="361.67" r="6"/>
+<circle class="int-joint" cx="428.51" cy="380.0" r="6"/>
+<circle class="triple-joint" cx="396.75" cy="325.0" r="6"/>
+<circle class="int-joint" cx="396.75" cy="361.67" r="6"/>
+<circle class="int-joint" cx="365.0" cy="270.0" r="6"/>
+<circle class="int-joint" cx="365.0" cy="306.67" r="6"/>
+</g><g class="layer-panel">
+<rect class="panel-bg" x="90" y="30" width="550" height="150" rx="6"/>
+<text class="layer-label" x="10" y="99.0">Layer 3</text>
+<text class="layer-sublabel" x="10" y="117.0">1 cell</text>
+<polygon class="cell-face" points="301.49,160.0 428.51,160.0 365.0,50.0"/>
+<path class="strut" d="M301.49,160.0 L428.51,160.0 L365.0,50.0 Z M301.49,160.0 L365.0,123.33 M428.51,160.0 L365.0,123.33 M365.0,50.0 L365.0,123.33"/>
+<circle class="int-joint" cx="301.49" cy="160.0" r="6"/>
+<circle class="int-joint" cx="428.51" cy="160.0" r="6"/>
+<circle class="int-joint" cx="365.0" cy="50.0" r="6"/>
+<circle class="ext-joint" cx="365.0" cy="123.33" r="6"/>
+</g>
+  <g transform="translate(90,864)">
+    <circle class="ext-joint" cx="8" cy="0" r="6"/>
+    <text class="label" x="20" y="4">Exterior — 3 sockets (kite_corner.scad)</text>
+  </g>
+  <g transform="translate(90,882)">
+    <circle class="int-joint" cx="8" cy="0" r="6"/>
+    <text class="label" x="20" y="4">Interior, 2 cells — 6 sockets (kite_corner_interior.scad)</text>
+  </g>
+  <g transform="translate(90,900)">
+    <circle class="triple-joint" cx="8" cy="0" r="6"/>
+    <text class="label" x="20" y="4">Triple, 3 cells — 9 sockets (kite_corner_triple.scad)</text>
+  </g>
+  <g transform="translate(90,918)">
+    <circle class="unhandled-joint" cx="8" cy="0" r="6"/>
+    <text class="label" x="20" y="4">4+ cells meeting — no hub file yet (see README)</text>
+  </g>
+  <g transform="translate(90,936)">
+    <path class="connector" d="M8,0 L40,0"/>
+    <text class="label" x="48" y="4">Dashed line = same physical joint shared between adjacent layers</text>
+  </g>
+  </g>
+</svg>
+
+<p style="font-size:13px;color:var(--text-faint);">
+  Layer 0 (base, bottom) through Layer 3 (top) of the same 4-layer, 20-cell
+  arrangement, pulled apart vertically. Notice that Layer 0's own
+  interior/triple joints (where its 10 cells meet each other) are separate
+  from the dashed connector joints at its top edge (where Layer 0 meets
+  Layer 1) — both use the same colour code, since the hub choice depends
+  only on how many cells share that specific point, not on which layer(s)
+  it's between.
+</p>
+
+<hr>
+
+<h2>Build it yourself: 3D-printed kite corner hubs</h2>
+
+<p>
+  This repository also contains actual buildable parts for a tetrahedral kite —
+  <strong>not</strong> just this theoretical comparison. See
+  <a href="https://github.com/mgifford/Hex-Bicup-Rotor/tree/main/kite-corners">the <code>kite-corners/</code> directory</a>
+  for two 3D-printable hub designs (OpenSCAD source, plus ready-to-print STL/3MF
+  files) and a full assembly guide. <code>kite-corners/</code> is a separate,
+  unrelated hobby side-project — it shares nothing with VINDSNURR beyond the
+  "triangulated frames are rigid" idea discussed on this page.
+</p>
+
+<svg width="720" height="400" viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" role="img"
+     aria-label="Schematic diagram of a 4-layer, 20-cell tetrahedral kite from two angles, showing exterior joints (red, 3-socket hub) at the outer tips, interior joints (blue, 6-socket hub) where 2 cells meet, triple joints (green, 9-socket hub) where 3 cells meet, and one 4-cell joint (orange, not yet covered by any hub design) near the middle of the assembly." style="max-width:100%;height:auto;">
+  <style>
+    .kite-diagram .strut { stroke: var(--text-muted); stroke-width: 1.4; fill: none; }
+    .kite-diagram .cell-face { fill: #4f8fd6; fill-opacity: 0.5; stroke: none; }
+    .kite-diagram .cell-face-alt { fill: #2fa87d; fill-opacity: 0.5; stroke: none; }
+    .kite-diagram .ext-joint { fill: #d6473c; stroke: #7a221c; stroke-width: 1; }
+    .kite-diagram .int-joint { fill: #2c62c9; stroke: #17356f; stroke-width: 1; }
+    .kite-diagram .triple-joint { fill: #2f9e44; stroke: #1a5c27; stroke-width: 1; }
+    .kite-diagram .unhandled-joint { fill: #e8830a; stroke: #8a4d06; stroke-width: 1; }
+    .kite-diagram .label { font-size: 12px; fill: var(--text-main); }
+    .kite-diagram .caption { font-size: 13px; fill: var(--text-main); font-weight: 600; }
+  </style>
+  <g class="kite-diagram">
+  <title>Tetrahedral kite — front view and 3/4 view</title>
+
+<g transform="translate(30,40)">
+<text class="caption" x="150.0" y="-10" text-anchor="middle">Front view</text>
+<polygon class="cell-face" points="24.0,222.93 85.67,222.93 54.83,226.2"/>
+<path class="strut" d="M24.0,222.93 L85.67,222.93 L54.83,226.2 Z M24.0,222.93 L54.83,173.2 M85.67,222.93 L54.83,173.2 M54.83,226.2 L54.83,173.2"/>
+<polygon class="cell-face-alt" points="85.67,222.93 147.34,222.93 116.5,226.2"/>
+<path class="strut" d="M85.67,222.93 L147.34,222.93 L116.5,226.2 Z M85.67,222.93 L116.5,173.2 M147.34,222.93 L116.5,173.2 M116.5,226.2 L116.5,173.2"/>
+<polygon class="cell-face" points="147.34,222.93 209.0,222.93 178.17,226.2"/>
+<path class="strut" d="M147.34,222.93 L209.0,222.93 L178.17,226.2 Z M147.34,222.93 L178.17,173.2 M209.0,222.93 L178.17,173.2 M178.17,226.2 L178.17,173.2"/>
+<polygon class="cell-face-alt" points="209.0,222.93 270.67,222.93 239.84,226.2"/>
+<path class="strut" d="M209.0,222.93 L270.67,222.93 L239.84,226.2 Z M209.0,222.93 L239.84,173.2 M270.67,222.93 L239.84,173.2 M239.84,226.2 L239.84,173.2"/>
+<polygon class="cell-face" points="54.83,173.2 116.5,173.2 85.67,176.46"/>
+<path class="strut" d="M54.83,173.2 L116.5,173.2 L85.67,176.46 Z M54.83,173.2 L85.67,123.46 M116.5,173.2 L85.67,123.46 M85.67,176.46 L85.67,123.46"/>
+<polygon class="cell-face-alt" points="116.5,173.2 178.17,173.2 147.34,176.46"/>
+<path class="strut" d="M116.5,173.2 L178.17,173.2 L147.34,176.46 Z M116.5,173.2 L147.34,123.46 M178.17,173.2 L147.34,123.46 M147.34,176.46 L147.34,123.46"/>
+<polygon class="cell-face" points="178.17,173.2 239.84,173.2 209.0,176.46"/>
+<path class="strut" d="M178.17,173.2 L239.84,173.2 L209.0,176.46 Z M178.17,173.2 L209.0,123.46 M239.84,173.2 L209.0,123.46 M209.0,176.46 L209.0,123.46"/>
+<polygon class="cell-face-alt" points="54.83,226.2 116.5,226.2 85.67,229.46"/>
+<path class="strut" d="M54.83,226.2 L116.5,226.2 L85.67,229.46 Z M54.83,226.2 L85.67,176.46 M116.5,226.2 L85.67,176.46 M85.67,229.46 L85.67,176.46"/>
+<polygon class="cell-face" points="116.5,226.2 178.17,226.2 147.34,229.46"/>
+<path class="strut" d="M116.5,226.2 L178.17,226.2 L147.34,229.46 Z M116.5,226.2 L147.34,176.46 M178.17,226.2 L147.34,176.46 M147.34,229.46 L147.34,176.46"/>
+<polygon class="cell-face-alt" points="178.17,226.2 239.84,226.2 209.0,229.46"/>
+<path class="strut" d="M178.17,226.2 L239.84,226.2 L209.0,229.46 Z M178.17,226.2 L209.0,176.46 M239.84,226.2 L209.0,176.46 M209.0,229.46 L209.0,176.46"/>
+<polygon class="cell-face" points="85.67,123.46 147.34,123.46 116.5,126.73"/>
+<path class="strut" d="M85.67,123.46 L147.34,123.46 L116.5,126.73 Z M85.67,123.46 L116.5,73.73 M147.34,123.46 L116.5,73.73 M116.5,126.73 L116.5,73.73"/>
+<polygon class="cell-face-alt" points="147.34,123.46 209.0,123.46 178.17,126.73"/>
+<path class="strut" d="M147.34,123.46 L209.0,123.46 L178.17,126.73 Z M147.34,123.46 L178.17,73.73 M209.0,123.46 L178.17,73.73 M178.17,126.73 L178.17,73.73"/>
+<polygon class="cell-face" points="85.67,176.46 147.34,176.46 116.5,179.73"/>
+<path class="strut" d="M85.67,176.46 L147.34,176.46 L116.5,179.73 Z M85.67,176.46 L116.5,126.73 M147.34,176.46 L116.5,126.73 M116.5,179.73 L116.5,126.73"/>
+<polygon class="cell-face-alt" points="147.34,176.46 209.0,176.46 178.17,179.73"/>
+<path class="strut" d="M147.34,176.46 L209.0,176.46 L178.17,179.73 Z M147.34,176.46 L178.17,126.73 M209.0,176.46 L178.17,126.73 M178.17,179.73 L178.17,126.73"/>
+<polygon class="cell-face" points="116.5,73.73 178.17,73.73 147.34,77.0"/>
+<path class="strut" d="M116.5,73.73 L178.17,73.73 L147.34,77.0 Z M116.5,73.73 L147.34,24.0 M178.17,73.73 L147.34,24.0 M147.34,77.0 L147.34,24.0"/>
+<polygon class="cell-face-alt" points="85.67,229.46 147.34,229.46 116.5,232.73"/>
+<path class="strut" d="M85.67,229.46 L147.34,229.46 L116.5,232.73 Z M85.67,229.46 L116.5,179.73 M147.34,229.46 L116.5,179.73 M116.5,232.73 L116.5,179.73"/>
+<polygon class="cell-face" points="147.34,229.46 209.0,229.46 178.17,232.73"/>
+<path class="strut" d="M147.34,229.46 L209.0,229.46 L178.17,232.73 Z M147.34,229.46 L178.17,179.73 M209.0,229.46 L178.17,179.73 M178.17,232.73 L178.17,179.73"/>
+<polygon class="cell-face-alt" points="116.5,126.73 178.17,126.73 147.34,130.0"/>
+<path class="strut" d="M116.5,126.73 L178.17,126.73 L147.34,130.0 Z M116.5,126.73 L147.34,77.0 M178.17,126.73 L147.34,77.0 M147.34,130.0 L147.34,77.0"/>
+<polygon class="cell-face" points="116.5,179.73 178.17,179.73 147.34,183.0"/>
+<path class="strut" d="M116.5,179.73 L178.17,179.73 L147.34,183.0 Z M116.5,179.73 L147.34,130.0 M178.17,179.73 L147.34,130.0 M147.34,183.0 L147.34,130.0"/>
+<polygon class="cell-face-alt" points="116.5,232.73 178.17,232.73 147.34,236.0"/>
+<path class="strut" d="M116.5,232.73 L178.17,232.73 L147.34,236.0 Z M116.5,232.73 L147.34,183.0 M178.17,232.73 L147.34,183.0 M147.34,236.0 L147.34,183.0"/>
+<circle class="ext-joint" cx="24.0" cy="222.93" r="5"/>
+<circle class="int-joint" cx="85.67" cy="222.93" r="5"/>
+<circle class="int-joint" cx="54.83" cy="226.2" r="5"/>
+<circle class="int-joint" cx="54.83" cy="173.2" r="5"/>
+<circle class="int-joint" cx="147.34" cy="222.93" r="5"/>
+<circle class="triple-joint" cx="116.5" cy="226.2" r="5"/>
+<circle class="triple-joint" cx="116.5" cy="173.2" r="5"/>
+<circle class="int-joint" cx="209.0" cy="222.93" r="5"/>
+<circle class="triple-joint" cx="178.17" cy="226.2" r="5"/>
+<circle class="triple-joint" cx="178.17" cy="173.2" r="5"/>
+<circle class="ext-joint" cx="270.67" cy="222.93" r="5"/>
+<circle class="int-joint" cx="239.84" cy="226.2" r="5"/>
+<circle class="int-joint" cx="239.84" cy="173.2" r="5"/>
+<circle class="int-joint" cx="85.67" cy="229.46" r="5"/>
+<circle class="triple-joint" cx="85.67" cy="176.46" r="5"/>
+<circle class="triple-joint" cx="147.34" cy="229.46" r="5"/>
+<circle class="unhandled-joint" cx="147.34" cy="176.46" r="5"/>
+<circle class="int-joint" cx="209.0" cy="229.46" r="5"/>
+<circle class="triple-joint" cx="209.0" cy="176.46" r="5"/>
+<circle class="int-joint" cx="116.5" cy="232.73" r="5"/>
+<circle class="triple-joint" cx="116.5" cy="179.73" r="5"/>
+<circle class="int-joint" cx="178.17" cy="232.73" r="5"/>
+<circle class="triple-joint" cx="178.17" cy="179.73" r="5"/>
+<circle class="ext-joint" cx="147.34" cy="236.0" r="5"/>
+<circle class="int-joint" cx="147.34" cy="183.0" r="5"/>
+<circle class="int-joint" cx="85.67" cy="123.46" r="5"/>
+<circle class="triple-joint" cx="147.34" cy="123.46" r="5"/>
+<circle class="int-joint" cx="209.0" cy="123.46" r="5"/>
+<circle class="triple-joint" cx="116.5" cy="126.73" r="5"/>
+<circle class="triple-joint" cx="178.17" cy="126.73" r="5"/>
+<circle class="int-joint" cx="147.34" cy="130.0" r="5"/>
+<circle class="int-joint" cx="116.5" cy="73.73" r="5"/>
+<circle class="int-joint" cx="178.17" cy="73.73" r="5"/>
+<circle class="int-joint" cx="147.34" cy="77.0" r="5"/>
+<circle class="ext-joint" cx="147.34" cy="24.0" r="5"/>
+</g>
+
+<g transform="translate(380,40)">
+<text class="caption" x="150.0" y="-10" text-anchor="middle">3/4 view</text>
+<polygon class="cell-face" points="171.94,167.84 221.25,204.38 196.6,212.28"/>
+<path class="strut" d="M171.94,167.84 L221.25,204.38 L196.6,212.28 Z M171.94,167.84 L230.38,159.28 M221.25,204.38 L230.38,159.28 M196.6,212.28 L230.38,159.28"/>
+<polygon class="cell-face-alt" points="122.63,131.31 171.94,167.84 147.28,175.75"/>
+<path class="strut" d="M122.63,131.31 L171.94,167.84 L147.28,175.75 Z M122.63,131.31 L181.07,122.75 M171.94,167.84 L181.07,122.75 M147.28,175.75 L181.07,122.75"/>
+<polygon class="cell-face" points="73.31,94.77 122.63,131.31 97.97,139.21"/>
+<path class="strut" d="M73.31,94.77 L122.63,131.31 L97.97,139.21 Z M73.31,94.77 L131.76,86.21 M122.63,131.31 L131.76,86.21 M97.97,139.21 L131.76,86.21"/>
+<polygon class="cell-face-alt" points="181.07,122.75 230.38,159.28 205.73,167.19"/>
+<path class="strut" d="M181.07,122.75 L230.38,159.28 L205.73,167.19 Z M181.07,122.75 L239.51,114.19 M230.38,159.28 L239.51,114.19 M205.73,167.19 L239.51,114.19"/>
+<polygon class="cell-face" points="24.0,58.24 73.31,94.77 48.66,102.68"/>
+<path class="strut" d="M24.0,58.24 L73.31,94.77 L48.66,102.68 Z M24.0,58.24 L82.44,49.68 M73.31,94.77 L82.44,49.68 M48.66,102.68 L82.44,49.68"/>
+<polygon class="cell-face-alt" points="147.28,175.75 196.6,212.28 171.94,220.19"/>
+<path class="strut" d="M147.28,175.75 L196.6,212.28 L171.94,220.19 Z M147.28,175.75 L205.73,167.19 M196.6,212.28 L205.73,167.19 M171.94,220.19 L205.73,167.19"/>
+<polygon class="cell-face" points="131.76,86.21 181.07,122.75 156.41,130.65"/>
+<path class="strut" d="M131.76,86.21 L181.07,122.75 L156.41,130.65 Z M131.76,86.21 L190.2,77.65 M181.07,122.75 L190.2,77.65 M156.41,130.65 L190.2,77.65"/>
+<polygon class="cell-face-alt" points="97.97,139.21 147.28,175.75 122.63,183.65"/>
+<path class="strut" d="M97.97,139.21 L147.28,175.75 L122.63,183.65 Z M97.97,139.21 L156.41,130.65 M147.28,175.75 L156.41,130.65 M122.63,183.65 L156.41,130.65"/>
+<polygon class="cell-face" points="82.44,49.68 131.76,86.21 107.1,94.12"/>
+<path class="strut" d="M82.44,49.68 L131.76,86.21 L107.1,94.12 Z M82.44,49.68 L140.89,41.12 M131.76,86.21 L140.89,41.12 M107.1,94.12 L140.89,41.12"/>
+<polygon class="cell-face-alt" points="190.2,77.65 239.51,114.19 214.86,122.09"/>
+<path class="strut" d="M190.2,77.65 L239.51,114.19 L214.86,122.09 Z M190.2,77.65 L248.64,69.09 M239.51,114.19 L248.64,69.09 M214.86,122.09 L248.64,69.09"/>
+<polygon class="cell-face" points="48.66,102.68 97.97,139.21 73.31,147.12"/>
+<path class="strut" d="M48.66,102.68 L97.97,139.21 L73.31,147.12 Z M48.66,102.68 L107.1,94.12 M97.97,139.21 L107.1,94.12 M73.31,147.12 L107.1,94.12"/>
+<polygon class="cell-face-alt" points="156.41,130.65 205.73,167.19 181.07,175.09"/>
+<path class="strut" d="M156.41,130.65 L205.73,167.19 L181.07,175.09 Z M156.41,130.65 L214.86,122.09 M205.73,167.19 L214.86,122.09 M181.07,175.09 L214.86,122.09"/>
+<polygon class="cell-face" points="140.89,41.12 190.2,77.65 165.54,85.56"/>
+<path class="strut" d="M140.89,41.12 L190.2,77.65 L165.54,85.56 Z M140.89,41.12 L199.33,32.56 M190.2,77.65 L199.33,32.56 M165.54,85.56 L199.33,32.56"/>
+<polygon class="cell-face-alt" points="122.63,183.65 171.94,220.19 147.28,228.09"/>
+<path class="strut" d="M122.63,183.65 L171.94,220.19 L147.28,228.09 Z M122.63,183.65 L181.07,175.09 M171.94,220.19 L181.07,175.09 M147.28,228.09 L181.07,175.09"/>
+<polygon class="cell-face" points="107.1,94.12 156.41,130.65 131.76,138.56"/>
+<path class="strut" d="M107.1,94.12 L156.41,130.65 L131.76,138.56 Z M107.1,94.12 L165.54,85.56 M156.41,130.65 L165.54,85.56 M131.76,138.56 L165.54,85.56"/>
+<polygon class="cell-face-alt" points="199.33,32.56 248.64,69.09 223.98,77.0"/>
+<path class="strut" d="M199.33,32.56 L248.64,69.09 L223.98,77.0 Z M199.33,32.56 L257.77,24.0 M248.64,69.09 L257.77,24.0 M223.98,77.0 L257.77,24.0"/>
+<polygon class="cell-face" points="73.31,147.12 122.63,183.65 97.97,191.56"/>
+<path class="strut" d="M73.31,147.12 L122.63,183.65 L97.97,191.56 Z M73.31,147.12 L131.76,138.56 M122.63,183.65 L131.76,138.56 M97.97,191.56 L131.76,138.56"/>
+<polygon class="cell-face-alt" points="165.54,85.56 214.86,122.09 190.2,130.0"/>
+<path class="strut" d="M165.54,85.56 L214.86,122.09 L190.2,130.0 Z M165.54,85.56 L223.98,77.0 M214.86,122.09 L223.98,77.0 M190.2,130.0 L223.98,77.0"/>
+<polygon class="cell-face" points="131.76,138.56 181.07,175.09 156.41,183.0"/>
+<path class="strut" d="M131.76,138.56 L181.07,175.09 L156.41,183.0 Z M131.76,138.56 L190.2,130.0 M181.07,175.09 L190.2,130.0 M156.41,183.0 L190.2,130.0"/>
+<polygon class="cell-face-alt" points="97.97,191.56 147.28,228.09 122.63,236.0"/>
+<path class="strut" d="M97.97,191.56 L147.28,228.09 L122.63,236.0 Z M97.97,191.56 L156.41,183.0 M147.28,228.09 L156.41,183.0 M122.63,236.0 L156.41,183.0"/>
+<circle class="ext-joint" cx="24.0" cy="58.24" r="5"/>
+<circle class="int-joint" cx="73.31" cy="94.77" r="5"/>
+<circle class="int-joint" cx="48.66" cy="102.68" r="5"/>
+<circle class="int-joint" cx="82.44" cy="49.68" r="5"/>
+<circle class="int-joint" cx="122.63" cy="131.31" r="5"/>
+<circle class="triple-joint" cx="97.97" cy="139.21" r="5"/>
+<circle class="triple-joint" cx="131.76" cy="86.21" r="5"/>
+<circle class="int-joint" cx="171.94" cy="167.84" r="5"/>
+<circle class="triple-joint" cx="147.28" cy="175.75" r="5"/>
+<circle class="triple-joint" cx="181.07" cy="122.75" r="5"/>
+<circle class="ext-joint" cx="221.25" cy="204.38" r="5"/>
+<circle class="int-joint" cx="196.6" cy="212.28" r="5"/>
+<circle class="int-joint" cx="230.38" cy="159.28" r="5"/>
+<circle class="int-joint" cx="73.31" cy="147.12" r="5"/>
+<circle class="triple-joint" cx="107.1" cy="94.12" r="5"/>
+<circle class="triple-joint" cx="122.63" cy="183.65" r="5"/>
+<circle class="unhandled-joint" cx="156.41" cy="130.65" r="5"/>
+<circle class="int-joint" cx="171.94" cy="220.19" r="5"/>
+<circle class="triple-joint" cx="205.73" cy="167.19" r="5"/>
+<circle class="int-joint" cx="97.97" cy="191.56" r="5"/>
+<circle class="triple-joint" cx="131.76" cy="138.56" r="5"/>
+<circle class="int-joint" cx="147.28" cy="228.09" r="5"/>
+<circle class="triple-joint" cx="181.07" cy="175.09" r="5"/>
+<circle class="ext-joint" cx="122.63" cy="236.0" r="5"/>
+<circle class="int-joint" cx="156.41" cy="183.0" r="5"/>
+<circle class="int-joint" cx="140.89" cy="41.12" r="5"/>
+<circle class="triple-joint" cx="190.2" cy="77.65" r="5"/>
+<circle class="int-joint" cx="239.51" cy="114.19" r="5"/>
+<circle class="triple-joint" cx="165.54" cy="85.56" r="5"/>
+<circle class="triple-joint" cx="214.86" cy="122.09" r="5"/>
+<circle class="int-joint" cx="190.2" cy="130.0" r="5"/>
+<circle class="int-joint" cx="199.33" cy="32.56" r="5"/>
+<circle class="int-joint" cx="248.64" cy="69.09" r="5"/>
+<circle class="int-joint" cx="223.98" cy="77.0" r="5"/>
+<circle class="ext-joint" cx="257.77" cy="24.0" r="5"/>
+</g>
+
+  <g transform="translate(30,320)">
+    <circle class="ext-joint" cx="8" cy="0" r="6"/>
+    <text class="label" x="20" y="4">Exterior, 1 cell — 3 sockets (kite_corner.scad)</text>
+  </g>
+  <g transform="translate(30,336)">
+    <circle class="int-joint" cx="8" cy="0" r="6"/>
+    <text class="label" x="20" y="4">Interior, 2 cells — 6 sockets (kite_corner_interior.scad)</text>
+  </g>
+  <g transform="translate(30,352)">
+    <circle class="triple-joint" cx="8" cy="0" r="6"/>
+    <text class="label" x="20" y="4">Triple, 3 cells — 9 sockets (kite_corner_triple.scad)</text>
+  </g>
+  <g transform="translate(30,368)">
+    <circle class="unhandled-joint" cx="8" cy="0" r="6"/>
+    <text class="label" x="20" y="4">4+ cells meeting — no hub file yet (see README)</text>
+  </g>
+  </g>
+</svg>
+
+<p style="font-size:13px;color:var(--text-faint);">
+  Front view and 3/4 view of a 4-layer, 20-cell arrangement (10 base cells + 6
+  + 3 + 1), deliberately taller than the classic 10-cell Instructables build
+  because a 3-layer kite never produces a vertex where more than 2 cells
+  meet. Red = exterior joint (3-socket hub). Blue = interior joint, 2 cells
+  meeting (6-socket hub). Green = triple joint, 3 cells meeting at one point
+  (9-socket hub). Orange = a vertex where 4 cells meet — real, and confirmed
+  to occur at this layer count, but not yet covered by any hub design (see
+  <a href="https://github.com/mgifford/Hex-Bicup-Rotor/blob/main/kite-corners/README.md">kite-corners/README.md</a>
+  for why, and for the full geometry derivation and assembly instructions).
+  This is a schematic, not a precision engineering drawing, but every vertex
+  position and joint classification was computed from real 3D coordinates.
+</p>
+
 <hr>
 
 <h2>Structural comparison at a glance</h2>
