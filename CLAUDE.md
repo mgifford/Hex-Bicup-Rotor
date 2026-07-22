@@ -11,6 +11,11 @@ A 14-vertex, 36-edge, fully triangulated hexagonal wind rotor frame for a Savoni
 - **Core files:** OpenSCAD `.scad` files in `3d/`. Export each to STL for printing.
 - **Docs:** HTML visualizations in `docs/`.
 
+**Not part of this project:** `kite-corners/` is a separate, unrelated hobby
+side-project (3D-printed corner hubs for tetrahedral kites) that lives in this
+repo for convenience only. It does not share geometry, parameters, or print
+settings with VINDSNURR — see `kite-corners/README.md`.
+
 ## File structure
 
 | File | Purpose |
@@ -30,6 +35,7 @@ A 14-vertex, 36-edge, fully triangulated hexagonal wind rotor frame for a Savoni
 | `docs/geometry-comparison.html` | Icosahedron vs hexagonal bicupola comparison (theoretical) |
 | `docs/generator.html` | Generator selection guide — BLDC, hub motor, PMA, drive options |
 | `docs/support-frame.html` | Frame design, bearing hardware (6204-2RS), shaft coupling |
+| `docs/kite-comparison.html` | Structural comparison with Bell's tetrahedral kite (triangulated-frame precedent) |
 | `docs/site.css` | Shared stylesheet — colour tokens, nav, dark/light mode |
 | `docs/site.js` | Shared script — theme toggle, aria-current nav marking |
 

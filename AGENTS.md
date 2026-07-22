@@ -4,6 +4,13 @@ This file tells human contributors and AI coding agents how to keep the
 VINDSNURR project consistent. The geometry, hardware numbers, and visual
 representations must stay in agreement across all file types.
 
+**Scope note:** `kite-corners/` is a separate, unrelated hobby side-project
+(3D-printed tetrahedral kite corner hubs) that happens to live in this repo.
+None of the consistency rules below apply to it — it has its own
+self-contained `kite-corners/README.md` and no shared parameters with
+VINDSNURR. Do not merge its geometry, tolerances, or file conventions with
+the rules in this document.
+
 ---
 
 ## 1. The single source of truth
@@ -63,7 +70,7 @@ size, node coordinates), touch all of the following:
 **HTML pages** — these are the hardest to keep current; see §4
 - [ ] `docs/viz.html` — JS vertex coordinates (search for `phi`, `R = 210`, `buildVerts`)
 - [ ] `docs/step-by-step.html` — SVG diagrams with hardcoded hub and rod geometry
-- [ ] `docs/site.css` / `docs/site.js` — shared nav: if a page is added or renamed, update the `<nav>` block in **all seven HTML files** (index, viz, step-by-step, theory, geometry-comparison, generator, support-frame)
+- [ ] `docs/site.css` / `docs/site.js` — shared nav: if a page is added or renamed, update the `<nav>` block in **all eight HTML files** (index, viz, step-by-step, theory, geometry-comparison, generator, support-frame, kite-comparison)
 
 **Comparison and theory docs** — update if the change affects the comparison claims
 - [ ] `docs/geometry-comparison.html` — vertex/edge/face counts, rod length count
@@ -184,6 +191,7 @@ without a corresponding prototype test result to cite.
 | `docs/geometry-comparison.html` | Design rationale | Icosahedron vs bicupola comparison |
 | `docs/generator.html` | Generator guide | Generator selection, drive options, power expectations |
 | `docs/support-frame.html` | Structural guide | Frame design, bearing hardware, shaft coupling, load estimates |
+| `docs/kite-comparison.html` | Design rationale | Structural comparison with Bell's tetrahedral kite (triangulated-frame precedent) |
 | `docs/site.css` | Shared stylesheet | Colour tokens, nav, prose, dark/light |
 | `docs/site.js` | Shared script | Theme toggle, current-page nav marking |
 | `CLAUDE.md` | AI context | Project overview for AI sessions |

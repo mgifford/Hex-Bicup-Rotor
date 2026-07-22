@@ -33,11 +33,42 @@ For a theoretical comparison of the icosahedron (GW1200) vs hexagonal bicupola (
 
 ---
 
-## Software required
+## Just want to print? Skip OpenSCAD entirely
+
+Ready-to-print **STL** and **3MF** files for every hub are already in
+[`3d/printable/`](3d/printable/) — download the ones you need straight from
+GitHub and load them into your slicer (Cura, PrusaSlicer, Bambu Studio,
+Creality Print, etc. all read both formats natively). You don't need OpenSCAD
+unless you want to change a dimension yourself.
+
+| File | Use it for |
+|------|------------|
+| `hub_test_jig.stl` / `.3mf` | Print first — calibrates rod and bearing fit |
+| `hub_apex.stl` / `.3mf` | Hub T and Hub B — print 2 |
+| `hub_ring.stl` / `.3mf` | Hub U1–U6 and L1–L6 — print 12 |
+
+## Software required (only if you're changing the design)
 
 **OpenSCAD** (free) — https://openscad.org  
 Open any `.scad` file → press **F6** to render → **File → Export → Export as STL**  
 Increase `$fn` from 64 to 128 in each file before exporting final STL for smoother curves.
+
+### Command-line validation and export
+
+`3d/validate_and_export.sh` checks that `hub_apex.scad`, `hub_ring.scad`, and
+`hub_test_jig.scad` each render as a clean manifold solid (no non-manifold
+geometry, which is what produces broken or unprintable meshes), then exports
+STL and 3MF files at `$fn=128` into `3d/printable/`. Run this after any
+geometry change and commit the results, so the ready-to-print files in
+`3d/printable/` always match the current `.scad` source.
+
+```
+cd 3d
+./validate_and_export.sh
+```
+
+Requires OpenSCAD on `PATH`. If a file fails validation, do not print it —
+check the error log printed to `/tmp/vindsnurr_validate_<file>.log` first.
 
 ---
 

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tetrahedral Kite Comparison — VINDSNURR</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-logo" href="index.html">VIND<span>SNURR</span></a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="index.html">Overview</a>
+    <a href="viz.html">3D Visualizer</a>
+    <a href="step-by-step.html">Assembly Guide</a>
+    <a href="theory.html">Theory</a>
+    <a href="geometry-comparison.html">Geometry</a>
+    <a href="generator.html">Generator</a>
+    <a href="support-frame.html">Support Frame</a>
+    <a href="kite-comparison.html" aria-current="page">Kite Comparison</a>
+  </nav>
+  <button id="theme-toggle" aria-label="Switch to dark mode">
+    <svg aria-hidden="true" class="sun-icon" viewBox="0 0 24 24" width="18" height="18">
+      <circle cx="12" cy="12" r="5" fill="currentColor"/>
+      <path fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+    </svg>
+    <svg aria-hidden="true" class="moon-icon" viewBox="0 0 24 24" width="18" height="18">
+      <path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+</header>
+
+<main class="page">
+<div class="prose">
+
+<h1>Tetrahedral Kite Comparison</h1>
+<p style="color:var(--text-faint);font-size:13px;">Bell's tetrahedral kite cells vs VINDSNURR's hexagonal bicupola frame — a structural, not aerodynamic, comparison</p>
+
+<blockquote>
+  <strong>Disclaimer:</strong> This is a structural-design comparison only. The tetrahedral kite is a
+  lift-generating airborne structure held by a tether; VINDSNURR is a ground-mounted, shaft-driven
+  drag turbine. They serve entirely different purposes. The comparison below is limited to how each
+  structure achieves rigidity from a triangulated strut framework — it is not a claim that one
+  design could substitute for the other.
+</blockquote>
+
+<hr>
+
+<h2>Historical background</h2>
+
+<p>
+  The tetrahedral kite was developed by <strong>Alexander Graham Bell</strong> starting around 1899–1903,
+  as part of his aeronautical research into rigid, lightweight, scalable structures for
+  (ultimately unsuccessful) piloted flight experiments. The core insight — a tetrahedron is the
+  simplest fully triangulated 3D cell, so trusses built from tetrahedral cells are rigid without
+  extra bracing — carried over into 20th-century truss and space-frame engineering generally.
+</p>
+
+<p>
+  A widely circulated hobbyist build of the design is documented in
+  <a href="https://www.instructables.com/Tetrahedral-Kite-1/">this Instructables tutorial</a>,
+  which builds a kite from drinking straws, string, and tissue paper. It is referenced here purely
+  as an accessible, well-illustrated example of tetrahedral-cell construction — the same structural
+  principle VINDSNURR applies with 3D-printed hubs and rigid rods instead of straws and knotted string.
+</p>
+
+<hr>
+
+<h2>Structural comparison at a glance</h2>
+
+<table>
+  <thead><tr><th>Property</th><th>Tetrahedral Kite (Bell / Instructables build)</th><th>VINDSNURR — Hexagonal Bicupola</th></tr></thead>
+  <tbody>
+    <tr><td>Base structural cell</td><td>Tetrahedron (4 vertices, 6 edges, 4 triangular faces)</td><td>Hexagonal bicupola graph (14 vertices, 36 edges, 24 triangular faces) — not decomposed into repeating cells</td></tr>
+    <tr><td>Cell count in reference build</td><td>10 tetrahedral cells (6 base + 3 mid + 1 top)</td><td>1 unified frame (not modular cells)</td></tr>
+    <tr><td>Strut material (reference build)</td><td>Plastic drinking straws</td><td>Fiberglass or carbon rod, 10mm OD</td></tr>
+    <tr><td>Joint method (reference build)</td><td>String tied through straw ends, knotted</td><td>3D-printed hub with drilled sockets, epoxy-bonded rods</td></tr>
+    <tr><td>Covering / sail</td><td>Tissue paper, covering 2 of 4 faces per cell (for lift + visibility, not all faces)</td><td>Ripstop nylon, 6 triangular sail panels on selected faces (for drag, not all faces)</td></tr>
+    <tr><td>Joint degree (vertices per node)</td><td>Uniform: every vertex is degree 3 within its cell, degree up to 6 where cells meet</td><td>Two hub types: degree-6 apex (T, B), degree-5 ring (U1–U6, L1–L6)</td></tr>
+    <tr><td>Load path in flight/operation</td><td>Tether tension distributed through triangulated cells; kite is unsupported (airborne)</td><td>Torque and bending loads through triangulated rod frame into a fixed central shaft and bearings</td></tr>
+    <tr><td>Scale of reference build</td><td>Hobby scale, ~1m span, no engineering loads beyond wind lift and tether pull</td><td>1000mm rotor diameter, engineered for continuous rotational and wind loading</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>What the two designs share</h2>
+
+<h3>Full triangulation as the structural strategy</h3>
+<p>
+  Both designs rely on the same core principle: an assembly of triangles cannot deform without
+  changing an edge length, so a fully triangulated frame is rigid using only axial (tension/compression)
+  loads in each strut — no bending stiffness is required from the struts themselves. Bell's tetrahedral
+  cells and VINDSNURR's 24 triangular faces both exploit this, just at different scales and for
+  different load cases.
+</p>
+
+<h3>Struts plus hub/joint plus fabric covering</h3>
+<p>
+  Both use the same three-part construction pattern: rigid linear struts (straws / carbon rods),
+  a joint that fixes the angles between struts (knotted string / printed hub), and a lightweight
+  fabric skin attached to a subset of faces to do the actual aerodynamic work (tissue paper for lift,
+  ripstop nylon for drag). Neither design covers every face — the fabric is functional, not structural.
+</p>
+
+<h3>Modularity from a small number of repeated parts</h3>
+<p>
+  Bell's kite scales by adding more identical tetrahedral cells. VINDSNURR achieves a similar
+  fabrication economy differently: instead of one repeating 3D cell, it uses <strong>two hub designs</strong>
+  (apex and ring) and <strong>three rod lengths</strong> to build the entire 14-vertex frame — see the
+  <a href="geometry-comparison.html">geometry comparison</a> page for how this compares to a
+  single-part icosahedron approach.
+</p>
+
+<hr>
+
+<h2>Where the designs differ structurally</h2>
+
+<h3>Modular cells vs. one integrated frame</h3>
+<p>
+  The tetrahedral kite is literally built by assembling small identical cells into a larger structure —
+  the cell <em>is</em> the repeating unit, and the joints between cells are just shared vertices.
+  VINDSNURR's hexagonal bicupola is not decomposed into repeating tetrahedral (or other) cells; it is
+  a single 14-vertex graph with two families of hub joints and three rod-length families. This makes
+  the kite easier to scale arbitrarily (just add more cells) but means VINDSNURR's angles and lengths
+  are fixed by the specific 1000mm rotor geometry — resizing requires recomputing node coordinates and
+  rod vectors (see <a href="https://github.com/mgifford/Hex-Bicup-Rotor/blob/main/AGENTS.md">AGENTS.md</a> §5).
+</p>
+
+<h3>Joint tolerance and load requirements</h3>
+<p>
+  A knotted-string joint is adequate for a kite, where loads are light and joints can flex slightly
+  without consequence. VINDSNURR's printed hub sockets require calibrated tolerances
+  (<code>rod_tol</code>, <code>bearing_tol</code>) because the frame carries continuous rotational
+  and bending loads at a fixed 20mm shaft and 6204-2RS bearing — see
+  <code>3d/hub_test_jig.scad</code> and the <a href="step-by-step.html">assembly guide</a> for the
+  calibration procedure this requires that a kite build does not.
+</p>
+
+<h3>Function of the covering</h3>
+<p>
+  Tissue paper on a kite must be light enough to fly and porous/rigid enough to hold shape under
+  lift — it is not meant to fully seal off airflow. VINDSNURR's ripstop nylon sails are sized and
+  oriented specifically to <em>catch</em> drag-producing airflow on the power stroke and present
+  minimal resistance on the return stroke, per the Savonius operating principle described in the
+  <a href="theory.html">theory page</a>. The kite's covering serves lift and visual identity;
+  VINDSNURR's covering is the primary torque-generating element.
+</p>
+
+<hr>
+
+<h2>Summary</h2>
+
+<p>
+  The tetrahedral kite is a useful, accessible reference for understanding why VINDSNURR's frame is
+  fully triangulated: both designs demonstrate that a strut-and-joint lattice of triangles is rigid
+  without needing rigid joints or bending-resistant struts. Beyond that shared structural principle,
+  the two projects solve different problems — airborne lift-and-tether versus ground-mounted
+  shaft-driven drag rotation — and the engineering requirements diverge accordingly (joint precision,
+  load magnitude, scalability strategy, and the functional role of the fabric covering).
+</p>
+
+<p class="note">
+  This comparison is structural and educational, not a performance or aerodynamic equivalence claim.
+  See the <a href="geometry-comparison.html">geometry comparison</a> page for VINDSNURR's comparison
+  against another wind-turbine design (the GeoWind GW1200 icosahedron rotor), which is the
+  directly comparable analysis for turbine performance questions.
+</p>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <span>VINDSNURR HBR-6-14V · Open source · MIT licence</span>
+  <span><a href="https://github.com/mgifford/Hex-Bicup-Rotor">GitHub repository</a></span>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>
