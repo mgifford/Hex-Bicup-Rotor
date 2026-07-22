@@ -41,12 +41,17 @@ strut_socket_d = strut_d + strut_tol;
 
 // ── Rod directions from hub centre (unit vectors) ───────────────
 // Three sockets symmetric about the vertical axis, spaced 120°
-// apart in azimuth, tilted so every pair is at the tetrahedral
-// vertex angle: arccos(1/3) ≈ 70.53°.
+// apart in azimuth, tilted so every pair is at the true tetrahedral
+// vertex angle: 60° (every face of a regular tetrahedron is
+// equilateral, so the angle between any two edges at a vertex is 60°;
+// arccos(1/3) ≈ 70.53° is the DIHEDRAL angle between two faces sharing
+// an edge, a different quantity — verified numerically against a
+// real unit-edge tetrahedron's coordinates, not just the formula).
+// Polar angle from the central axis: 35.264°.
 socket_dirs = [
-    [ 0.666667,  0.000000, 0.745356],
-    [-0.333333,  0.577350, 0.745356],
-    [-0.333333, -0.577350, 0.745356],
+    [ 0.577350,  0.000000, 0.816497],
+    [-0.288675,  0.500000, 0.816497],
+    [-0.288675, -0.500000, 0.816497],
 ];
 
 // ── Utility: orient socket opening toward a direction vector ────
@@ -94,5 +99,9 @@ kite_corner();
 
 // ── Quick-reference ─────────────────────────────────────────────
 // Strut sockets: 3, each at 6.3mm diameter × 16mm deep (adjust strut_tol if needed)
-// Angle between any two sockets: 70.53° (tetrahedral vertex angle)
-// Print qty: 4 per single tetrahedral cell (one per vertex)
+// Angle between any two sockets: 60° (tetrahedral vertex angle)
+// Use this hub for EXTERIOR vertices — touched by only one cell.
+// For INTERIOR vertices (where two cells meet corner-to-corner), see
+// kite_corner_interior.scad instead — it needs 6 sockets, not 3.
+// Print qty: 4 per single tetrahedral cell (one per vertex), fewer if
+// some vertices in your layout are interior joints using the other hub.

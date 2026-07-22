@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# Validates kite_corner.scad and exports STL + 3MF.
+# Validates the kite corner hub .scad files and exports STL + 3MF.
 #
 # Usage: ./validate_and_export.sh
 #
-# Renders at the file's committed $fn to confirm the geometry is a
+# Renders each file at its committed $fn to confirm the geometry is a
 # manifold solid (non-manifold geometry produces broken/unprintable
 # meshes), then exports STL and 3MF at high resolution ($fn=128)
-# into kite-corners/printable/, without editing the source file.
+# into kite-corners/3d/printable/, without editing the source files.
 #
-# kite-corners/printable/ is committed to the repo so anyone can download
+# kite-corners/3d/printable/ is committed to the repo so anyone can download
 # ready-to-print files directly from GitHub without installing OpenSCAD.
 # Re-run this script after any geometry change to keep those files current.
 #
@@ -20,7 +20,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OUT_DIR="$SCRIPT_DIR/printable"
 OPENSCAD="${OPENSCAD_BIN:-openscad}"
 
-PRINT_FILES=(kite_corner)
+PRINT_FILES=(kite_corner kite_corner_interior)
 
 mkdir -p "$OUT_DIR"
 
