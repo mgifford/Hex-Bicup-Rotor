@@ -198,29 +198,50 @@ the kite carry only itself, the tether, and control-line hardware.
 
 ## Best arrangement of kite elements to support "circular turbine elements"
 
-If the goal is a rotor-like element flying as part of the kite (rather
-than on the ground), the tetrahedral cell structure's own geometry
-suggests where it's structurally sensible to mount one — **not** where it
-would actually work aerodynamically (that's the open question above):
+Alexander Graham Bell's real multi-cell kite arrays (the same photographed
+lattice already cited in [`kite-corners/README.md`](../kite-corners/README.md) —
+a man sitting in a woven seat inside a wall of hundreds of tetrahedral
+cells, not a single kite) are the right visual reference for this
+question: not one tetrahedron, but a large repeating field of them. If the
+goal is rotor-like elements flying as part of that field (rather than on
+the ground), the lattice's own geometry — already verified numerically in
+[`kite-corners/generate_diagram.py`](../kite-corners/generate_diagram.py) —
+tells you exactly where natural mounting points already exist:
 
-- **A ring-shaped rotor could sit around the belt** between the upper and
-  lower rings of a hexagonal-bicupola-style arrangement (borrowing
-  VINDSNURR's own belt/ring geometry concept), using the kite's own
-  interior/triple joints as mounting points, since those are already the
-  most reinforced hubs in the structure (6 or 9 sockets, vs. 3 for an
-  exterior hub).
-- **A single rotor at the kite's central axis**, geometrically similar to
-  how VINDSNURR mounts its shaft through Hub T/Hub B, could reuse that
-  same bearing-and-shaft concept — but would need the whole tetrahedral
-  frame stiffened well beyond the current lightweight preset to resist
-  the gyroscopic and torque loads of a spinning mass in a moving,
-  flexing kite frame, which is a substantial structural redesign, not a
-  parameter tweak.
+![Solarpunk-style illustration of a large multi-cell tetrahedral kite lattice with small VINDSNURR-style rotors nested at the vertical joints between layers, tethered down to a ground station surrounded by greenery](lattice-array.svg)
 
-Both of these are geometry-based placement suggestions only — neither has
-been checked against real aerodynamic or structural loads for a rotating
-mass in flight. Flag this as the single biggest open question in this
-whole exploration if anyone picks it up.
+**Every vertical joint between two layers is already a natural rotor-shaft
+location.** In the 4-layer, 20-cell lattice used throughout this repo, a
+lower layer's apex and the layer above's base corner are literally the
+same physical point (verified by exact coordinate matching, not
+approximation) — there are **19 such vertical joints** (10 between Layer 0
+and 1, 6 between Layer 1 and 2, 3 between Layer 2 and 3), each already a
+reinforced interior or triple hub (6 or 9 sockets, vs. 3 for an exterior
+hub) rather than a fresh mounting point that would need to be engineered
+in. The illustration above places a small rotor icon at every one of
+those 19 real joints, scaled up from the same geometry as the rest of this
+repo, not invented for the picture. Shaft length between layers scales
+directly with strut length — about 400mm per bay at 500mm struts, 800mm at
+1000mm struts.
+
+**This does not mean it would work.** The illustration shows *where* a
+rotor could physically bolt on, using joints the frame already has, and
+nothing about whether the frame could survive a rotor actually spinning
+there:
+
+- Every rotor adds dead weight and a spinning gyroscopic load at a joint
+  the [FLIGHT.md](../kite-corners/FLIGHT.md) weight budget never accounted
+  for — 19 rotors' worth of mass would need to be added back into that
+  budget, and it would push wing loading up significantly, working against
+  the whole point of the lightweight preset.
+- A tetrahedral kite frame flexes in wind. VINDSNURR's own rotor is
+  designed around a fixed, rigid shaft and bearing pair — nothing about
+  its bearing tolerances or hub design assumes the shaft's two ends could
+  be moving relative to each other, which is exactly what happens on a
+  flexing kite frame under load.
+- None of this has been checked against real structural loads for a
+  rotating mass in flight. This remains the single biggest open question
+  in this whole exploration.
 
 ---
 
