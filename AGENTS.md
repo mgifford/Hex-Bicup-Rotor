@@ -11,6 +11,12 @@ self-contained `kite-corners/README.md` and no shared parameters with
 VINDSNURR. Do not merge its geometry, tolerances, or file conventions with
 the rules in this document.
 
+**Also out of scope:** `kite-energy/` is a speculative, unbuilt exploration
+combining the kite with VINDSNURR's rotor concept for airborne wind energy.
+It is explicitly not a build guide — treat any numbers in it as
+order-of-magnitude estimates, not verified specs, and don't propagate them
+into VINDSNURR's own documentation.
+
 ---
 
 ## 1. The single source of truth

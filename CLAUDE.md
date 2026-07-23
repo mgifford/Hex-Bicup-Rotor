@@ -16,6 +16,11 @@ side-project (3D-printed corner hubs for tetrahedral kites) that lives in this
 repo for convenience only. It does not share geometry, parameters, or print
 settings with VINDSNURR — see `kite-corners/README.md`.
 
+**Also not part of this project:** `kite-energy/` is a speculative,
+unbuilt exploration of combining the tetrahedral kite with VINDSNURR's
+rotor concept for airborne wind energy (ground-based generation via a
+pumping cycle). Nothing in it has been prototyped — see `kite-energy/README.md`.
+
 ## File structure
 
 | File | Purpose |

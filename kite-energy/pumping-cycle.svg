@@ -1,0 +1,103 @@
+<svg width="820" height="420" viewBox="0 0 820 420" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" role="img"
+     aria-label="Two-phase pumping cycle: in the power phase the kite flies crosswind at a high angle, pulling the tether out under high tension to drive the generator; in the retraction phase the kite is depowered and reeled back in using a small fraction of the energy just generated.">
+  <title>Pumping-cycle power generation, two phases</title>
+  <style>
+    svg { background: #fafaf5; }
+    .panel-bg { fill: #eeece4; stroke: #d8d5cb; stroke-width: 1; }
+    .kite-strut { stroke: #2c2c2a; stroke-width: 1.4; fill: none; }
+    .kite-face { fill: #4f8fd6; fill-opacity: 0.55; stroke: none; }
+    .kite-face-alt { fill: #2fa87d; fill-opacity: 0.55; stroke: none; }
+    .tether-high { stroke: #7a221c; stroke-width: 3; fill: none; }
+    .tether-low { stroke: #7a221c; stroke-width: 1.4; stroke-dasharray: 5 4; fill: none; }
+    .path-arc { stroke: #5f5e5a; stroke-width: 1.4; fill: none; stroke-dasharray: 3 3; }
+    .ground-station { fill: #e8e4d8; stroke: #8a8570; stroke-width: 1.5; }
+    .rotor-shaft { stroke: #2c2c2a; stroke-width: 2; }
+    .label-bold { font-size: 15px; fill: #2c2c2a; font-weight: 700; }
+    .label { font-size: 12.5px; fill: #2c2c2a; }
+    .callout { font-size: 11.5px; fill: #5f5e5a; }
+    @media (prefers-color-scheme: dark) {
+      svg { background: #1a1a18; }
+      .panel-bg { fill: #232320; stroke: #35342f; }
+      .kite-strut { stroke: #e8e7e1; }
+      .path-arc { stroke: #a8a79f; }
+      .ground-station { fill: #2e2e2b; stroke: #55503f; }
+      .rotor-shaft { stroke: #e8e7e1; }
+      .label-bold { fill: #e8e7e1; }
+      .label { fill: #e8e7e1; }
+      .callout { fill: #a8a79f; }
+    }
+  </style>
+
+  <!-- LEFT PANEL: power phase -->
+  <g>
+    <rect class="panel-bg" x="20" y="20" width="380" height="380" rx="8"/>
+    <text class="label-bold" x="210" y="46" text-anchor="middle">1. Power phase (reel-out)</text>
+
+    <!-- crosswind arc path -->
+    <path class="path-arc" d="M 100,140 Q 210,80 320,140 Q 210,200 100,140"/>
+
+    <!-- kite at high angle, far out -->
+    <g transform="translate(320,130) scale(0.8)">
+      <polygon class="kite-face" points="-30,26 30,26 0,-30"/>
+      <polygon class="kite-face-alt" points="0,-30 30,26 18,38"/>
+      <path class="kite-strut" d="M-30,26 L30,26 L0,-30 Z M-30,26 L18,38 M30,26 L18,38 M0,-30 L18,38"/>
+    </g>
+
+    <!-- taut tether, high tension -->
+    <path class="tether-high" d="M320,150 C 300,220 260,280 220,340"/>
+    <text class="callout" x="330" y="230">high tension</text>
+
+    <!-- ground station, winch reeling OUT -->
+    <g transform="translate(150,340)">
+      <rect class="ground-station" x="0" y="0" width="140" height="60" rx="6"/>
+      <circle cx="35" cy="30" r="18" fill="none" class="rotor-shaft"/>
+      <circle cx="35" cy="30" r="5" fill="#2c2c2a"/>
+      <path d="M35,12 A18,18 0 0 1 51,22" stroke="#2f9e44" stroke-width="2" fill="none" marker-end="url(#arrowgreen)"/>
+    </g>
+    <text class="label" x="220" y="380">Winch spins → drives generator</text>
+
+    <text class="callout" x="210" y="65" text-anchor="middle">Kite flown crosswind at a high</text>
+    <text class="callout" x="210" y="79" text-anchor="middle">angle — maximum pull, tether</text>
+    <text class="callout" x="210" y="93" text-anchor="middle">reels out, generator makes power</text>
+  </g>
+
+  <!-- RIGHT PANEL: retraction phase -->
+  <g>
+    <rect class="panel-bg" x="420" y="20" width="380" height="380" rx="8"/>
+    <text class="label-bold" x="610" y="46" text-anchor="middle">2. Retraction phase (reel-in)</text>
+
+    <!-- kite depowered, edge-on, closer in -->
+    <g transform="translate(610,120) scale(0.55) rotate(20)">
+      <polygon class="kite-face" points="-30,26 30,26 0,-30"/>
+      <polygon class="kite-face-alt" points="0,-30 30,26 18,38"/>
+      <path class="kite-strut" d="M-30,26 L30,26 L0,-30 Z M-30,26 L18,38 M30,26 L18,38 M0,-30 L18,38"/>
+    </g>
+
+    <!-- slack-ish tether, low tension -->
+    <path class="tether-low" d="M610,145 C 605,220 600,280 600,340"/>
+    <text class="callout" x="640" y="230">low tension</text>
+
+    <!-- ground station, winch reeling IN -->
+    <g transform="translate(530,340)">
+      <rect class="ground-station" x="0" y="0" width="140" height="60" rx="6"/>
+      <circle cx="35" cy="30" r="18" fill="none" class="rotor-shaft"/>
+      <circle cx="35" cy="30" r="5" fill="#2c2c2a"/>
+      <path d="M51,38 A18,18 0 0 1 35,48" stroke="#d6473c" stroke-width="2" fill="none" marker-end="url(#arrowred)"/>
+    </g>
+    <text class="label" x="590" y="380">Small motor reels tether in</text>
+
+    <text class="callout" x="610" y="65" text-anchor="middle">Kite pitched edge-on to the wind —</text>
+    <text class="callout" x="610" y="79" text-anchor="middle">pull nearly vanishes, tether reels back</text>
+    <text class="callout" x="610" y="93" text-anchor="middle">in using only a small fraction of</text>
+    <text class="callout" x="610" y="107" text-anchor="middle">the energy just generated</text>
+  </g>
+
+  <defs>
+    <marker id="arrowgreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <polygon points="0,0 7,3 0,6" fill="#2f9e44"/>
+    </marker>
+    <marker id="arrowred" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <polygon points="0,0 7,3 0,6" fill="#d6473c"/>
+    </marker>
+  </defs>
+</svg>

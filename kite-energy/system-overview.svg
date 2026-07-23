@@ -1,0 +1,98 @@
+<svg width="820" height="560" viewBox="0 0 820 560" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" role="img"
+     aria-label="System diagram: a tetrahedral kite flies aloft in strong wind, pulling a tether that reels out through a ground-based winch and generator, inspired by VINDSNURR's rotor as the ground station's auxiliary turbine.">
+  <title>Ground-generation airborne wind energy concept</title>
+  <style>
+    svg { background: #fafaf5; }
+    .sky { fill: #cfe3f5; }
+    .ground { fill: #cdbf9a; }
+    .wind-arrow { stroke: #5f5e5a; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    .kite-strut { stroke: #2c2c2a; stroke-width: 1.6; fill: none; }
+    .kite-face { fill: #4f8fd6; fill-opacity: 0.55; stroke: none; }
+    .kite-face-alt { fill: #2fa87d; fill-opacity: 0.55; stroke: none; }
+    .tether { stroke: #7a221c; stroke-width: 2; stroke-dasharray: 6 4; fill: none; }
+    .ground-station { fill: #e8e4d8; stroke: #8a8570; stroke-width: 1.5; }
+    .rotor-shaft { stroke: #2c2c2a; stroke-width: 2; }
+    .rotor-blade { fill: #85b7eb; fill-opacity: 0.7; stroke: #2c2c2a; stroke-width: 1; }
+    .label { font-size: 13px; fill: #2c2c2a; }
+    .label-bold { font-size: 14px; fill: #2c2c2a; font-weight: 700; }
+    .callout { font-size: 12px; fill: #5f5e5a; }
+    @media (prefers-color-scheme: dark) {
+      svg { background: #1a1a18; }
+      .sky { fill: #223244; }
+      .ground { fill: #3d3626; }
+      .wind-arrow { stroke: #c7c7c2; }
+      .kite-strut { stroke: #e8e7e1; }
+      .tether { stroke: #e8830a; }
+      .ground-station { fill: #2e2e2b; stroke: #55503f; }
+      .rotor-shaft { stroke: #e8e7e1; }
+      .label { fill: #e8e7e1; }
+      .label-bold { fill: #e8e7e1; }
+      .callout { fill: #a8a79f; }
+    }
+  </style>
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto">
+      <polygon points="0,0 10,4 0,8" fill="#5f5e5a"/>
+    </marker>
+  </defs>
+
+  <!-- sky / ground backdrop -->
+  <rect class="sky" x="0" y="0" width="820" height="400"/>
+  <rect class="ground" x="0" y="400" width="820" height="160"/>
+
+  <!-- wind arrows -->
+  <path class="wind-arrow" d="M40,90 L110,90"/>
+  <path class="wind-arrow" d="M40,140 L110,140"/>
+  <path class="wind-arrow" d="M40,190 L110,190"/>
+  <text class="callout" x="20" y="70">Strong, steady</text>
+  <text class="callout" x="20" y="84">high-altitude wind</text>
+
+  <!-- tetrahedral kite (simple single-cell schematic, high altitude) -->
+  <g transform="translate(430,90)">
+    <polygon class="kite-face" points="-70,60 70,60 0,-70"/>
+    <polygon class="kite-face-alt" points="0,-70 70,60 40,90"/>
+    <path class="kite-strut" d="M-70,60 L70,60 L0,-70 Z M-70,60 L40,90 M70,60 L40,90 M0,-70 L40,90"/>
+    <circle cx="-70" cy="60" r="4" fill="#d6473c" stroke="#7a221c"/>
+    <circle cx="70" cy="60" r="4" fill="#d6473c" stroke="#7a221c"/>
+    <circle cx="0" cy="-70" r="4" fill="#d6473c" stroke="#7a221c"/>
+    <circle cx="40" cy="90" r="4" fill="#d6473c" stroke="#7a221c"/>
+  </g>
+  <text class="label-bold" x="580" y="70" text-anchor="middle">Tetrahedral kite</text>
+  <text class="callout" x="580" y="87" text-anchor="middle">(kite-corners/ frame,</text>
+  <text class="callout" x="580" y="102" text-anchor="middle">many cells, sail-covered)</text>
+
+  <!-- tether from kite attachment point down to ground winch -->
+  <path class="tether" d="M470,180 C 460,260 440,340 420,400"/>
+  <text class="label" x="500" y="290">Tether reels out</text>
+  <text class="label" x="500" y="306">under load —</text>
+  <text class="label" x="500" y="322">drives the winch</text>
+  <text class="label" x="500" y="338">below as a generator</text>
+
+  <!-- ground station -->
+  <g transform="translate(280,404)">
+    <rect class="ground-station" x="0" y="0" width="280" height="110" rx="6"/>
+    <text class="label-bold" x="140" y="20" text-anchor="middle">Ground station</text>
+
+    <!-- winch drum -->
+    <circle cx="60" cy="65" r="22" fill="none" class="rotor-shaft"/>
+    <circle cx="60" cy="65" r="6" fill="#2c2c2a"/>
+    <text class="callout" x="60" y="100" text-anchor="middle">Winch drum</text>
+
+    <!-- generator + VINDSNURR-inspired auxiliary rotor -->
+    <g transform="translate(200,55)">
+      <line x1="0" y1="-22" x2="0" y2="22" class="rotor-shaft"/>
+      <ellipse class="rotor-blade" cx="0" cy="-14" rx="16" ry="6"/>
+      <ellipse class="rotor-blade" cx="0" cy="14" rx="16" ry="6" transform="rotate(60 0 14)"/>
+      <ellipse class="rotor-blade" cx="0" cy="0" rx="16" ry="6" transform="rotate(-60 0 0)"/>
+    </g>
+    <text class="callout" x="200" y="100" text-anchor="middle">Generator (VINDSNURR-inspired)</text>
+  </g>
+
+  <!-- power output line -->
+  <path class="wind-arrow" d="M570,459 L620,459" stroke="#2f9e44"/>
+  <text class="label" x="625" y="464" fill="#2f9e44">Electricity out</text>
+
+  <text class="callout" x="410" y="545" text-anchor="middle">
+    Schematic — not to scale. See kite-energy/README.md for the physics and open questions.
+  </text>
+</svg>

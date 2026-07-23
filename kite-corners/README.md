@@ -10,6 +10,11 @@ tolerances, or print settings between this directory and `../3d/`.
 where to attach the line, how strong it needs to be, whether your build is
 light enough, and wind/launch guidance.
 
+**Curious whether this kite could generate electricity?** See
+[`../kite-energy/`](../kite-energy/) for a speculative exploration of
+combining this kite with VINDSNURR's rotor concept — ground-based power
+generation via a pumping cycle, not an airborne VINDSNURR rotor.
+
 ---
 
 ## What this is
