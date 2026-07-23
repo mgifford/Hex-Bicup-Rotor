@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kite + Wind Energy — VINDSNURR</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-logo" href="index.html">VIND<span>SNURR</span></a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="index.html">Overview</a>
+    <a href="viz.html">3D Visualizer</a>
+    <a href="step-by-step.html">Assembly Guide</a>
+    <a href="theory.html">Theory</a>
+    <a href="geometry-comparison.html">Geometry</a>
+    <a href="generator.html">Generator</a>
+    <a href="support-frame.html">Support Frame</a>
+    <a href="kite-comparison.html">Kite Comparison</a>
+    <a href="kite-energy.html" aria-current="page">Kite + Energy</a>
+  </nav>
+  <button id="theme-toggle" aria-label="Switch to dark mode">
+    <svg aria-hidden="true" class="sun-icon" viewBox="0 0 24 24" width="18" height="18">
+      <circle cx="12" cy="12" r="5" fill="currentColor"/>
+      <path fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+    </svg>
+    <svg aria-hidden="true" class="moon-icon" viewBox="0 0 24 24" width="18" height="18">
+      <path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+</header>
+
+<main class="page">
+<div class="prose">
+
+<h1>Kite + VINDSNURR: An Exploratory Combination</h1>
+<p style="color:var(--text-faint);font-size:13px;">A speculative exploration combining the tetrahedral kite with VINDSNURR's rotor concept for airborne wind energy</p>
+
+<blockquote>
+  <strong>This is a speculative exploration, not a build guide.</strong> Nothing here has
+  been prototyped, and several open questions are flagged explicitly rather
+  than answered. It combines two existing, separately-real ideas in this
+  repository — the <a href="https://github.com/mgifford/Hex-Bicup-Rotor/tree/main/kite-corners">kite-corners</a> tetrahedral kite and
+  VINDSNURR's rotor concept — into a third idea neither one implies on its
+  own: could a tetrahedral kite structure, flown on a long tether, generate
+  usable electricity?
+</blockquote>
+
+<p>
+  <strong>Short answer: yes, in principle, via a real and already-existing
+  approach called Airborne Wind Energy (AWE) — but not by putting VINDSNURR's
+  actual rotor in the air.</strong> The physically coherent version keeps
+  generation on the ground.
+</p>
+
+<hr>
+
+<h2>Two ways to combine "kite" and "power," and why only one fits</h2>
+
+<p>There are two genuinely different architectures in real AWE research:</p>
+
+<ol>
+  <li><strong>Ground-generation (pumping kite)</strong> — the kite flies and pulls the
+    tether; a ground-based winch/generator converts tether tension and
+    reel-out speed into electricity. This is how SkySails, Kitepower, and
+    most current AWE systems work.</li>
+  <li><strong>Fly-generation (airborne turbine)</strong> — small turbines mounted <em>on</em> the
+    flying structure generate power in the air, sent down an electrical
+    (not just mechanical) tether. This is how Google's Makani worked — but
+    Makani used a rigid wing with lift-type propeller/turbines, not a soft
+    cellular kite with a drag-type rotor.</li>
+</ol>
+
+<p>
+  VINDSNURR is a <strong>ground-mounted, drag-type Savonius-style rotor</strong> — heavy
+  and bulky relative to its swept area compared to the lift-type rotors
+  real fly-gen systems use, and it isn't designed to fly at all. Putting an
+  actual VINDSNURR rotor airborne would mean redesigning it from scratch as
+  a lightweight lift-type turbine — a different project. <strong>This exploration
+  uses architecture 1</strong>: the tetrahedral kite flies, a ground station
+  (inspired by VINDSNURR's rotor, but not VINDSNURR itself) generates the
+  power.
+</p>
+
+<p style="font-size:13px;color:var(--text-faint);">
+  Sources for how real systems work: <a href="https://arxiv.org/pdf/1409.3083">arXiv: Flight control of tethered kites in autonomous pumping cycles</a>, <a href="https://knowablemagazine.org/content/article/technology/2022/could-high-flying-kites-power-your-home">Knowable Magazine: Could high-flying kites power your home?</a>, <a href="https://spectrum.ieee.org/micro-wind-power-kitepower">IEEE Spectrum: Flying Kites Deliver Container-Size Power Generation</a>, <a href="https://www.tudelft.nl/en/2020/lr/13-years-of-makani-airborne-wind-energy-knowledge-available-open-source">TU Delft: 13 years of Makani airborne wind energy knowledge</a>.
+</p>
+
+<svg width="820" height="560" viewBox="0 0 820 560" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" role="img"
+     aria-label="System diagram: a tetrahedral kite flies aloft in strong wind, pulling a tether that reels out through a ground-based winch and generator, inspired by VINDSNURR's rotor as the ground station's auxiliary turbine.">
+  <title>Ground-generation airborne wind energy concept</title>
+  <style>
+    .sov-sky { fill: #cfe3f5; }
+    .sov-ground { fill: #cdbf9a; }
+    .sov-wind-arrow { stroke: var(--text-muted); stroke-width: 2; fill: none; marker-end: url(#sov-arrowhead); }
+    .sov-kite-strut { stroke: var(--text-main); stroke-width: 1.6; fill: none; }
+    .sov-kite-face { fill: #4f8fd6; fill-opacity: 0.55; stroke: none; }
+    .sov-kite-face-alt { fill: #2fa87d; fill-opacity: 0.55; stroke: none; }
+    .sov-tether { stroke: #7a221c; stroke-width: 2; stroke-dasharray: 6 4; fill: none; }
+    .sov-ground-station { fill: var(--bg-code); stroke: #8a8570; stroke-width: 1.5; }
+    .sov-rotor-shaft { stroke: var(--text-main); stroke-width: 2; }
+    .sov-rotor-blade { fill: #85b7eb; fill-opacity: 0.7; stroke: var(--text-main); stroke-width: 1; }
+    .sov-label { font-size: 13px; fill: var(--text-main); }
+    .sov-label-bold { font-size: 14px; fill: var(--text-main); font-weight: 700; }
+    .sov-callout { font-size: 12px; fill: var(--text-muted); }
+    [data-theme="dark"] .sov-sky { fill: #223244; }
+    [data-theme="dark"] .sov-ground { fill: #3d3626; }
+    [data-theme="dark"] .sov-tether { stroke: #e8830a; }
+    [data-theme="dark"] .sov-ground-station { stroke: #55503f; }
+  </style>
+  <defs>
+    <marker id="sov-arrowhead" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto">
+      <polygon points="0,0 10,4 0,8" fill="var(--text-muted)"/>
+    </marker>
+  </defs>
+
+  <!-- sky / ground backdrop -->
+  <rect class="sov-sky" x="0" y="0" width="820" height="400"/>
+  <rect class="sov-ground" x="0" y="400" width="820" height="160"/>
+
+  <!-- wind arrows -->
+  <path class="sov-wind-arrow" d="M40,90 L110,90"/>
+  <path class="sov-wind-arrow" d="M40,140 L110,140"/>
+  <path class="sov-wind-arrow" d="M40,190 L110,190"/>
+  <text class="sov-callout" x="20" y="70">Strong, steady</text>
+  <text class="sov-callout" x="20" y="84">high-altitude wind</text>
+
+  <!-- tetrahedral kite (simple single-cell schematic, high altitude) -->
+  <g transform="translate(430,90)">
+    <polygon class="sov-kite-face" points="-70,60 70,60 0,-70"/>
+    <polygon class="sov-kite-face-alt" points="0,-70 70,60 40,90"/>
+    <path class="sov-kite-strut" d="M-70,60 L70,60 L0,-70 Z M-70,60 L40,90 M70,60 L40,90 M0,-70 L40,90"/>
+    <circle cx="-70" cy="60" r="4" fill="#d6473c" stroke="#7a221c"/>
+    <circle cx="70" cy="60" r="4" fill="#d6473c" stroke="#7a221c"/>
+    <circle cx="0" cy="-70" r="4" fill="#d6473c" stroke="#7a221c"/>
+    <circle cx="40" cy="90" r="4" fill="#d6473c" stroke="#7a221c"/>
+  </g>
+  <text class="sov-label-bold" x="580" y="70" text-anchor="middle">Tetrahedral kite</text>
+  <text class="sov-callout" x="580" y="87" text-anchor="middle">(kite-corners/ frame,</text>
+  <text class="sov-callout" x="580" y="102" text-anchor="middle">many cells, sail-covered)</text>
+
+  <!-- tether from kite attachment point down to ground winch -->
+  <path class="sov-tether" d="M470,180 C 460,260 440,340 420,400"/>
+  <text class="sov-label" x="500" y="290">Tether reels out</text>
+  <text class="sov-label" x="500" y="306">under load —</text>
+  <text class="sov-label" x="500" y="322">drives the winch</text>
+  <text class="sov-label" x="500" y="338">below as a generator</text>
+
+  <!-- ground station -->
+  <g transform="translate(280,404)">
+    <rect class="sov-ground-station" x="0" y="0" width="280" height="110" rx="6"/>
+    <text class="sov-label-bold" x="140" y="20" text-anchor="middle">Ground station</text>
+
+    <!-- winch drum -->
+    <circle cx="60" cy="65" r="22" fill="none" class="sov-rotor-shaft"/>
+    <circle cx="60" cy="65" r="6" fill="var(--text-main)"/>
+    <text class="sov-callout" x="60" y="100" text-anchor="middle">Winch drum</text>
+
+    <!-- generator + VINDSNURR-inspired auxiliary rotor -->
+    <g transform="translate(200,55)">
+      <line x1="0" y1="-22" x2="0" y2="22" class="sov-rotor-shaft"/>
+      <ellipse class="sov-rotor-blade" cx="0" cy="-14" rx="16" ry="6"/>
+      <ellipse class="sov-rotor-blade" cx="0" cy="14" rx="16" ry="6" transform="rotate(60 0 14)"/>
+      <ellipse class="sov-rotor-blade" cx="0" cy="0" rx="16" ry="6" transform="rotate(-60 0 0)"/>
+    </g>
+    <text class="sov-callout" x="200" y="100" text-anchor="middle">Generator (VINDSNURR-inspired)</text>
+  </g>
+
+  <!-- power output line -->
+  <path class="sov-wind-arrow" d="M570,459 L620,459" stroke="#2f9e44"/>
+  <text class="sov-label" x="625" y="464" fill="#2f9e44">Electricity out</text>
+
+  <text class="sov-callout" x="410" y="545" text-anchor="middle">
+    Schematic — not to scale. See kite-energy/README.md for the physics and open questions.
+  </text>
+</svg>
+
+<hr>
+
+<h2>How it would actually generate power: the pumping cycle</h2>
+
+<svg width="820" height="420" viewBox="0 0 820 420" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" role="img"
+     aria-label="Two-phase pumping cycle: in the power phase the kite flies crosswind at a high angle, pulling the tether out under high tension to drive the generator; in the retraction phase the kite is depowered and reeled back in using a small fraction of the energy just generated.">
+  <title>Pumping-cycle power generation, two phases</title>
+  <style>
+    .pc-panel-bg { fill: var(--bg-code); stroke: var(--border); stroke-width: 1; }
+    .pc-kite-strut { stroke: var(--text-main); stroke-width: 1.4; fill: none; }
+    .pc-kite-face { fill: #4f8fd6; fill-opacity: 0.55; stroke: none; }
+    .pc-kite-face-alt { fill: #2fa87d; fill-opacity: 0.55; stroke: none; }
+    .pc-tether-high { stroke: #7a221c; stroke-width: 3; fill: none; }
+    .pc-tether-low { stroke: #7a221c; stroke-width: 1.4; stroke-dasharray: 5 4; fill: none; }
+    .pc-path-arc { stroke: var(--text-muted); stroke-width: 1.4; fill: none; stroke-dasharray: 3 3; }
+    .pc-ground-station { fill: var(--bg-code); stroke: #8a8570; stroke-width: 1.5; }
+    .pc-rotor-shaft { stroke: var(--text-main); stroke-width: 2; }
+    .pc-label-bold { font-size: 15px; fill: var(--text-main); font-weight: 700; }
+    .pc-label { font-size: 12.5px; fill: var(--text-main); }
+    .pc-callout { font-size: 11.5px; fill: var(--text-muted); }
+    [data-theme="dark"] .pc-panel-bg { stroke: #35342f; }
+    [data-theme="dark"] .pc-ground-station { stroke: #55503f; }
+  </style>
+
+  <!-- LEFT PANEL: power phase -->
+  <g>
+    <rect class="pc-panel-bg" x="20" y="20" width="380" height="380" rx="8"/>
+    <text class="pc-label-bold" x="210" y="46" text-anchor="middle">1. Power phase (reel-out)</text>
+
+    <!-- crosswind arc path -->
+    <path class="pc-path-arc" d="M 100,140 Q 210,80 320,140 Q 210,200 100,140"/>
+
+    <!-- kite at high angle, far out -->
+    <g transform="translate(320,130) scale(0.8)">
+      <polygon class="pc-kite-face" points="-30,26 30,26 0,-30"/>
+      <polygon class="pc-kite-face-alt" points="0,-30 30,26 18,38"/>
+      <path class="pc-kite-strut" d="M-30,26 L30,26 L0,-30 Z M-30,26 L18,38 M30,26 L18,38 M0,-30 L18,38"/>
+    </g>
+
+    <!-- taut tether, high tension -->
+    <path class="pc-tether-high" d="M320,150 C 300,220 260,280 220,340"/>
+    <text class="pc-callout" x="330" y="230">high tension</text>
+
+    <!-- ground station, winch reeling OUT -->
+    <g transform="translate(150,340)">
+      <rect class="pc-ground-station" x="0" y="0" width="140" height="60" rx="6"/>
+      <circle cx="35" cy="30" r="18" fill="none" class="pc-rotor-shaft"/>
+      <circle cx="35" cy="30" r="5" fill="var(--text-main)"/>
+      <path d="M35,12 A18,18 0 0 1 51,22" stroke="#2f9e44" stroke-width="2" fill="none" marker-end="url(#pc-arrowgreen)"/>
+    </g>
+    <text class="pc-label" x="220" y="380">Winch spins → drives generator</text>
+
+    <text class="pc-callout" x="210" y="65" text-anchor="middle">Kite flown crosswind at a high</text>
+    <text class="pc-callout" x="210" y="79" text-anchor="middle">angle — maximum pull, tether</text>
+    <text class="pc-callout" x="210" y="93" text-anchor="middle">reels out, generator makes power</text>
+  </g>
+
+  <!-- RIGHT PANEL: retraction phase -->
+  <g>
+    <rect class="pc-panel-bg" x="420" y="20" width="380" height="380" rx="8"/>
+    <text class="pc-label-bold" x="610" y="46" text-anchor="middle">2. Retraction phase (reel-in)</text>
+
+    <!-- kite depowered, edge-on, closer in -->
+    <g transform="translate(610,120) scale(0.55) rotate(20)">
+      <polygon class="pc-kite-face" points="-30,26 30,26 0,-30"/>
+      <polygon class="pc-kite-face-alt" points="0,-30 30,26 18,38"/>
+      <path class="pc-kite-strut" d="M-30,26 L30,26 L0,-30 Z M-30,26 L18,38 M30,26 L18,38 M0,-30 L18,38"/>
+    </g>
+
+    <!-- slack-ish tether, low tension -->
+    <path class="pc-tether-low" d="M610,145 C 605,220 600,280 600,340"/>
+    <text class="pc-callout" x="640" y="230">low tension</text>
+
+    <!-- ground station, winch reeling IN -->
+    <g transform="translate(530,340)">
+      <rect class="pc-ground-station" x="0" y="0" width="140" height="60" rx="6"/>
+      <circle cx="35" cy="30" r="18" fill="none" class="pc-rotor-shaft"/>
+      <circle cx="35" cy="30" r="5" fill="var(--text-main)"/>
+      <path d="M51,38 A18,18 0 0 1 35,48" stroke="#d6473c" stroke-width="2" fill="none" marker-end="url(#pc-arrowred)"/>
+    </g>
+    <text class="pc-label" x="590" y="380">Small motor reels tether in</text>
+
+    <text class="pc-callout" x="610" y="65" text-anchor="middle">Kite pitched edge-on to the wind —</text>
+    <text class="pc-callout" x="610" y="79" text-anchor="middle">pull nearly vanishes, tether reels back</text>
+    <text class="pc-callout" x="610" y="93" text-anchor="middle">in using only a small fraction of</text>
+    <text class="pc-callout" x="610" y="107" text-anchor="middle">the energy just generated</text>
+  </g>
+
+  <defs>
+    <marker id="pc-arrowgreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <polygon points="0,0 7,3 0,6" fill="#2f9e44"/>
+    </marker>
+    <marker id="pc-arrowred" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <polygon points="0,0 7,3 0,6" fill="#d6473c"/>
+    </marker>
+  </defs>
+</svg>
+
+<ol>
+  <li><strong>Power phase</strong> — the kite is flown crosswind (a figure-eight or
+    circular path), which multiplies the apparent wind speed the kite
+    experiences far beyond the actual wind speed. This pulls the tether out
+    under high tension, spinning the ground-station winch, which drives a
+    generator.</li>
+  <li><strong>Retraction phase</strong> — the kite is pitched edge-on to the wind (using
+    its bridle, if it has one — see "Steering" below), collapsing the pull
+    to nearly zero, and a small motor reels the tether back in using only a
+    fraction of the energy just generated.</li>
+</ol>
+
+<p>
+  Net power = energy generated in phase 1 minus energy spent in phase 2.
+  This is exactly how real systems like Kitepower's Falcon work.
+</p>
+
+<hr>
+
+<h2>Raising and lowering: launch, altitude, and recovery</h2>
+
+<p>
+  <strong>Launch is passive, wind-lofted — the same 2-person launch already in
+  <a href="https://github.com/mgifford/Hex-Bicup-Rotor/blob/main/kite-corners/FLIGHT.md">kite-corners/FLIGHT.md</a></strong>, not a powered
+  vertical takeoff. A soft cellular kite has no onboard motors; adding them
+  (as Makani did, with propellers that doubled as turbines) would mean a
+  fundamentally different, rigid, motorized airframe — a different project,
+  not a variant of this one.
+</p>
+
+<p>
+  <strong>Raising to altitude:</strong> once airborne, gaining height is simply reeling
+  out more tether while the kite holds a stable flying angle — no different
+  in principle from flying any kite higher.
+</p>
+
+<p>
+  <strong>Lowering:</strong> reduce the tether angle while depowering (pitch the kite
+  more edge-on to the wind, the same mechanism as the retraction phase
+  above), then winch down under reduced tension. Never winch down a
+  fully-powered kite under full load — that's how lines snap or ground
+  crews get hurt.
+</p>
+
+<h3>Why altitude actually matters here — this part is real, published science</h3>
+
+<p>
+  Wind speed increases with height following the atmospheric boundary-layer
+  power law, and wind <em>power</em> scales with the <strong>cube</strong> of wind speed, so the
+  gains compound fast:
+</p>
+
+<table>
+  <thead><tr><th>Height</th><th>Wind speed (vs. 10m reference)</th><th>Power density (vs. 10m reference)</th></tr></thead>
+  <tbody>
+    <tr><td>10m</td><td>1.00x</td><td>1.00x</td></tr>
+    <tr><td>50m</td><td>1.29x</td><td>2.17x</td></tr>
+    <tr><td>100m</td><td>1.45x</td><td>3.02x</td></tr>
+    <tr><td>200m</td><td>1.61x</td><td>4.21x</td></tr>
+    <tr><td>500m</td><td>1.87x</td><td>6.54x</td></tr>
+    <tr><td>1000m</td><td>2.09x</td><td>9.12x</td></tr>
+  </tbody>
+</table>
+
+<p>
+  (Standard power-law wind profile, shear exponent 0.16 for open terrain —
+  a widely used estimate, not measured for any specific site.) This is
+  the core motivation for AWE generally: a kite at a few hundred meters can
+  access meaningfully stronger, steadier wind than a ground-mounted turbine
+  of any practical height, including VINDSNURR's own support-frame mast.
+</p>
+
+<hr>
+
+<h2>Steering, height, and direction control — a real limitation of this design</h2>
+
+<p>
+  <strong>As designed, this kite has no steering.</strong> <a href="https://github.com/mgifford/Hex-Bicup-Rotor/blob/main/kite-corners/README.md">kite-corners/README.md</a>'s
+  assembly guide attaches the flight line to a single exterior hub — a
+  classic single-line kite, which holds a stable angle in the wind but
+  cannot be actively steered into a crosswind figure-eight path. Real
+  power-generating kites use <strong>multi-line bridles</strong> — typically 2-4 lines to
+  different attachment points, with asymmetric pulling for steering
+  (left/right) and symmetric pulling for depower (collapsing pull to nearly
+  zero for the retraction phase).
+</p>
+
+<p>To actually fly the pumping cycle described above, this design would need:</p>
+
+<ul>
+  <li><strong>At least 2 additional lines</strong> to other exterior hubs (front-left and
+    front-right corners, alongside the current single attachment point),
+    so pulling one vs. the other steers the kite</li>
+  <li><strong>A ground-side control mechanism</strong> (either a human "kite-steering bar"
+    like sport kiteboarding, or a small powered actuator system for
+    autonomous flight, as real AWE systems use)</li>
+  <li>Height/direction in flight is then a function of steering input plus
+    reel speed, not a separate control — same as any modern sport kite</li>
+</ul>
+
+<p>
+  This is a real, unaddressed gap between the current single-line assembly
+  guide and what a genuine power-generating version would need. It's a
+  natural next step for this exploration, not solved here.
+</p>
+
+<hr>
+
+<h2>Gusts, tether tension, and why single-line is a real weakness</h2>
+
+<p>
+  Tether tension responds to gusts differently depending on tether length
+  and whether the kite can depower:
+</p>
+
+<ul>
+  <li><strong>A longer tether</strong> generally has more line stretch to absorb a sudden
+    gust (more compliance = lower peak tension spike), but reacts more
+    slowly to control inputs, since it takes longer for a steering pull at
+    the ground to reach and reorient the kite.</li>
+  <li><strong>A shorter, tauter tether</strong> transmits gust spikes more directly and
+    sharply into the structure, but responds faster to steering.</li>
+  <li><strong>A depower-capable (multi-line) kite</strong> can actively "spill" a gust —
+    pull the depower line to reduce the angle of attack the instant tension
+    spikes — which is exactly why real AWE kites are never single-line.</li>
+</ul>
+
+<p>
+  <strong>Our single-line design has no active gust response at all.</strong> A gust
+  simply increases tension on the one line and loads the one exterior
+  attachment hub directly, with no mechanism to shed it except line stretch
+  and structural margin. This is consistent with the wind-range ceiling
+  already recommended in FLIGHT.md (avoid above ~28-30 km/h) — that ceiling
+  is doing double duty as a crude gust-safety margin in the absence of any
+  real depower control.
+</p>
+
+<hr>
+
+<h2>Could a man-carrying-scale kite also carry wind-turbine hardware?</h2>
+
+<p>
+  Bell's real 1907 Cygnet-series kite (documented history, already cited in
+  <a href="https://github.com/mgifford/Hex-Bicup-Rotor/blob/main/kite-corners/README.md">kite-corners/README.md</a>) weighed about 90kg
+  and carried a person of comparable weight — its structure carried roughly
+  its own mass again as payload. That's a real, achieved data point, not a
+  guess.
+</p>
+
+<p>
+  For our design, scaling the lightweight-preset numbers from FLIGHT.md to
+  a genuinely large kite:
+</p>
+
+<table>
+  <thead><tr><th>Base width</th><th>Structure mass (lightweight preset)</th><th>Sail area</th></tr></thead>
+  <tbody>
+    <tr><td>4m</td><td>~1.3 kg</td><td>13.9 m²</td></tr>
+    <tr><td>8m</td><td>~3.8 kg</td><td>55.4 m²</td></tr>
+    <tr><td>12m</td><td>~7.6 kg</td><td>124.7 m²</td></tr>
+  </tbody>
+</table>
+
+<p>
+  <strong>Important caveat:</strong> the "payload budget" numbers in earlier drafts of
+  this kind of estimate conflate <em>tether pull force</em> (from the crosswind
+  power formula) with <em>sustained lift capacity for carrying dead weight</em> —
+  those are not the same calculation, and this document does not have a
+  trustworthy answer for how much stationary weight this kite shape could
+  actually carry aloft. A tetrahedral cellular kite is not an airfoil in the
+  aeronautical sense (it has no real angle-of-attack-driven lift like a
+  wing); its aerodynamic force is closer to a large, efficient drag sail. A
+  genuine "how much can it carry" answer needs real lift/drag wind-tunnel
+  or CFD data for this specific cell geometry — treat any number here as
+  unverified.
+</p>
+
+<p>
+  <strong>What is a reasonable, low-risk answer:</strong> don't try to carry actual
+  VINDSNURR-scale rotor hardware (which is designed to be heavy and
+  rigid — the opposite of what a kite needs) on the kite itself. If the goal
+  is "wind infrastructure aloft," the honest, buildable version is
+  architecture 1 above: keep the generation hardware on the ground, and let
+  the kite carry only itself, the tether, and control-line hardware.
+</p>
+
+<hr>
+
+<h2>Best arrangement of kite elements to support "circular turbine elements"</h2>
+
+<p>
+  Alexander Graham Bell's real multi-cell kite arrays (the same photographed
+  lattice already cited in <a href="https://github.com/mgifford/Hex-Bicup-Rotor/blob/main/kite-corners/README.md">kite-corners/README.md</a> —
+  a man sitting in a woven seat inside a wall of hundreds of tetrahedral
+  cells, not a single kite) are the right visual reference for this
+  question: not one tetrahedron, but a large repeating field of them. If the
+  goal is rotor-like elements flying as part of that field (rather than on
+  the ground), the lattice's own geometry — already verified numerically in
+  <a href="https://github.com/mgifford/Hex-Bicup-Rotor/blob/main/kite-corners/generate_diagram.py">kite-corners/generate_diagram.py</a> —
+  tells you exactly where natural mounting points already exist:
+</p>
+
+<svg width="720" height="560" viewBox="0 0 720 560" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" role="img"
+     aria-label="Solarpunk-style illustration of a large multi-cell tetrahedral kite lattice, similar in scale to Alexander Graham Bell's historical multi-cell kite arrays, with small VINDSNURR-style vertical-axis rotors nested in the open bays between layers, tethered to a small ground station.">
+  <title>Tetrahedral kite lattice with embedded rotor array — exploratory illustration</title>
+  <style>
+    .lat-sky-grad { fill: #fbe9c9; }
+    .lat-sun { fill: #f4b942; opacity: 0.85; }
+    .lat-cell-face-a { fill: #e8a24a; fill-opacity: 0.55; stroke: none; }
+    .lat-cell-face-b { fill: #5fae82; fill-opacity: 0.55; stroke: none; }
+    .lat-strut { stroke: #6b4a2f; stroke-width: 1.3; fill: none; }
+    .lat-joint { fill: #3f6b4f; stroke: #274a35; stroke-width: 0.8; }
+    .lat-rotor-shaft { stroke: #274a35; stroke-width: 1.6; }
+    .lat-rotor-blade { fill: #dd6b4a; fill-opacity: 0.9; stroke: #7a3620; stroke-width: 0.8; }
+    .lat-tether { stroke: #7a221c; stroke-width: 2; stroke-dasharray: 6 4; fill: none; }
+    .lat-ground { fill: #cfead0; }
+    .lat-ground-station { fill: #fff8e8; stroke: #b58a4a; stroke-width: 1.5; }
+    .lat-leaf { fill: #5fae82; opacity: 0.8; }
+    .lat-label-bold { font-size: 16px; fill: #3a2c1a; font-weight: 700; }
+    .lat-label { font-size: 12.5px; fill: #3a2c1a; }
+    .lat-callout { font-size: 11.5px; fill: #6b5a3f; }
+    [data-theme="dark"] .lat-sky-grad { fill: #2a2416; }
+    [data-theme="dark"] .lat-sun { opacity: 0.6; }
+    [data-theme="dark"] .lat-strut { stroke: #d8c9a8; }
+    [data-theme="dark"] .lat-joint { fill: #7fcf9f; stroke: #3f6b4f; }
+    [data-theme="dark"] .lat-rotor-shaft { stroke: #d8c9a8; }
+    [data-theme="dark"] .lat-ground { fill: #21361f; }
+    [data-theme="dark"] .lat-ground-station { fill: #2e2e2b; stroke: #7a5f34; }
+    [data-theme="dark"] .lat-leaf { fill: #4f9068; }
+    [data-theme="dark"] .lat-label-bold { fill: #f0e6cc; }
+    [data-theme="dark"] .lat-label { fill: #f0e6cc; }
+    [data-theme="dark"] .lat-callout { fill: #c9bc9e; }
+  </style>
+
+  <rect class="lat-sky-grad" x="0" y="0" width="720" height="400"/>
+  <rect class="lat-ground" x="0" y="400" width="720" height="160"/>
+  <circle class="lat-sun" cx="650" cy="55" r="34"/>
+
+  <text class="lat-label-bold" x="360.0" y="26" text-anchor="middle">A kite lattice carrying its own wind rotors</text>
+  <text class="lat-callout" x="360.0" y="44" text-anchor="middle">Exploratory illustration — see kite-energy/README.md for the physics and open structural questions</text>
+
+  <polygon class="lat-cell-face-a" points="208.74,323.97 284.37,323.97 246.55,327.98"/><polygon class="lat-cell-face-b" points="284.37,323.97 360.0,323.97 322.18,327.98"/><polygon class="lat-cell-face-a" points="360.0,323.97 435.63,323.97 397.82,327.98"/><polygon class="lat-cell-face-b" points="435.63,323.97 511.26,323.97 473.45,327.98"/><polygon class="lat-cell-face-a" points="246.55,262.98 322.18,262.98 284.37,266.98"/><polygon class="lat-cell-face-b" points="322.18,262.98 397.82,262.98 360.0,266.98"/><polygon class="lat-cell-face-a" points="397.82,262.98 473.45,262.98 435.63,266.98"/><polygon class="lat-cell-face-b" points="246.55,327.98 322.18,327.98 284.37,331.98"/><polygon class="lat-cell-face-a" points="322.18,327.98 397.82,327.98 360.0,331.98"/><polygon class="lat-cell-face-b" points="397.82,327.98 473.45,327.98 435.63,331.98"/><polygon class="lat-cell-face-a" points="284.37,201.98 360.0,201.98 322.18,205.99"/><polygon class="lat-cell-face-b" points="360.0,201.98 435.63,201.98 397.82,205.99"/><polygon class="lat-cell-face-a" points="284.37,266.98 360.0,266.98 322.18,270.99"/><polygon class="lat-cell-face-b" points="360.0,266.98 435.63,266.98 397.82,270.99"/><polygon class="lat-cell-face-a" points="322.18,140.99 397.82,140.99 360.0,145.0"/><polygon class="lat-cell-face-b" points="284.37,331.98 360.0,331.98 322.18,335.99"/><polygon class="lat-cell-face-a" points="360.0,331.98 435.63,331.98 397.82,335.99"/><polygon class="lat-cell-face-b" points="322.18,205.99 397.82,205.99 360.0,210.0"/><polygon class="lat-cell-face-a" points="322.18,270.99 397.82,270.99 360.0,275.0"/><polygon class="lat-cell-face-b" points="322.18,335.99 397.82,335.99 360.0,340.0"/>
+  <path class="lat-strut" d="M208.74,323.97 L284.37,323.97 L246.55,327.98 Z M208.74,323.97 L246.55,262.98 M284.37,323.97 L246.55,262.98 M246.55,327.98 L246.55,262.98"/><path class="lat-strut" d="M284.37,323.97 L360.0,323.97 L322.18,327.98 Z M284.37,323.97 L322.18,262.98 M360.0,323.97 L322.18,262.98 M322.18,327.98 L322.18,262.98"/><path class="lat-strut" d="M360.0,323.97 L435.63,323.97 L397.82,327.98 Z M360.0,323.97 L397.82,262.98 M435.63,323.97 L397.82,262.98 M397.82,327.98 L397.82,262.98"/><path class="lat-strut" d="M435.63,323.97 L511.26,323.97 L473.45,327.98 Z M435.63,323.97 L473.45,262.98 M511.26,323.97 L473.45,262.98 M473.45,327.98 L473.45,262.98"/><path class="lat-strut" d="M246.55,262.98 L322.18,262.98 L284.37,266.98 Z M246.55,262.98 L284.37,201.98 M322.18,262.98 L284.37,201.98 M284.37,266.98 L284.37,201.98"/><path class="lat-strut" d="M322.18,262.98 L397.82,262.98 L360.0,266.98 Z M322.18,262.98 L360.0,201.98 M397.82,262.98 L360.0,201.98 M360.0,266.98 L360.0,201.98"/><path class="lat-strut" d="M397.82,262.98 L473.45,262.98 L435.63,266.98 Z M397.82,262.98 L435.63,201.98 M473.45,262.98 L435.63,201.98 M435.63,266.98 L435.63,201.98"/><path class="lat-strut" d="M246.55,327.98 L322.18,327.98 L284.37,331.98 Z M246.55,327.98 L284.37,266.98 M322.18,327.98 L284.37,266.98 M284.37,331.98 L284.37,266.98"/><path class="lat-strut" d="M322.18,327.98 L397.82,327.98 L360.0,331.98 Z M322.18,327.98 L360.0,266.98 M397.82,327.98 L360.0,266.98 M360.0,331.98 L360.0,266.98"/><path class="lat-strut" d="M397.82,327.98 L473.45,327.98 L435.63,331.98 Z M397.82,327.98 L435.63,266.98 M473.45,327.98 L435.63,266.98 M435.63,331.98 L435.63,266.98"/><path class="lat-strut" d="M284.37,201.98 L360.0,201.98 L322.18,205.99 Z M284.37,201.98 L322.18,140.99 M360.0,201.98 L322.18,140.99 M322.18,205.99 L322.18,140.99"/><path class="lat-strut" d="M360.0,201.98 L435.63,201.98 L397.82,205.99 Z M360.0,201.98 L397.82,140.99 M435.63,201.98 L397.82,140.99 M397.82,205.99 L397.82,140.99"/><path class="lat-strut" d="M284.37,266.98 L360.0,266.98 L322.18,270.99 Z M284.37,266.98 L322.18,205.99 M360.0,266.98 L322.18,205.99 M322.18,270.99 L322.18,205.99"/><path class="lat-strut" d="M360.0,266.98 L435.63,266.98 L397.82,270.99 Z M360.0,266.98 L397.82,205.99 M435.63,266.98 L397.82,205.99 M397.82,270.99 L397.82,205.99"/><path class="lat-strut" d="M322.18,140.99 L397.82,140.99 L360.0,145.0 Z M322.18,140.99 L360.0,80.0 M397.82,140.99 L360.0,80.0 M360.0,145.0 L360.0,80.0"/><path class="lat-strut" d="M284.37,331.98 L360.0,331.98 L322.18,335.99 Z M284.37,331.98 L322.18,270.99 M360.0,331.98 L322.18,270.99 M322.18,335.99 L322.18,270.99"/><path class="lat-strut" d="M360.0,331.98 L435.63,331.98 L397.82,335.99 Z M360.0,331.98 L397.82,270.99 M435.63,331.98 L397.82,270.99 M397.82,335.99 L397.82,270.99"/><path class="lat-strut" d="M322.18,205.99 L397.82,205.99 L360.0,210.0 Z M322.18,205.99 L360.0,145.0 M397.82,205.99 L360.0,145.0 M360.0,210.0 L360.0,145.0"/><path class="lat-strut" d="M322.18,270.99 L397.82,270.99 L360.0,275.0 Z M322.18,270.99 L360.0,210.0 M397.82,270.99 L360.0,210.0 M360.0,275.0 L360.0,210.0"/><path class="lat-strut" d="M322.18,335.99 L397.82,335.99 L360.0,340.0 Z M322.18,335.99 L360.0,275.0 M397.82,335.99 L360.0,275.0 M360.0,340.0 L360.0,275.0"/>
+  <circle class="lat-joint" cx="208.74" cy="323.97" r="3"/><circle class="lat-joint" cx="284.37" cy="323.97" r="3"/><circle class="lat-joint" cx="246.55" cy="327.98" r="3"/><circle class="lat-joint" cx="246.55" cy="262.98" r="3"/><circle class="lat-joint" cx="360.0" cy="323.97" r="3"/><circle class="lat-joint" cx="322.18" cy="327.98" r="3"/><circle class="lat-joint" cx="322.18" cy="262.98" r="3"/><circle class="lat-joint" cx="435.63" cy="323.97" r="3"/><circle class="lat-joint" cx="397.82" cy="327.98" r="3"/><circle class="lat-joint" cx="397.82" cy="262.98" r="3"/><circle class="lat-joint" cx="511.26" cy="323.97" r="3"/><circle class="lat-joint" cx="473.45" cy="327.98" r="3"/><circle class="lat-joint" cx="473.45" cy="262.98" r="3"/><circle class="lat-joint" cx="284.37" cy="266.98" r="3"/><circle class="lat-joint" cx="284.37" cy="201.98" r="3"/><circle class="lat-joint" cx="360.0" cy="266.98" r="3"/><circle class="lat-joint" cx="360.0" cy="201.98" r="3"/><circle class="lat-joint" cx="435.63" cy="266.98" r="3"/><circle class="lat-joint" cx="435.63" cy="201.98" r="3"/><circle class="lat-joint" cx="284.37" cy="331.98" r="3"/><circle class="lat-joint" cx="360.0" cy="331.98" r="3"/><circle class="lat-joint" cx="435.63" cy="331.98" r="3"/><circle class="lat-joint" cx="322.18" cy="205.99" r="3"/><circle class="lat-joint" cx="322.18" cy="140.99" r="3"/><circle class="lat-joint" cx="397.82" cy="205.99" r="3"/><circle class="lat-joint" cx="397.82" cy="140.99" r="3"/><circle class="lat-joint" cx="322.18" cy="270.99" r="3"/><circle class="lat-joint" cx="397.82" cy="270.99" r="3"/><circle class="lat-joint" cx="360.0" cy="145.0" r="3"/><circle class="lat-joint" cx="360.0" cy="80.0" r="3"/><circle class="lat-joint" cx="322.18" cy="335.99" r="3"/><circle class="lat-joint" cx="397.82" cy="335.99" r="3"/><circle class="lat-joint" cx="360.0" cy="210.0" r="3"/><circle class="lat-joint" cx="360.0" cy="275.0" r="3"/><circle class="lat-joint" cx="360.0" cy="340.0" r="3"/>
+  <g class="rotor-icon" transform="translate(246.55,262.98)"><line x1="0" y1="-13.35" x2="0" y2="13.35" class="lat-rotor-shaft"/><path d="M 0,-9.35 A 9.35,5.609999999999999 0 0 1 0,0 A 9.35,5.609999999999999 0 0 0 0,9.35 A 9.35,5.609999999999999 0 0 1 0,-9.35 Z" class="lat-rotor-blade"/></g><g class="rotor-icon" transform="translate(284.37,266.98)"><line x1="0" y1="-13.35" x2="0" y2="13.35" class="lat-rotor-shaft"/><path d="M 0,-9.35 A 9.35,5.609999999999999 0 0 1 0,0 A 9.35,5.609999999999999 0 0 0 0,9.35 A 9.35,5.609999999999999 0 0 1 0,-9.35 Z" class="lat-rotor-blade"/></g><g class="rotor-icon" transform="translate(473.45,262.98)"><line x1="0" y1="-13.35" x2="0" y2="13.35" class="lat-rotor-shaft"/><path d="M 0,-9.35 A 9.35,5.609999999999999 0 0 1 0,0 A 9.35,5.609999999999999 0 0 0 0,9.35 A 9.35,5.609999999999999 0 0 1 0,-9.35 Z" class="lat-rotor-blade"/></g><g class="rotor-icon" transform="translate(360.0,266.98)"><line x1="0" y1="-13.35" x2="0" y2="13.35" class="lat-rotor-shaft"/><path d="M 0,-9.35 A 9.35,5.609999999999999 0 0 1 0,0 A 9.35,5.609999999999999 0 0 0 0,9.35 A 9.35,5.609999999999999 0 0 1 0,-9.35 Z" class="lat-rotor-blade"/></g><g class="rotor-icon" transform="translate(322.18,262.98)"><line x1="0" y1="-13.35" x2="0" y2="13.35" class="lat-rotor-shaft"/><path d="M 0,-9.35 A 9.35,5.609999999999999 0 0 1 0,0 A 9.35,5.609999999999999 0 0 0 0,9.35 A 9.35,5.609999999999999 0 0 1 0,-9.35 Z" class="lat-rotor-blade"/></g><g class="rotor-icon" transform="translate(322.18,270.99)"><line x1="0" y1="-13.35" x2="0" y2="13.35" class="lat-rotor-shaft"/><path d="M 0,-9.35 A 9.35,5.609999999999999 0 0 1 0,0 A 9.35,5.609999999999999 0 0 0 0,9.35 A 9.35,5.609999999999999 0 0 1 0,-9.35 Z" class="lat-rotor-blade"/></g><g class="rotor-icon" transform="translate(397.82,262.98)"><line x1="0" y1="-13.35" x2="0" y2="13.35" class="lat-rotor-shaft"/><path d="M 0,-9.35 A 9.35,5.609999999999999 0 0 1 0,0 A 9.35,5.609999999999999 0 0 0 0,9.35 A 9.35,5.609999999999999 0 0 1 0,-9.35 Z" class="lat-rotor-blade"/></g><g class="rotor-icon" transform="translate(397.82,270.99)"><line x1="0" y1="-13.35" x2="0" y2="13.35" class="lat-rotor-shaft"/><path d="M 0,-9.35 A 9.35,5.609999999999999 0 0 1 0,0 A 9.35,5.609999999999999 0 0 0 0,9.35 A 9.35,5.609999999999999 0 0 1 0,-9.35 Z" class="lat-rotor-blade"/></g><g class="rotor-icon" transform="translate(435.63,266.98)"><line x1="0" y1="-13.35" x2="0" y2="13.35" class="lat-rotor-shaft"/><path d="M 0,-9.35 A 9.35,5.609999999999999 0 0 1 0,0 A 9.35,5.609999999999999 0 0 0 0,9.35 A 9.35,5.609999999999999 0 0 1 0,-9.35 Z" class="lat-rotor-blade"/></g><g class="rotor-icon" transform="translate(360.0,275.0)"><line x1="0" y1="-13.35" x2="0" y2="13.35" class="lat-rotor-shaft"/><path d="M 0,-9.35 A 9.35,5.609999999999999 0 0 1 0,0 A 9.35,5.609999999999999 0 0 0 0,9.35 A 9.35,5.609999999999999 0 0 1 0,-9.35 Z" class="lat-rotor-blade"/></g><g class="rotor-icon" transform="translate(322.18,205.99)"><line x1="0" y1="-13.35" x2="0" y2="13.35" class="lat-rotor-shaft"/><path d="M 0,-9.35 A 9.35,5.609999999999999 0 0 1 0,0 A 9.35,5.609999999999999 0 0 0 0,9.35 A 9.35,5.609999999999999 0 0 1 0,-9.35 Z" class="lat-rotor-blade"/></g><g class="rotor-icon" transform="translate(360.0,210.0)"><line x1="0" y1="-13.35" x2="0" y2="13.35" class="lat-rotor-shaft"/><path d="M 0,-9.35 A 9.35,5.609999999999999 0 0 1 0,0 A 9.35,5.609999999999999 0 0 0 0,9.35 A 9.35,5.609999999999999 0 0 1 0,-9.35 Z" class="lat-rotor-blade"/></g><g class="rotor-icon" transform="translate(284.37,201.98)"><line x1="0" y1="-13.35" x2="0" y2="13.35" class="lat-rotor-shaft"/><path d="M 0,-9.35 A 9.35,5.609999999999999 0 0 1 0,0 A 9.35,5.609999999999999 0 0 0 0,9.35 A 9.35,5.609999999999999 0 0 1 0,-9.35 Z" class="lat-rotor-blade"/></g><g class="rotor-icon" transform="translate(360.0,201.98)"><line x1="0" y1="-13.35" x2="0" y2="13.35" class="lat-rotor-shaft"/><path d="M 0,-9.35 A 9.35,5.609999999999999 0 0 1 0,0 A 9.35,5.609999999999999 0 0 0 0,9.35 A 9.35,5.609999999999999 0 0 1 0,-9.35 Z" class="lat-rotor-blade"/></g><g class="rotor-icon" transform="translate(435.63,201.98)"><line x1="0" y1="-13.35" x2="0" y2="13.35" class="lat-rotor-shaft"/><path d="M 0,-9.35 A 9.35,5.609999999999999 0 0 1 0,0 A 9.35,5.609999999999999 0 0 0 0,9.35 A 9.35,5.609999999999999 0 0 1 0,-9.35 Z" class="lat-rotor-blade"/></g><g class="rotor-icon" transform="translate(397.82,205.99)"><line x1="0" y1="-13.35" x2="0" y2="13.35" class="lat-rotor-shaft"/><path d="M 0,-9.35 A 9.35,5.609999999999999 0 0 1 0,0 A 9.35,5.609999999999999 0 0 0 0,9.35 A 9.35,5.609999999999999 0 0 1 0,-9.35 Z" class="lat-rotor-blade"/></g><g class="rotor-icon" transform="translate(397.82,140.99)"><line x1="0" y1="-13.35" x2="0" y2="13.35" class="lat-rotor-shaft"/><path d="M 0,-9.35 A 9.35,5.609999999999999 0 0 1 0,0 A 9.35,5.609999999999999 0 0 0 0,9.35 A 9.35,5.609999999999999 0 0 1 0,-9.35 Z" class="lat-rotor-blade"/></g><g class="rotor-icon" transform="translate(322.18,140.99)"><line x1="0" y1="-13.35" x2="0" y2="13.35" class="lat-rotor-shaft"/><path d="M 0,-9.35 A 9.35,5.609999999999999 0 0 1 0,0 A 9.35,5.609999999999999 0 0 0 0,9.35 A 9.35,5.609999999999999 0 0 1 0,-9.35 Z" class="lat-rotor-blade"/></g><g class="rotor-icon" transform="translate(360.0,145.0)"><line x1="0" y1="-13.35" x2="0" y2="13.35" class="lat-rotor-shaft"/><path d="M 0,-9.35 A 9.35,5.609999999999999 0 0 1 0,0 A 9.35,5.609999999999999 0 0 0 0,9.35 A 9.35,5.609999999999999 0 0 1 0,-9.35 Z" class="lat-rotor-blade"/></g>
+
+  <path class="lat-tether" d="M360.0,340.0 C 350.0,330 340.0,375 335.0,408"/>
+
+  <g transform="translate(265.0,406)">
+    <rect class="lat-ground-station" x="0" y="0" width="150" height="60" rx="8"/>
+    <circle cx="32" cy="30" r="17" fill="none" stroke="#6b4a2f" stroke-width="2"/>
+    <circle cx="32" cy="30" r="4" fill="#6b4a2f"/>
+    <text class="lat-callout" x="32" y="54" text-anchor="middle">Winch + generator</text>
+    <path d="M54,22 L85,15" stroke="#2f9e44" stroke-width="2" marker-end="url(#lat-arrowgreen)"/>
+    <text class="lat-label" x="90" y="18">To grid</text>
+  </g>
+
+  <g transform="translate(40,435)">
+    <path class="lat-leaf" d="M0,20 Q10,-10 20,20 Q10,10 0,20 Z"/>
+    <path class="lat-leaf" d="M15,22 Q25,-5 35,22 Q25,14 15,22 Z"/>
+  </g>
+  <g transform="translate(630,430)">
+    <path class="lat-leaf" d="M0,20 Q10,-10 20,20 Q10,10 0,20 Z"/>
+    <path class="lat-leaf" d="M15,22 Q25,-5 35,22 Q25,14 15,22 Z"/>
+  </g>
+
+  <defs>
+    <marker id="lat-arrowgreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <polygon points="0,0 7,3 0,6" fill="#2f9e44"/>
+    </marker>
+  </defs>
+</svg>
+
+<p>
+  <strong>Every vertical joint between two layers is already a natural rotor-shaft
+  location.</strong> In the 4-layer, 20-cell lattice used throughout this repo, a
+  lower layer's apex and the layer above's base corner are literally the
+  same physical point (verified by exact coordinate matching, not
+  approximation) — there are <strong>19 such vertical joints</strong> (10 between Layer 0
+  and 1, 6 between Layer 1 and 2, 3 between Layer 2 and 3), each already a
+  reinforced interior or triple hub (6 or 9 sockets, vs. 3 for an exterior
+  hub) rather than a fresh mounting point that would need to be engineered
+  in. The illustration above places a small rotor icon at every one of
+  those 19 real joints, scaled up from the same geometry as the rest of this
+  repo, not invented for the picture. Shaft length between layers scales
+  directly with strut length — about 400mm per bay at 500mm struts, 800mm at
+  1000mm struts.
+</p>
+
+<p><strong>This does not mean it would work.</strong> The illustration shows <em>where</em> a
+  rotor could physically bolt on, using joints the frame already has, and
+  nothing about whether the frame could survive a rotor actually spinning
+  there:</p>
+
+<ul>
+  <li>Every rotor adds dead weight and a spinning gyroscopic load at a joint
+    the <a href="https://github.com/mgifford/Hex-Bicup-Rotor/blob/main/kite-corners/FLIGHT.md">FLIGHT.md</a> weight budget never accounted
+    for — 19 rotors' worth of mass would need to be added back into that
+    budget, and it would push wing loading up significantly, working against
+    the whole point of the lightweight preset.</li>
+  <li>A tetrahedral kite frame flexes in wind. VINDSNURR's own rotor is
+    designed around a fixed, rigid shaft and bearing pair — nothing about
+    its bearing tolerances or hub design assumes the shaft's two ends could
+    be moving relative to each other, which is exactly what happens on a
+    flexing kite frame under load.</li>
+  <li>None of this has been checked against real structural loads for a
+    rotating mass in flight. This remains the single biggest open question
+    in this whole exploration.</li>
+</ul>
+
+<h3>An alternative to nesting rotors inside a dense lattice: alternating chains</h3>
+
+<p>
+  The lattice above buries each rotor inside a dense wall of tetrahedra —
+  sail fabric and neighboring struts on most sides. A different arrangement
+  keeps rotors in clearly open air: alternate discrete tetrahedron and rotor
+  units in a line, <strong>▲ o ▲ o ▲</strong> (or with more spacing, <strong>▲ o o ▲ o o ▲</strong>),
+  rather than nesting rotors inside a big triangular wall.
+</p>
+
+<svg width="780" height="460" viewBox="0 0 780 460" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" role="img"
+     aria-label="Solarpunk-style illustration of an alternating chain of tetrahedral kite cells and VINDSNURR-style vertical-axis rotor units — triangle, rotor, triangle, rotor, triangle — tethered to a ground station."
+     style="max-width:100%;height:auto;">
+  <title>Alternating tetrahedron/rotor chain — exploratory illustration</title>
+  <style>
+    .chn-sky-grad { fill: #fbe9c9; }
+    .chn-sun { fill: #f4b942; opacity: 0.85; }
+    .chn-cell-face-a { fill: #e8a24a; fill-opacity: 0.55; stroke: none; }
+    .chn-cell-face-b { fill: #5fae82; fill-opacity: 0.55; stroke: none; }
+    .chn-strut { stroke: #6b4a2f; stroke-width: 1.6; fill: none; }
+    .chn-joint { fill: #3f6b4f; stroke: #274a35; stroke-width: 0.8; }
+    .chn-rotor-shaft { stroke: #274a35; stroke-width: 2.2; }
+    .chn-rotor-blade { fill: #dd6b4a; fill-opacity: 0.9; stroke: #7a3620; stroke-width: 1; }
+    .chn-tether { stroke: #7a221c; stroke-width: 2; stroke-dasharray: 6 4; fill: none; }
+    .chn-ground { fill: #cfead0; }
+    .chn-ground-station { fill: #fff8e8; stroke: #b58a4a; stroke-width: 1.5; }
+    .chn-leaf { fill: #5fae82; opacity: 0.8; }
+    .chn-label-bold { font-size: 16px; fill: #3a2c1a; font-weight: 700; }
+    .chn-label { font-size: 12.5px; fill: #3a2c1a; }
+    .chn-callout { font-size: 11.5px; fill: #6b5a3f; }
+    [data-theme="dark"] .chn-sky-grad { fill: #2a2416; }
+    [data-theme="dark"] .chn-sun { opacity: 0.6; }
+    [data-theme="dark"] .chn-strut { stroke: #d8c9a8; }
+    [data-theme="dark"] .chn-joint { fill: #7fcf9f; stroke: #3f6b4f; }
+    [data-theme="dark"] .chn-rotor-shaft { stroke: #d8c9a8; }
+    [data-theme="dark"] .chn-ground { fill: #21361f; }
+    [data-theme="dark"] .chn-ground-station { fill: #2e2e2b; stroke: #7a5f34; }
+    [data-theme="dark"] .chn-leaf { fill: #4f9068; }
+    [data-theme="dark"] .chn-label-bold { fill: #f0e6cc; }
+    [data-theme="dark"] .chn-label { fill: #f0e6cc; }
+    [data-theme="dark"] .chn-callout { fill: #c9bc9e; }
+  </style>
+
+  <rect class="chn-sky-grad" x="0" y="0" width="780" height="310"/>
+  <rect class="chn-ground" x="0" y="310" width="780" height="150"/>
+  <circle class="chn-sun" cx="710" cy="55" r="34"/>
+
+  <text class="chn-label-bold" x="390.0" y="26" text-anchor="middle">Alternating chain: kite cells and rotors in line</text>
+  <text class="chn-callout" x="390.0" y="44" text-anchor="middle">▲ o ▲ o ▲ — each tetrahedron's vertical edge doubles as a rotor's shaft span</text>
+
+  <polygon class="chn-cell-face-a" points="129.11,90.0 200.55,167.32 200.55,167.32"/><polygon class="chn-cell-face-a" points="103.83,208.9 200.55,167.32 200.55,167.32"/><polygon class="chn-cell-face-b" points="366.92,140.55 270.2,182.13 270.2,182.13"/><polygon class="chn-cell-face-b" points="341.64,259.45 270.2,182.13 270.2,182.13"/><polygon class="chn-cell-face-a" points="604.73,191.1 676.17,268.42 676.17,268.42"/><polygon class="chn-cell-face-a" points="579.45,310.0 676.17,268.42 676.17,268.42"/>
+  <path class="chn-strut" d="M129.11,90.0 L103.83,208.9 M129.11,90.0 L200.55,167.32 M129.11,90.0 L200.55,167.32 M103.83,208.9 L200.55,167.32 M103.83,208.9 L200.55,167.32 M200.55,167.32 L200.55,167.32"/><path class="chn-strut" d="M366.92,140.55 L341.64,259.45 M366.92,140.55 L270.2,182.13 M366.92,140.55 L270.2,182.13 M341.64,259.45 L270.2,182.13 M341.64,259.45 L270.2,182.13 M270.2,182.13 L270.2,182.13"/><path class="chn-strut" d="M604.73,191.1 L579.45,310.0 M604.73,191.1 L676.17,268.42 M604.73,191.1 L676.17,268.42 M579.45,310.0 L676.17,268.42 M579.45,310.0 L676.17,268.42 M676.17,268.42 L676.17,268.42"/>
+  <circle class="chn-joint" cx="129.11" cy="90.0" r="3.5"/><circle class="chn-joint" cx="103.83" cy="208.9" r="3.5"/><circle class="chn-joint" cx="200.55" cy="167.32" r="3.5"/><circle class="chn-joint" cx="200.55" cy="167.32" r="3.5"/><circle class="chn-joint" cx="366.92" cy="140.55" r="3.5"/><circle class="chn-joint" cx="341.64" cy="259.45" r="3.5"/><circle class="chn-joint" cx="270.2" cy="182.13" r="3.5"/><circle class="chn-joint" cx="270.2" cy="182.13" r="3.5"/><circle class="chn-joint" cx="604.73" cy="191.1" r="3.5"/><circle class="chn-joint" cx="579.45" cy="310.0" r="3.5"/><circle class="chn-joint" cx="676.17" cy="268.42" r="3.5"/><circle class="chn-joint" cx="676.17" cy="268.42" r="3.5"/>
+  <g class="rotor-icon"><line x1="248.01" y1="115.27" x2="248.01" y2="234.18" class="chn-rotor-shaft"/><path d="M 248.01,159.725 A 15.0,8.25 0 0 1 248.01,174.725 A 15.0,8.25 0 0 0 248.01,189.725 A 15.0,8.25 0 0 1 248.01,159.725 Z" class="chn-rotor-blade"/></g><g class="rotor-icon"><line x1="485.82" y1="165.82" x2="485.82" y2="284.73" class="chn-rotor-shaft"/><path d="M 485.82,210.275 A 15.0,8.25 0 0 1 485.82,225.275 A 15.0,8.25 0 0 0 485.82,240.275 A 15.0,8.25 0 0 1 485.82,210.275 Z" class="chn-rotor-blade"/></g>
+
+  <path class="chn-tether" d="M103.83,208.9 C 100,240 90,285 85,318"/>
+
+  <g transform="translate(40,316)">
+    <rect class="chn-ground-station" x="0" y="0" width="150" height="60" rx="8"/>
+    <circle cx="32" cy="30" r="17" fill="none" stroke="#6b4a2f" stroke-width="2"/>
+    <circle cx="32" cy="30" r="4" fill="#6b4a2f"/>
+    <text class="chn-callout" x="32" y="54" text-anchor="middle">Winch + generator</text>
+    <path d="M54,22 L85,15" stroke="#2f9e44" stroke-width="2" marker-end="url(#chn-arrowgreen)"/>
+    <text class="chn-label" x="90" y="18">To grid</text>
+  </g>
+
+  <g transform="translate(40,345)">
+    <path class="chn-leaf" d="M0,20 Q10,-10 20,20 Q10,10 0,20 Z"/>
+    <path class="chn-leaf" d="M15,22 Q25,-5 35,22 Q25,14 15,22 Z"/>
+  </g>
+  <g transform="translate(690,340)">
+    <path class="chn-leaf" d="M0,20 Q10,-10 20,20 Q10,10 0,20 Z"/>
+    <path class="chn-leaf" d="M15,22 Q25,-5 35,22 Q25,14 15,22 Z"/>
+  </g>
+
+  <defs>
+    <marker id="chn-arrowgreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <polygon points="0,0 7,3 0,6" fill="#2f9e44"/>
+    </marker>
+  </defs>
+</svg>
+
+<p>
+  This works because of a real geometric fact, not just a visual pattern: a
+  tetrahedron oriented with <strong>one edge vertical</strong> (rather than the usual
+  "apex over a horizontal base" orientation used everywhere else in this
+  repo) has a natural top and bottom point spaced exactly one strut-length
+  apart — precisely the vertical span a VINDSNURR-style rotor shaft needs.
+  Verified: if the tetrahedron's edge length equals VINDSNURR's actual
+  1000mm rotor diameter, that span (1000mm) is close to VINDSNURR's own real
+  rotor height (1064mm, per <a href="https://github.com/mgifford/Hex-Bicup-Rotor/blob/main/CLAUDE.md">CLAUDE.md</a>) — the two unit
+  types are naturally compatible scales, not an arbitrary pairing. Each
+  rotor in the chain gets clear air on at least two sides, unlike a rotor
+  buried inside the lattice above.
+</p>
+
+<h3>Which arrangement? A linear chain has a real problem, though</h3>
+
+<p>
+  A single ▲o▲o▲ line is simple and modular, but it has two genuine
+  drawbacks for something that actually needs to <strong>fly</strong>, not just stand as
+  a lattice:
+</p>
+
+<ul>
+  <li><strong>Sail area for lift/tether-tension only grows linearly</strong> with chain
+    length, and the crosswind power formula already used in this document
+    (and cited from Wikipedia's Crosswind kite power article below) scales
+    with sail <em>area</em>, not length — a long, thin line is a poor shape for
+    that.</li>
+  <li><strong>A 1D line has the worst possible resistance to twisting and bending</strong>
+    in gusty wind — there's no lateral triangulation between parallel rows
+    to stop it flexing sideways, unlike a genuinely 2D structure.</li>
+</ul>
+
+<p>
+  A <strong>wide array of parallel chains</strong>, offset brick-fashion so each row's
+  rotors sit staggered relative to the row above/below, fixes both problems
+  while keeping the same clear-air rotor placement:
+</p>
+
+<svg width="780" height="480" viewBox="0 0 780 480" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" role="img"
+     aria-label="Top-down plan view of a wide array of parallel alternating tetrahedron/rotor chains, offset brick-fashion between rows, tethered to a ground station."
+     style="max-width:100%;height:auto;">
+  <title>Wide array — top-down plan view, exploratory illustration</title>
+  <style>
+    .wid-sky-grad { fill: #fbe9c9; }
+    .wid-sun { fill: #f4b942; opacity: 0.85; }
+    .wid-cell-face-a { fill: #e8a24a; fill-opacity: 0.55; stroke: none; }
+    .wid-cell-face-b { fill: #5fae82; fill-opacity: 0.55; stroke: none; }
+    .wid-strut { stroke: #6b4a2f; stroke-width: 1.4; fill: none; }
+    .wid-joint { fill: #3f6b4f; stroke: #274a35; stroke-width: 0.8; }
+    .wid-rotor-icon { fill: #dd6b4a; fill-opacity: 0.85; stroke: #7a3620; stroke-width: 1; }
+    .wid-rotor-icon-core { fill: #274a35; }
+    .wid-tether { stroke: #7a221c; stroke-width: 2; stroke-dasharray: 6 4; fill: none; }
+    .wid-ground { fill: #cfead0; }
+    .wid-ground-station { fill: #fff8e8; stroke: #b58a4a; stroke-width: 1.5; }
+    .wid-leaf { fill: #5fae82; opacity: 0.8; }
+    .wid-label-bold { font-size: 16px; fill: #3a2c1a; font-weight: 700; }
+    .wid-label { font-size: 12.5px; fill: #3a2c1a; }
+    .wid-callout { font-size: 11.5px; fill: #6b5a3f; }
+    [data-theme="dark"] .wid-sky-grad { fill: #2a2416; }
+    [data-theme="dark"] .wid-sun { opacity: 0.6; }
+    [data-theme="dark"] .wid-strut { stroke: #d8c9a8; }
+    [data-theme="dark"] .wid-ground { fill: #21361f; }
+    [data-theme="dark"] .wid-ground-station { fill: #2e2e2b; stroke: #7a5f34; }
+    [data-theme="dark"] .wid-leaf { fill: #4f9068; }
+    [data-theme="dark"] .wid-label-bold { fill: #f0e6cc; }
+    [data-theme="dark"] .wid-label { fill: #f0e6cc; }
+    [data-theme="dark"] .wid-callout { fill: #c9bc9e; }
+  </style>
+
+  <rect class="wid-sky-grad" x="0" y="0" width="780" height="330"/>
+  <rect class="wid-ground" x="0" y="330" width="780" height="150"/>
+  <circle class="wid-sun" cx="710" cy="55" r="34"/>
+
+  <text class="wid-label-bold" x="390.0" y="26" text-anchor="middle">Wide array: parallel chains, top-down view</text>
+  <text class="wid-callout" x="390.0" y="44" text-anchor="middle">Rows offset like bricklaying, so every rotor keeps clear air on both sides</text>
+
+  <polygon class="wid-cell-face-a" points="213.53,115.29 263.44,150.59 263.44,80.0"/><polygon class="wid-cell-face-b" points="354.71,115.29 304.79,150.59 304.79,80.0"/><polygon class="wid-cell-face-a" points="495.88,115.29 545.8,150.59 545.8,80.0"/><polygon class="wid-cell-face-b" points="284.12,200.0 234.2,235.29 234.2,164.71"/><polygon class="wid-cell-face-a" points="425.29,200.0 475.21,235.29 475.21,164.71"/><polygon class="wid-cell-face-b" points="566.47,200.0 516.56,235.29 516.56,164.71"/><polygon class="wid-cell-face-a" points="213.53,284.71 263.44,320.0 263.44,249.41"/><polygon class="wid-cell-face-b" points="354.71,284.71 304.79,320.0 304.79,249.41"/><polygon class="wid-cell-face-a" points="495.88,284.71 545.8,320.0 545.8,249.41"/>
+  <path class="wid-strut" d="M213.53,115.29 L263.44,150.59 M213.53,115.29 L263.44,80.0 M263.44,150.59 L263.44,80.0"/><path class="wid-strut" d="M354.71,115.29 L304.79,150.59 M354.71,115.29 L304.79,80.0 M304.79,150.59 L304.79,80.0"/><path class="wid-strut" d="M495.88,115.29 L545.8,150.59 M495.88,115.29 L545.8,80.0 M545.8,150.59 L545.8,80.0"/><path class="wid-strut" d="M284.12,200.0 L234.2,235.29 M284.12,200.0 L234.2,164.71 M234.2,235.29 L234.2,164.71"/><path class="wid-strut" d="M425.29,200.0 L475.21,235.29 M425.29,200.0 L475.21,164.71 M475.21,235.29 L475.21,164.71"/><path class="wid-strut" d="M566.47,200.0 L516.56,235.29 M566.47,200.0 L516.56,164.71 M516.56,235.29 L516.56,164.71"/><path class="wid-strut" d="M213.53,284.71 L263.44,320.0 M213.53,284.71 L263.44,249.41 M263.44,320.0 L263.44,249.41"/><path class="wid-strut" d="M354.71,284.71 L304.79,320.0 M354.71,284.71 L304.79,249.41 M304.79,320.0 L304.79,249.41"/><path class="wid-strut" d="M495.88,284.71 L545.8,320.0 M495.88,284.71 L545.8,249.41 M545.8,320.0 L545.8,249.41"/>
+  <circle class="wid-joint" cx="213.53" cy="115.29" r="3"/><circle class="wid-joint" cx="263.44" cy="150.59" r="3"/><circle class="wid-joint" cx="263.44" cy="80.0" r="3"/><circle class="wid-joint" cx="354.71" cy="115.29" r="3"/><circle class="wid-joint" cx="304.79" cy="150.59" r="3"/><circle class="wid-joint" cx="304.79" cy="80.0" r="3"/><circle class="wid-joint" cx="495.88" cy="115.29" r="3"/><circle class="wid-joint" cx="545.8" cy="150.59" r="3"/><circle class="wid-joint" cx="545.8" cy="80.0" r="3"/><circle class="wid-joint" cx="284.12" cy="200.0" r="3"/><circle class="wid-joint" cx="234.2" cy="235.29" r="3"/><circle class="wid-joint" cx="234.2" cy="164.71" r="3"/><circle class="wid-joint" cx="425.29" cy="200.0" r="3"/><circle class="wid-joint" cx="475.21" cy="235.29" r="3"/><circle class="wid-joint" cx="475.21" cy="164.71" r="3"/><circle class="wid-joint" cx="566.47" cy="200.0" r="3"/><circle class="wid-joint" cx="516.56" cy="235.29" r="3"/><circle class="wid-joint" cx="516.56" cy="164.71" r="3"/><circle class="wid-joint" cx="213.53" cy="284.71" r="3"/><circle class="wid-joint" cx="263.44" cy="320.0" r="3"/><circle class="wid-joint" cx="263.44" cy="249.41" r="3"/><circle class="wid-joint" cx="354.71" cy="284.71" r="3"/><circle class="wid-joint" cx="304.79" cy="320.0" r="3"/><circle class="wid-joint" cx="304.79" cy="249.41" r="3"/><circle class="wid-joint" cx="495.88" cy="284.71" r="3"/><circle class="wid-joint" cx="545.8" cy="320.0" r="3"/><circle class="wid-joint" cx="545.8" cy="249.41" r="3"/>
+  <circle class="wid-rotor-icon" cx="284.12" cy="115.29" r="9"/><circle class="wid-rotor-icon-core" cx="284.12" cy="115.29" r="3"/><circle class="wid-rotor-icon" cx="425.29" cy="115.29" r="9"/><circle class="wid-rotor-icon-core" cx="425.29" cy="115.29" r="3"/><circle class="wid-rotor-icon" cx="354.71" cy="200.0" r="9"/><circle class="wid-rotor-icon-core" cx="354.71" cy="200.0" r="3"/><circle class="wid-rotor-icon" cx="495.88" cy="200.0" r="9"/><circle class="wid-rotor-icon-core" cx="495.88" cy="200.0" r="3"/><circle class="wid-rotor-icon" cx="284.12" cy="284.71" r="9"/><circle class="wid-rotor-icon-core" cx="284.12" cy="284.71" r="3"/><circle class="wid-rotor-icon" cx="425.29" cy="284.71" r="9"/><circle class="wid-rotor-icon-core" cx="425.29" cy="284.71" r="3"/>
+
+  <path class="wid-tether" d="M234.2,115.29 C 100,260 90,305 85,338"/>
+
+  <g transform="translate(40,336)">
+    <rect class="wid-ground-station" x="0" y="0" width="150" height="60" rx="8"/>
+    <circle cx="32" cy="30" r="17" fill="none" stroke="#6b4a2f" stroke-width="2"/>
+    <circle cx="32" cy="30" r="4" fill="#6b4a2f"/>
+    <text class="wid-callout" x="32" y="54" text-anchor="middle">Winch + generator</text>
+    <path d="M54,22 L85,15" stroke="#2f9e44" stroke-width="2" marker-end="url(#wid-arrowgreen)"/>
+    <text class="wid-label" x="90" y="18">To grid</text>
+  </g>
+
+  <g transform="translate(40,365)">
+    <path class="wid-leaf" d="M0,20 Q10,-10 20,20 Q10,10 0,20 Z"/>
+    <path class="wid-leaf" d="M15,22 Q25,-5 35,22 Q25,14 15,22 Z"/>
+  </g>
+  <g transform="translate(690,360)">
+    <path class="wid-leaf" d="M0,20 Q10,-10 20,20 Q10,10 0,20 Z"/>
+    <path class="wid-leaf" d="M15,22 Q25,-5 35,22 Q25,14 15,22 Z"/>
+  </g>
+
+  <defs>
+    <marker id="wid-arrowgreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <polygon points="0,0 7,3 0,6" fill="#2f9e44"/>
+    </marker>
+  </defs>
+</svg>
+
+<table>
+  <thead><tr><th>Arrangement</th><th>Sail area for lift</th><th>Structural rigidity</th><th>Rotor airflow</th><th>Verdict</th></tr></thead>
+  <tbody>
+    <tr><td>Linear chain (▲o▲o▲)</td><td>Grows only linearly with length</td><td>Weakest — no lateral triangulation</td><td>Clear on 2 sides</td><td>Simple, but a poor shape to actually fly</td></tr>
+    <tr><td><strong>Wide array (parallel chains, offset)</strong></td><td>Grows with both length and width</td><td>Much stronger — rows triangulate against each other</td><td>Clear, staggered so no rotor sits directly downwind of another</td><td><strong>Best match for real kite aerodynamics</strong></td></tr>
+    <tr><td>Ring / annulus (tetrahedra forming a circle, rotors inside)</td><td>Poor — a ring doesn't present a clean lift surface to the wind</td><td>Good torsional resistance (like a wheel)</td><td>Rotors partially shielded from gusts by the surrounding wall</td><td>Interesting for gust protection, but not aerodynamically kite-like</td></tr>
+  </tbody>
+</table>
+
+<p>
+  None of these three has been built, tested, or checked against real
+  aerodynamic data — this table is reasoning from the same formulas and
+  structural logic used throughout this document, not a measured
+  comparison. The wide array is the most defensible starting point <em>if</em>
+  someone pursues this further, precisely because it doesn't fight the
+  kite's actual job (generating lift/tether tension) the way a thin line or
+  a ring would.
+</p>
+
+<hr>
+
+<h2>Could birds land on it?</h2>
+
+<p>
+  Short answer: not realistically <strong>in flight</strong>. During the power phase the
+  kite is moving at real airspeed through a crosswind path; during any phase
+  the sail surfaces flex in wind, and there's no stationary perch. The
+  open (uncovered) faces expose bare strut edges, which also don't offer a
+  comfortable grip. This is more of a <strong>ground-storage/handling</strong>
+  consideration (a parked, unflown kite lying on the ground is just a large
+  static object, like any lawn furniture a bird might land on) than an
+  in-flight safety concern.
+</p>
+
+<hr>
+
+<h2>Best-case power estimate</h2>
+
+<p>
+  Using the standard crosswind-kite power formula (P ≈ (2/27)·ρ·A·v³·Cl·(L/D)²,
+  the same order-of-magnitude equation used throughout the AWE literature
+  already cited above — not a measured result for this specific design), for
+  a 12m-base kite (124.7 m² sail area) in 28 km/h wind:
+</p>
+
+<table>
+  <thead><tr><th>Aerodynamic quality (L/D)</th><th>Theoretical peak power</th><th>Realistic net average (30-50% of peak)</th></tr></thead>
+  <tbody>
+    <tr><td>2 (as-built, loose cellular sail — honest baseline)</td><td>~17 kW</td><td>~5-9 kW</td></tr>
+    <tr><td>4 (optimistic — taut/semi-rigid panels)</td><td>~68 kW</td><td>~20-34 kW</td></tr>
+    <tr><td>6 (best case — significant aero refinement)</td><td>~153 kW</td><td>~46-77 kW</td></tr>
+  </tbody>
+</table>
+
+<p>
+  <strong>Sanity check against a real system:</strong> Kitepower's Falcon (a real,
+  flying, commercially-developed AWE kite, ~60m² area) is rated around 30kW
+  average output. Our 125m²-kite optimistic estimate (20-34kW) landing in
+  the same order of magnitude as a real system roughly half our kite's area
+  is a reasonable cross-check — not proof this specific tetrahedral design
+  would perform that well, since L/D=4 assumes aerodynamic refinement this
+  loose-cell, partially-covered design doesn't currently have.
+</p>
+
+<p>
+  <strong>The honest baseline (L/D=2, this design as actually specified) gives
+  5-9 kW</strong> — real, useful power at a genuinely large (12m) scale, but far
+  below the optimistic numbers, and achieving even that requires solving
+  the steering problem above first, since none of this works without a
+  multi-line, actively-flown kite.
+</p>
+
+<hr>
+
+<h2>Further reading: real airborne wind energy systems</h2>
+
+<p>
+  Most people have never heard of Airborne Wind Energy, and far fewer have
+  seen a system fly. These are real, currently or recently active
+  companies, projects, and reference sources — not concepts, and not
+  related to VINDSNURR's tetrahedral-kite idea specifically (all of them
+  use conventional wing- or drone-shaped airframes, not tetrahedral cells).
+</p>
+
+<p><strong>Ground-generation (pumping kite) systems — closest in spirit to this
+  document's approach:</strong></p>
+<ul>
+  <li><a href="https://skysails-power.com/how-power-kites-work/">SkySails Power</a> — soft
+    textile kites flown to ~750m; commercial units from 200kW (Venyo PN-14)
+    to 1MW (FUJUN), figure-eight pumping cycle with an autopilot control pod</li>
+  <li><a href="https://thekitepower.com/">Kitepower</a> (Delft, Netherlands) — soft-kite
+    ground-gen system; their published research on
+    <a href="https://thekitepower.com/publication/kite-as-a-sensor-wind-and-state-estimation-in-tethered-flying-systems/">using the kite itself as a wind sensor</a>
+    is directly relevant to the steering/control gap flagged above</li>
+  <li><a href="https://kitenrg.com/">Kitenergy</a> (Turin, Italy) — soft-kite ground-gen,
+    four-stage cycle (launch/capture/generate/recover), targets diesel
+    substitution for off-grid and remote sites</li>
+  <li><a href="https://kitegen.com/">KiteGen</a> (Turin, Italy) — one of the earliest AWE
+    companies (founded 2007); ground-gen "yo-yo" architecture</li>
+</ul>
+
+<p><strong>Rigid-wing systems:</strong></p>
+<ul>
+  <li><a href="https://www.kitemill.com/">Kitemill</a> (Norway) — rigid fixed-wing
+    aircraft, ground-gen, flies a helical pattern above 350m; claims under
+    10% of the material use of a conventional turbine for comparable output</li>
+  <li><a href="https://en.wikipedia.org/wiki/Rigid_kite_(airborne_wind_energy)">Wikipedia: Rigid kite (airborne wind energy)</a> —
+    good comparison table of Makani M600 (fly-gen, 600kW, defunct 2020),
+    Ampyx AP3 (ground-gen, 150kW, company insolvent 2022), and Kitemill's
+    KM2, plus a clear discussion of launch/landing reliability as an
+    unresolved industry-wide challenge</li>
+</ul>
+
+<p><strong>Fly-generation (rotors mounted on the flying structure) — the
+  architecture closest to the lattice/chain/array illustrations above,
+  though none of these use tetrahedral cells:</strong></p>
+<ul>
+  <li>KiteKraft (TU Munich spinout) — a multi-rotor rigid-wing design (8
+    onboard rotors) with planned 20–100kW units; the only primary sources
+    found for this document were low-quality aggregator sites repeating
+    unverified specs, so treat any specific numbers as unconfirmed until
+    checked against KiteKraft's own materials directly</li>
+  <li><a href="https://english.news.cn/20241011/6d0c56c5bb904e53adb0b9beb9f7be2d/c.html">Xinhua: China's Buoyant Airborne Turbine S500</a> —
+    a helium-buoyant airborne turbine (not a kite — stays up via buoyancy,
+    not aerodynamic lift) by Beijing SAWES Energy Technology with Tsinghua
+    University/CAS partners; reached 500m altitude generating over 50kW,
+    targeting 100kW at 1000m next; aimed at emergency response and off-grid
+    power rather than grid-scale generation</li>
+</ul>
+
+<p><strong>Background and physics:</strong></p>
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Crosswind_kite_power">Wikipedia: Crosswind kite power</a> —
+    the source of Loyd's formula (P = (2/27)·ρ·A·Cl·G²·V³) used throughout
+    this document's power estimates, and a clear explanation of all three
+    architecture types (ground-gen, fly-gen, and a less common "fast motion
+    transfer" belt/sprocket design not covered here)</li>
+  <li><a href="https://www.nowastedenergy.com/kite-power-systems-generating-electricity-with-airborne-wind-energy/">No Wasted Energy: Kite Power Systems</a> —
+    an accessible overview comparing KiteGen (ground-gen), Makani (fly-gen),
+    and Ampyx Power (hybrid) side by side</li>
+</ul>
+
+<p style="font-size:13px;color:var(--text-faint);">
+  <strong>A note on source quality:</strong> searching for AWE information turns up a
+  real mix of primary sources (company sites, peer-reviewed papers,
+  Wikipedia), journalism of varying rigor, and outright content-farm
+  spam repackaging press releases without attribution — one such site was
+  the only place a KiteKraft description could be found for this document,
+  which is why that entry above is flagged as unverified rather than cited
+  directly. When following up on any of this, prefer the company/university
+  sources over aggregator blogs.
+</p>
+
+<hr>
+
+<h2>Summary of open questions, if anyone wants to take this further</h2>
+
+<ul>
+  <li>Design a multi-line bridle/steering system — the single biggest gap
+    between "this could work" and "this actually flies a pumping cycle"</li>
+  <li>Get real lift/drag data for the tetrahedral cell shape (wind tunnel
+    or CFD) — the payload and L/D numbers above are order-of-magnitude
+    estimates, not measurements</li>
+  <li>Design an active or passive gust-depower mechanism</li>
+  <li>If pursuing a flying rotor instead of ground-gen: a full redesign of
+    VINDSNURR's rotor as a lightweight lift-type turbine, plus an
+    electrical (not just mechanical) tether — a different project</li>
+  <li>Structural analysis for a rotating mass mounted on a flexing kite
+    frame, if pursuing the "circular turbine element" placement above</li>
+  <li>If pursuing the wide-array arrangement: work out real row spacing
+    from actual rotor diameter and downstream wake effects (this
+    document's "clear air" check is pure geometric clearance, not a
+    wake/turbulence analysis) and a real structural connection between
+    rows, not just parallel unconnected chains</li>
+</ul>
+
+<p class="note">
+  See the full source, generator scripts, and standalone SVG files at
+  <a href="https://github.com/mgifford/Hex-Bicup-Rotor/tree/main/kite-energy">kite-energy/</a> on GitHub.
+</p>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <span>VINDSNURR HBR-6-14V · Open source · MIT licence</span>
+  <span><a href="https://github.com/mgifford/Hex-Bicup-Rotor">GitHub repository</a></span>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>
