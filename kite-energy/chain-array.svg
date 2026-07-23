@@ -1,0 +1,75 @@
+<svg width="780" height="460" viewBox="0 0 780 460" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" role="img"
+     aria-label="Solarpunk-style illustration of an alternating chain of tetrahedral kite cells and VINDSNURR-style vertical-axis rotor units — triangle, rotor, triangle, rotor, triangle — tethered to a ground station."
+     style="max-width:100%;height:auto;">
+  <title>Alternating tetrahedron/rotor chain — exploratory illustration</title>
+  <style>
+    svg { background: #fdf6e3; }
+    .sky-grad { fill: #fbe9c9; }
+    .sun { fill: #f4b942; opacity: 0.85; }
+    .cell-face-a { fill: #e8a24a; fill-opacity: 0.55; stroke: none; }
+    .cell-face-b { fill: #5fae82; fill-opacity: 0.55; stroke: none; }
+    .strut { stroke: #6b4a2f; stroke-width: 1.6; fill: none; }
+    .joint { fill: #3f6b4f; stroke: #274a35; stroke-width: 0.8; }
+    .rotor-shaft { stroke: #274a35; stroke-width: 2.2; }
+    .rotor-blade { fill: #dd6b4a; fill-opacity: 0.9; stroke: #7a3620; stroke-width: 1; }
+    .tether { stroke: #7a221c; stroke-width: 2; stroke-dasharray: 6 4; fill: none; }
+    .ground { fill: #cfead0; }
+    .ground-station { fill: #fff8e8; stroke: #b58a4a; stroke-width: 1.5; }
+    .leaf { fill: #5fae82; opacity: 0.8; }
+    .label-bold { font-size: 16px; fill: #3a2c1a; font-weight: 700; }
+    .label { font-size: 12.5px; fill: #3a2c1a; }
+    .callout { font-size: 11.5px; fill: #6b5a3f; }
+    @media (prefers-color-scheme: dark) {
+      svg { background: #1a1a18; }
+      .sky-grad { fill: #2a2416; }
+      .sun { fill: #f4b942; opacity: 0.6; }
+      .strut { stroke: #d8c9a8; }
+      .joint { fill: #7fcf9f; stroke: #3f6b4f; }
+      .rotor-shaft { stroke: #d8c9a8; }
+      .ground { fill: #21361f; }
+      .ground-station { fill: #2e2e2b; stroke: #7a5f34; }
+      .leaf { fill: #4f9068; }
+      .label-bold { fill: #f0e6cc; }
+      .label { fill: #f0e6cc; }
+      .callout { fill: #c9bc9e; }
+    }
+  </style>
+
+  <rect class="sky-grad" x="0" y="0" width="780" height="310"/>
+  <rect class="ground" x="0" y="310" width="780" height="150"/>
+  <circle class="sun" cx="710" cy="55" r="34"/>
+
+  <text class="label-bold" x="390.0" y="26" text-anchor="middle">Alternating chain: kite cells and rotors in line</text>
+  <text class="callout" x="390.0" y="44" text-anchor="middle">▲ o ▲ o ▲ — each tetrahedron's vertical edge doubles as a rotor's shaft span</text>
+
+  <polygon class="cell-face-a" points="129.11,90.0 200.55,167.32 200.55,167.32"/><polygon class="cell-face-a" points="103.83,208.9 200.55,167.32 200.55,167.32"/><polygon class="cell-face-b" points="366.92,140.55 270.2,182.13 270.2,182.13"/><polygon class="cell-face-b" points="341.64,259.45 270.2,182.13 270.2,182.13"/><polygon class="cell-face-a" points="604.73,191.1 676.17,268.42 676.17,268.42"/><polygon class="cell-face-a" points="579.45,310.0 676.17,268.42 676.17,268.42"/>
+  <path class="strut" d="M129.11,90.0 L103.83,208.9 M129.11,90.0 L200.55,167.32 M129.11,90.0 L200.55,167.32 M103.83,208.9 L200.55,167.32 M103.83,208.9 L200.55,167.32 M200.55,167.32 L200.55,167.32"/><path class="strut" d="M366.92,140.55 L341.64,259.45 M366.92,140.55 L270.2,182.13 M366.92,140.55 L270.2,182.13 M341.64,259.45 L270.2,182.13 M341.64,259.45 L270.2,182.13 M270.2,182.13 L270.2,182.13"/><path class="strut" d="M604.73,191.1 L579.45,310.0 M604.73,191.1 L676.17,268.42 M604.73,191.1 L676.17,268.42 M579.45,310.0 L676.17,268.42 M579.45,310.0 L676.17,268.42 M676.17,268.42 L676.17,268.42"/>
+  <circle class="joint" cx="129.11" cy="90.0" r="3.5"/><circle class="joint" cx="103.83" cy="208.9" r="3.5"/><circle class="joint" cx="200.55" cy="167.32" r="3.5"/><circle class="joint" cx="200.55" cy="167.32" r="3.5"/><circle class="joint" cx="366.92" cy="140.55" r="3.5"/><circle class="joint" cx="341.64" cy="259.45" r="3.5"/><circle class="joint" cx="270.2" cy="182.13" r="3.5"/><circle class="joint" cx="270.2" cy="182.13" r="3.5"/><circle class="joint" cx="604.73" cy="191.1" r="3.5"/><circle class="joint" cx="579.45" cy="310.0" r="3.5"/><circle class="joint" cx="676.17" cy="268.42" r="3.5"/><circle class="joint" cx="676.17" cy="268.42" r="3.5"/>
+  <g class="rotor-icon"><line x1="248.01" y1="115.27" x2="248.01" y2="234.18" class="rotor-shaft"/><path d="M 248.01,159.725 A 15.0,8.25 0 0 1 248.01,174.725 A 15.0,8.25 0 0 0 248.01,189.725 A 15.0,8.25 0 0 1 248.01,159.725 Z" class="rotor-blade"/></g><g class="rotor-icon"><line x1="485.82" y1="165.82" x2="485.82" y2="284.73" class="rotor-shaft"/><path d="M 485.82,210.275 A 15.0,8.25 0 0 1 485.82,225.275 A 15.0,8.25 0 0 0 485.82,240.275 A 15.0,8.25 0 0 1 485.82,210.275 Z" class="rotor-blade"/></g>
+
+  <path class="tether" d="M103.83,208.9 C 100,240 90,285 85,318"/>
+
+  <g transform="translate(40,316)">
+    <rect class="ground-station" x="0" y="0" width="150" height="60" rx="8"/>
+    <circle cx="32" cy="30" r="17" fill="none" stroke="#6b4a2f" stroke-width="2"/>
+    <circle cx="32" cy="30" r="4" fill="#6b4a2f"/>
+    <text class="callout" x="32" y="54" text-anchor="middle">Winch + generator</text>
+    <path d="M54,22 L85,15" stroke="#2f9e44" stroke-width="2" marker-end="url(#arrowgreen)"/>
+    <text class="label" x="90" y="18">To grid</text>
+  </g>
+
+  <g transform="translate(40,345)">
+    <path class="leaf" d="M0,20 Q10,-10 20,20 Q10,10 0,20 Z"/>
+    <path class="leaf" d="M15,22 Q25,-5 35,22 Q25,14 15,22 Z"/>
+  </g>
+  <g transform="translate(690,340)">
+    <path class="leaf" d="M0,20 Q10,-10 20,20 Q10,10 0,20 Z"/>
+    <path class="leaf" d="M15,22 Q25,-5 35,22 Q25,14 15,22 Z"/>
+  </g>
+
+  <defs>
+    <marker id="arrowgreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <polygon points="0,0 7,3 0,6" fill="#2f9e44"/>
+    </marker>
+  </defs>
+</svg>

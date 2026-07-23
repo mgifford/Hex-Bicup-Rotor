@@ -76,11 +76,16 @@ a:focus { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
 
 .site-nav a {
   font-size: 12px;
+  font-weight: 600; /* fixed for every state so the active page never
+                        reflows sibling links (bold-only-when-active
+                        changes each link's rendered width by a few px,
+                        shifting every link after it in the flex row) */
   color: var(--text-muted);
   text-decoration: none;
   padding: 5px 7px;
   border-radius: 5px;
   white-space: nowrap;
+  border-bottom: 2px solid transparent;
   transition: background 0.1s, color 0.1s;
 }
 .site-nav a:hover { background: var(--toggle-hov); color: var(--text-main); }
@@ -88,7 +93,7 @@ a:focus { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
 .site-nav a[aria-current="page"] {
   background: var(--bg-code);
   color: var(--accent);
-  font-weight: 600;
+  border-bottom-color: var(--accent);
 }
 
 #theme-toggle {

@@ -243,6 +243,63 @@ there:
   rotating mass in flight. This remains the single biggest open question
   in this whole exploration.
 
+### An alternative to nesting rotors inside a dense lattice: alternating chains
+
+The lattice above buries each rotor inside a dense wall of tetrahedra —
+sail fabric and neighboring struts on most sides. A different arrangement
+keeps rotors in clearly open air: alternate discrete tetrahedron and rotor
+units in a line, **▲ o ▲ o ▲** (or with more spacing, **▲ o o ▲ o o ▲**),
+rather than nesting rotors inside a big triangular wall.
+
+![Solarpunk-style illustration of an alternating chain of tetrahedral kite cells and VINDSNURR-style rotor units in a line — triangle, rotor, triangle, rotor, triangle — tethered to a ground station](chain-array.svg)
+
+This works because of a real geometric fact, not just a visual pattern: a
+tetrahedron oriented with **one edge vertical** (rather than the usual
+"apex over a horizontal base" orientation used everywhere else in this
+repo) has a natural top and bottom point spaced exactly one strut-length
+apart — precisely the vertical span a VINDSNURR-style rotor shaft needs.
+Verified: if the tetrahedron's edge length equals VINDSNURR's actual
+1000mm rotor diameter, that span (1000mm) is close to VINDSNURR's own real
+rotor height (1064mm, per [`../CLAUDE.md`](../CLAUDE.md)) — the two unit
+types are naturally compatible scales, not an arbitrary pairing. Each
+rotor in the chain gets clear air on at least two sides, unlike a rotor
+buried inside the lattice above.
+
+### Which arrangement? A linear chain has a real problem, though
+
+A single ▲o▲o▲ line is simple and modular, but it has two genuine
+drawbacks for something that actually needs to **fly**, not just stand as
+a lattice:
+
+- **Sail area for lift/tether-tension only grows linearly** with chain
+  length, and the crosswind power formula already used in this document
+  (and cited from Wikipedia's Crosswind kite power article below) scales
+  with sail *area*, not length — a long, thin line is a poor shape for
+  that.
+- **A 1D line has the worst possible resistance to twisting and bending**
+  in gusty wind — there's no lateral triangulation between parallel rows
+  to stop it flexing sideways, unlike a genuinely 2D structure.
+
+A **wide array of parallel chains**, offset brick-fashion so each row's
+rotors sit staggered relative to the row above/below, fixes both problems
+while keeping the same clear-air rotor placement:
+
+![Top-down plan view of a wide array of parallel alternating tetrahedron/rotor chains, rows offset like bricklaying, tethered to a ground station](wide-array.svg)
+
+| Arrangement | Sail area for lift | Structural rigidity | Rotor airflow | Verdict |
+|---|---|---|---|---|
+| Linear chain (▲o▲o▲) | Grows only linearly with length | Weakest — no lateral triangulation | Clear on 2 sides | Simple, but a poor shape to actually fly |
+| **Wide array (parallel chains, offset)** | Grows with both length and width | Much stronger — rows triangulate against each other | Clear, staggered so no rotor sits directly downwind of another | **Best match for real kite aerodynamics** |
+| Ring / annulus (tetrahedra forming a circle, rotors inside) | Poor — a ring doesn't present a clean lift surface to the wind | Good torsional resistance (like a wheel) | Rotors partially shielded from gusts by the surrounding wall | Interesting for gust protection, but not aerodynamically kite-like |
+
+None of these three has been built, tested, or checked against real
+aerodynamic data — this table is reasoning from the same formulas and
+structural logic used throughout this document, not a measured
+comparison. The wide array is the most defensible starting point *if*
+someone pursues this further, precisely because it doesn't fight the
+kite's actual job (generating lift/tether tension) the way a thin line or
+a ring would.
+
 ---
 
 ## Could birds land on it?
@@ -287,6 +344,75 @@ multi-line, actively-flown kite.
 
 ---
 
+## Further reading: real airborne wind energy systems
+
+Most people have never heard of Airborne Wind Energy, and far fewer have
+seen a system fly. These are real, currently or recently active
+companies, projects, and reference sources — not concepts, and not
+related to VINDSNURR's tetrahedral-kite idea specifically (all of them
+use conventional wing- or drone-shaped airframes, not tetrahedral cells).
+
+**Ground-generation (pumping kite) systems — closest in spirit to this
+document's approach:**
+- [SkySails Power](https://skysails-power.com/how-power-kites-work/) — soft
+  textile kites flown to ~750m; commercial units from 200kW (Venyo PN-14)
+  to 1MW (FUJUN), figure-eight pumping cycle with an autopilot control pod
+- [Kitepower](https://thekitepower.com/) (Delft, Netherlands) — soft-kite
+  ground-gen system; their published research on
+  [using the kite itself as a wind sensor](https://thekitepower.com/publication/kite-as-a-sensor-wind-and-state-estimation-in-tethered-flying-systems/)
+  is directly relevant to the steering/control gap flagged above
+- [Kitenergy](https://kitenrg.com/) (Turin, Italy) — soft-kite ground-gen,
+  four-stage cycle (launch/capture/generate/recover), targets diesel
+  substitution for off-grid and remote sites
+- [KiteGen](https://kitegen.com/) (Turin, Italy) — one of the earliest AWE
+  companies (founded 2007); ground-gen "yo-yo" architecture
+
+**Rigid-wing systems:**
+- [Kitemill](https://www.kitemill.com/) (Norway) — rigid fixed-wing
+  aircraft, ground-gen, flies a helical pattern above 350m; claims under
+  10% of the material use of a conventional turbine for comparable output
+- [Wikipedia: Rigid kite (airborne wind energy)](https://en.wikipedia.org/wiki/Rigid_kite_\(airborne_wind_energy\)) —
+  good comparison table of Makani M600 (fly-gen, 600kW, defunct 2020),
+  Ampyx AP3 (ground-gen, 150kW, company insolvent 2022), and Kitemill's
+  KM2, plus a clear discussion of launch/landing reliability as an
+  unresolved industry-wide challenge
+
+**Fly-generation (rotors mounted on the flying structure) — the
+architecture closest to the lattice/chain/array illustrations above,
+though none of these use tetrahedral cells:**
+- KiteKraft (TU Munich spinout) — a multi-rotor rigid-wing design (8
+  onboard rotors) with planned 20–100kW units; the only primary sources
+  found for this document were low-quality aggregator sites repeating
+  unverified specs, so treat any specific numbers as unconfirmed until
+  checked against KiteKraft's own materials directly
+- [Xinhua: China's Buoyant Airborne Turbine S500](https://english.news.cn/20241011/6d0c56c5bb904e53adb0b9beb9f7be2d/c.html) —
+  a helium-buoyant airborne turbine (not a kite — stays up via buoyancy,
+  not aerodynamic lift) by Beijing SAWES Energy Technology with Tsinghua
+  University/CAS partners; reached 500m altitude generating over 50kW,
+  targeting 100kW at 1000m next; aimed at emergency response and off-grid
+  power rather than grid-scale generation
+
+**Background and physics:**
+- [Wikipedia: Crosswind kite power](https://en.wikipedia.org/wiki/Crosswind_kite_power) —
+  the source of Loyd's formula (P = (2/27)·ρ·A·Cl·G²·V³) used throughout
+  this document's power estimates, and a clear explanation of all three
+  architecture types (ground-gen, fly-gen, and a less common "fast motion
+  transfer" belt/sprocket design not covered here)
+- [No Wasted Energy: Kite Power Systems](https://www.nowastedenergy.com/kite-power-systems-generating-electricity-with-airborne-wind-energy/) —
+  an accessible overview comparing KiteGen (ground-gen), Makani (fly-gen),
+  and Ampyx Power (hybrid) side by side
+
+**A note on source quality:** searching for AWE information turns up a
+real mix of primary sources (company sites, peer-reviewed papers,
+Wikipedia), journalism of varying rigor, and outright content-farm
+spam repackaging press releases without attribution — one such site was
+the only place a KiteKraft description could be found for this document,
+which is why that entry above is flagged as unverified rather than cited
+directly. When following up on any of this, prefer the company/university
+sources over aggregator blogs.
+
+---
+
 ## Summary of open questions, if anyone wants to take this further
 
 - [ ] Design a multi-line bridle/steering system — the single biggest gap
@@ -300,6 +426,11 @@ multi-line, actively-flown kite.
       electrical (not just mechanical) tether — a different project
 - [ ] Structural analysis for a rotating mass mounted on a flexing kite
       frame, if pursuing the "circular turbine element" placement above
+- [ ] If pursuing the wide-array arrangement: work out real row spacing
+      from actual rotor diameter and downstream wake effects (this
+      document's "clear air" check is pure geometric clearance, not a
+      wake/turbulence analysis) and a real structural connection between
+      rows, not just parallel unconnected chains
 
 ---
 

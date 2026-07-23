@@ -1,0 +1,73 @@
+<svg width="780" height="480" viewBox="0 0 780 480" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" role="img"
+     aria-label="Top-down plan view of a wide array of parallel alternating tetrahedron/rotor chains, offset brick-fashion between rows, tethered to a ground station."
+     style="max-width:100%;height:auto;">
+  <title>Wide array — top-down plan view, exploratory illustration</title>
+  <style>
+    svg { background: #fdf6e3; }
+    .sky-grad { fill: #fbe9c9; }
+    .sun { fill: #f4b942; opacity: 0.85; }
+    .cell-face-a { fill: #e8a24a; fill-opacity: 0.55; stroke: none; }
+    .cell-face-b { fill: #5fae82; fill-opacity: 0.55; stroke: none; }
+    .strut { stroke: #6b4a2f; stroke-width: 1.4; fill: none; }
+    .joint { fill: #3f6b4f; stroke: #274a35; stroke-width: 0.8; }
+    .rotor-icon { fill: #dd6b4a; fill-opacity: 0.85; stroke: #7a3620; stroke-width: 1; }
+    .rotor-icon-core { fill: #274a35; }
+    .tether { stroke: #7a221c; stroke-width: 2; stroke-dasharray: 6 4; fill: none; }
+    .ground { fill: #cfead0; }
+    .ground-station { fill: #fff8e8; stroke: #b58a4a; stroke-width: 1.5; }
+    .leaf { fill: #5fae82; opacity: 0.8; }
+    .label-bold { font-size: 16px; fill: #3a2c1a; font-weight: 700; }
+    .label { font-size: 12.5px; fill: #3a2c1a; }
+    .callout { font-size: 11.5px; fill: #6b5a3f; }
+    @media (prefers-color-scheme: dark) {
+      svg { background: #1a1a18; }
+      .sky-grad { fill: #2a2416; }
+      .sun { fill: #f4b942; opacity: 0.6; }
+      .strut { stroke: #d8c9a8; }
+      .ground { fill: #21361f; }
+      .ground-station { fill: #2e2e2b; stroke: #7a5f34; }
+      .leaf { fill: #4f9068; }
+      .label-bold { fill: #f0e6cc; }
+      .label { fill: #f0e6cc; }
+      .callout { fill: #c9bc9e; }
+    }
+  </style>
+
+  <rect class="sky-grad" x="0" y="0" width="780" height="330"/>
+  <rect class="ground" x="0" y="330" width="780" height="150"/>
+  <circle class="sun" cx="710" cy="55" r="34"/>
+
+  <text class="label-bold" x="390.0" y="26" text-anchor="middle">Wide array: parallel chains, top-down view</text>
+  <text class="callout" x="390.0" y="44" text-anchor="middle">Rows offset like bricklaying, so every rotor keeps clear air on both sides</text>
+
+  <polygon class="cell-face-a" points="213.53,115.29 263.44,150.59 263.44,80.0"/><polygon class="cell-face-b" points="354.71,115.29 304.79,150.59 304.79,80.0"/><polygon class="cell-face-a" points="495.88,115.29 545.8,150.59 545.8,80.0"/><polygon class="cell-face-b" points="284.12,200.0 234.2,235.29 234.2,164.71"/><polygon class="cell-face-a" points="425.29,200.0 475.21,235.29 475.21,164.71"/><polygon class="cell-face-b" points="566.47,200.0 516.56,235.29 516.56,164.71"/><polygon class="cell-face-a" points="213.53,284.71 263.44,320.0 263.44,249.41"/><polygon class="cell-face-b" points="354.71,284.71 304.79,320.0 304.79,249.41"/><polygon class="cell-face-a" points="495.88,284.71 545.8,320.0 545.8,249.41"/>
+  <path class="strut" d="M213.53,115.29 L263.44,150.59 M213.53,115.29 L263.44,80.0 M263.44,150.59 L263.44,80.0"/><path class="strut" d="M354.71,115.29 L304.79,150.59 M354.71,115.29 L304.79,80.0 M304.79,150.59 L304.79,80.0"/><path class="strut" d="M495.88,115.29 L545.8,150.59 M495.88,115.29 L545.8,80.0 M545.8,150.59 L545.8,80.0"/><path class="strut" d="M284.12,200.0 L234.2,235.29 M284.12,200.0 L234.2,164.71 M234.2,235.29 L234.2,164.71"/><path class="strut" d="M425.29,200.0 L475.21,235.29 M425.29,200.0 L475.21,164.71 M475.21,235.29 L475.21,164.71"/><path class="strut" d="M566.47,200.0 L516.56,235.29 M566.47,200.0 L516.56,164.71 M516.56,235.29 L516.56,164.71"/><path class="strut" d="M213.53,284.71 L263.44,320.0 M213.53,284.71 L263.44,249.41 M263.44,320.0 L263.44,249.41"/><path class="strut" d="M354.71,284.71 L304.79,320.0 M354.71,284.71 L304.79,249.41 M304.79,320.0 L304.79,249.41"/><path class="strut" d="M495.88,284.71 L545.8,320.0 M495.88,284.71 L545.8,249.41 M545.8,320.0 L545.8,249.41"/>
+  <circle class="joint" cx="213.53" cy="115.29" r="3"/><circle class="joint" cx="263.44" cy="150.59" r="3"/><circle class="joint" cx="263.44" cy="80.0" r="3"/><circle class="joint" cx="354.71" cy="115.29" r="3"/><circle class="joint" cx="304.79" cy="150.59" r="3"/><circle class="joint" cx="304.79" cy="80.0" r="3"/><circle class="joint" cx="495.88" cy="115.29" r="3"/><circle class="joint" cx="545.8" cy="150.59" r="3"/><circle class="joint" cx="545.8" cy="80.0" r="3"/><circle class="joint" cx="284.12" cy="200.0" r="3"/><circle class="joint" cx="234.2" cy="235.29" r="3"/><circle class="joint" cx="234.2" cy="164.71" r="3"/><circle class="joint" cx="425.29" cy="200.0" r="3"/><circle class="joint" cx="475.21" cy="235.29" r="3"/><circle class="joint" cx="475.21" cy="164.71" r="3"/><circle class="joint" cx="566.47" cy="200.0" r="3"/><circle class="joint" cx="516.56" cy="235.29" r="3"/><circle class="joint" cx="516.56" cy="164.71" r="3"/><circle class="joint" cx="213.53" cy="284.71" r="3"/><circle class="joint" cx="263.44" cy="320.0" r="3"/><circle class="joint" cx="263.44" cy="249.41" r="3"/><circle class="joint" cx="354.71" cy="284.71" r="3"/><circle class="joint" cx="304.79" cy="320.0" r="3"/><circle class="joint" cx="304.79" cy="249.41" r="3"/><circle class="joint" cx="495.88" cy="284.71" r="3"/><circle class="joint" cx="545.8" cy="320.0" r="3"/><circle class="joint" cx="545.8" cy="249.41" r="3"/>
+  <circle class="rotor-icon" cx="284.12" cy="115.29" r="9"/><circle class="rotor-icon-core" cx="284.12" cy="115.29" r="3"/><circle class="rotor-icon" cx="425.29" cy="115.29" r="9"/><circle class="rotor-icon-core" cx="425.29" cy="115.29" r="3"/><circle class="rotor-icon" cx="354.71" cy="200.0" r="9"/><circle class="rotor-icon-core" cx="354.71" cy="200.0" r="3"/><circle class="rotor-icon" cx="495.88" cy="200.0" r="9"/><circle class="rotor-icon-core" cx="495.88" cy="200.0" r="3"/><circle class="rotor-icon" cx="284.12" cy="284.71" r="9"/><circle class="rotor-icon-core" cx="284.12" cy="284.71" r="3"/><circle class="rotor-icon" cx="425.29" cy="284.71" r="9"/><circle class="rotor-icon-core" cx="425.29" cy="284.71" r="3"/>
+
+  <path class="tether" d="M234.2,115.29 C 100,260 90,305 85,338"/>
+
+  <g transform="translate(40,336)">
+    <rect class="ground-station" x="0" y="0" width="150" height="60" rx="8"/>
+    <circle cx="32" cy="30" r="17" fill="none" stroke="#6b4a2f" stroke-width="2"/>
+    <circle cx="32" cy="30" r="4" fill="#6b4a2f"/>
+    <text class="callout" x="32" y="54" text-anchor="middle">Winch + generator</text>
+    <path d="M54,22 L85,15" stroke="#2f9e44" stroke-width="2" marker-end="url(#arrowgreen)"/>
+    <text class="label" x="90" y="18">To grid</text>
+  </g>
+
+  <g transform="translate(40,365)">
+    <path class="leaf" d="M0,20 Q10,-10 20,20 Q10,10 0,20 Z"/>
+    <path class="leaf" d="M15,22 Q25,-5 35,22 Q25,14 15,22 Z"/>
+  </g>
+  <g transform="translate(690,360)">
+    <path class="leaf" d="M0,20 Q10,-10 20,20 Q10,10 0,20 Z"/>
+    <path class="leaf" d="M15,22 Q25,-5 35,22 Q25,14 15,22 Z"/>
+  </g>
+
+  <defs>
+    <marker id="arrowgreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <polygon points="0,0 7,3 0,6" fill="#2f9e44"/>
+    </marker>
+  </defs>
+</svg>
